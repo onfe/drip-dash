@@ -8,7 +8,7 @@
 export default {
   name: "dashboard",
   metaInfo: {
-    title: "Dashboard",
+    title: "Dashboard"
   }
 };
 </script>

@@ -13,7 +13,7 @@ import Login from "@/components/Login.vue";
 export default {
   name: "home",
   metaInfo: {
-    title: "Login",
+    title: "Login"
   },
   components: {
     Login

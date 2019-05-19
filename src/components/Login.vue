@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <b-card title="Login">
-      <b-form @submit="onSubmit" @reset="onReset">
+      <b-form @submit.prevent="login" @reset.prevent="reset">
         <b-form-group>
           <b-form-input
             id="input-1"
@@ -19,7 +19,7 @@
             placeholder="Password"
           ></b-form-input>
         </b-form-group>
-        <b-button block variant="primary">Login</b-button>
+        <b-button type="submit" block variant="primary">Login</b-button>
       </b-form>
     </b-card>
   </div>
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "Login",
   data() {
     return {
       form: {
@@ -37,12 +37,13 @@ export default {
     };
   },
   methods: {
-    onSubmit(e) {
-      e.preventDefault();
-      alert(JSON.stringify(this.form));
+    login() {
+      const { username, password } = this.form;
+      this.$store.dispatch("auth/request", { username, password }).then(() => {
+        this.$router.push("/dashboard");
+      });
     },
-    onReset(evt) {
-      evt.preventDefault();
+    reset() {
       // Reset our form values
       this.form.email = "";
       this.form.password = "";
