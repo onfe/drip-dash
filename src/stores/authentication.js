@@ -11,18 +11,27 @@ const getters = {
 };
 
 const actions = {
+  // Request an auth token
   request: ({ commit, dispatch }, user) => {
     return new Promise((resolve, reject) => {
-      // The Promise used for router redirect in login
+      // Set the state to loading whilst we get authenticated.
       commit("request");
+
       axios({ url: "api/auth/request", data: user, method: "POST" })
         .then(resp => {
+          // if the auth request succeeds, get the token, and store it.
           const token = resp.data.token;
           localStorage.setItem("user-token", token); // store the token in localstorage
+          console.log(token);
+          // set the token to be sent with every request.
+          axios.defaults.headers.common["Authorization"] = token;
+
           commit("success", token);
-          // you have your token, now log in your user :)
-          dispatch("user/request");
+
+          // using the token, complete log-in
+          // dispatch("user/request");
           resolve(resp);
+          axios({ url: "api/auth/test", data: {test: "test"}, method: "GET" });
         })
         .catch(err => {
           commit("error", err);
@@ -36,6 +45,7 @@ const actions = {
     return new Promise(resolve => {
       commit("logout");
       localStorage.removeItem("user-token"); // clear your user's token from localstorage
+      delete axios.defaults.headers.common["Authorization"];
       resolve();
     });
   }

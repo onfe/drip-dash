@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router()
 
+const auth = require("./routes/auth");
+const private = require("./routes/private")
+
+
 module.exports = router
 
-router.post('/auth/request', function (req, res) {
-  res.send('one')
-});
-
-router.post('/api/auth/request', function (req, res) {
-  res.send('two')
-});
+router.use('/auth', auth)
+router.use('/private', private)
