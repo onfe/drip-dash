@@ -12,7 +12,7 @@ const getters = {
 
 const actions = {
   // Request an auth token
-  request: ({ commit, dispatch }, user) => {
+  request: ({ commit }, user) => {
     return new Promise((resolve, reject) => {
       // Set the state to loading whilst we get authenticated.
       commit("request");
@@ -31,7 +31,6 @@ const actions = {
           // using the token, complete log-in
           // dispatch("user/request");
           resolve(resp);
-          axios({ url: "api/auth/test", data: {test: "test"}, method: "GET" });
         })
         .catch(err => {
           commit("error", err);

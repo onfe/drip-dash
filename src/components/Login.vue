@@ -40,7 +40,7 @@ export default {
     login() {
       const { username, password } = this.form;
       this.$store.dispatch("auth/request", { username, password }).then(() => {
-        this.$router.push("/dashboard");
+        this.$router.push({path: "/"});
       });
     },
     reset() {
