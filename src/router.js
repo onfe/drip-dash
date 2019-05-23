@@ -3,7 +3,6 @@ import Router from "vue-router";
 import Dashboard from "./views/Dashboard.vue";
 import store from "./store";
 
-
 Vue.use(Router);
 Vue.use(store);
 

@@ -15,11 +15,13 @@ export default {
     onClick() {
       console.log("ohno");
       const axios = require("axios");
-      axios({ url: "api/private/test", data: {}, method: "GET" }).then(resp => {
-        console.log(resp);
-      }).catch(err => {
-        console.log(err);
-      });
+      axios({ url: "api/private/test", data: {}, method: "GET" })
+        .then(resp => {
+          console.log(resp);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

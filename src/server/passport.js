@@ -1,4 +1,4 @@
-const tokens = require('./controllers/tokens')
+const tokens = require("./controllers/tokens");
 
 module.exports = options => {
   return function isAuthenticated(req, res, next) {
@@ -15,9 +15,9 @@ module.exports = options => {
 
     // Access not granted, so we either redirect or 401.
     if (options && options.redirect) {
-      res.redirect(options.redirect)
+      res.redirect(options.redirect);
     } else {
-      res.status(401).send("Route requires valid authentication token.")
+      res.status(401).send("Route requires valid authentication token.");
     }
-  }
-}
+  };
+};

@@ -1,5 +1,5 @@
-const User = require('../models').User;
-const bcrypt = require('bcrypt');
+const User = require("../models").User;
+const bcrypt = require("bcrypt");
 
 module.exports = {
   create(username, password) {
@@ -12,8 +12,8 @@ module.exports = {
     var u = User.findOne({ where: { username: username } }).then(user => {
       if (user) {
         // there is a user with this username, continue with auth.
-        var passMatch = bcrypt.compareSync( password, user.passhash );
-        console.log(username +" " + password + " " + passMatch)
+        var passMatch = bcrypt.compareSync(password, user.passhash);
+        console.log(username + " " + password + " " + passMatch);
         if (passMatch) {
           return user;
         } else {
@@ -30,10 +30,10 @@ module.exports = {
 
   createDefault() {
     User.findAll({}).then(userList => {
-      console.log(userList.length)
+      console.log(userList.length);
       if (userList.length == 0) {
-        this.create('test', 'test');
+        this.create("test", "test");
       }
     });
   }
-}
+};

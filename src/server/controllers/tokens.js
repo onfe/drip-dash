@@ -1,10 +1,9 @@
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 const privatekey = "894dfb33-e865-4c26-83db-8b16627a0fd7";
-
 
 module.exports = {
   create(user) {
-    return jwt.sign(user.username, privatekey)
+    return jwt.sign(user.username, privatekey);
   },
 
   check(token) {
@@ -15,4 +14,4 @@ module.exports = {
       return false;
     }
   }
-}
+};
