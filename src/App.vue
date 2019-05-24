@@ -24,7 +24,7 @@ export default {
     axios.interceptors.response.use(undefined, function(err) {
       return new Promise(function() {
         if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-          // if you ever get an unauthorized, logout the user
+          // if you ever get an unauthorized 401 response, logout the user.
           this.$store.dispatch("auth/logout");
         }
         throw err;
@@ -33,3 +33,15 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+// unscoped styles to modify html, body.
+body {
+  min-height: 100%;
+  background-color: var(--light);
+}
+
+html {
+  height: 100%;
+}
+</style>
