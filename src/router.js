@@ -23,7 +23,7 @@ const router = new Router({
       name: "login",
       // Lazy load when required
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Login.vue")
+        import(/* webpackChunkName: "login" */ "./views/Login.vue")
     }
   ]
 });
