@@ -5,11 +5,22 @@ import {
   faPowerOff,
   faAngleDown,
   faCog,
-  faEllipsisV
+  faEllipsisV,
+  faSignOutAlt,
+  faPlug,
+  faSyncAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 // Add the required icons to keep the bundle small.
-library.add(faPowerOff, faAngleDown, faCog, faEllipsisV);
+library.add(
+  faPowerOff,
+  faAngleDown,
+  faCog,
+  faEllipsisV,
+  faSignOutAlt,
+  faPlug,
+  faSyncAlt
+);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);

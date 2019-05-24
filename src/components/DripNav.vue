@@ -17,7 +17,7 @@
           <!-- Right aligned nav items -->
           <NavIcon icon="ellipsis-v" />
           <NavIcon icon="cog" />
-          <NavIcon icon="power-off" />
+          <PowerButton />
         </b-navbar-nav>
       </b-collapse>
     </b-container>
@@ -28,6 +28,7 @@
 import BreadcrumbButton from "@/components/BreadcrumbButton.vue";
 import DripDashLogo from "@/components/DripDashLogo.vue";
 import NavIcon from "@/components/NavIcon.vue";
+import PowerButton from "@/components/PowerButton.vue";
 
 export default {
   name: "DripNav",
@@ -35,7 +36,8 @@ export default {
   components: {
     BreadcrumbButton,
     DripDashLogo,
-    NavIcon
+    NavIcon,
+    PowerButton
   }
 };
 </script>
