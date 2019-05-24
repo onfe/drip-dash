@@ -44,4 +44,8 @@ body {
 html {
   height: 100%;
 }
+
+:root {
+  --accent: #0db8b0;
+}
 </style>

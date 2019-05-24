@@ -43,7 +43,7 @@ export default {
     height: 0;
     left: 50%;
     border-radius: 50%;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     z-index: -1;
   }
 }

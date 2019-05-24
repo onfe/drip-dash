@@ -2,7 +2,7 @@
   <b-navbar variant="white">
     <b-container>
       <b-navbar-brand to="/">
-        <DripDashLogo color="#0DB8B0" />
+        <DripDashLogo color="var(--accent)" />
       </b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <BreadcrumbButton />
