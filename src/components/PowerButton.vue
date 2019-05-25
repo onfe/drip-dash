@@ -1,10 +1,9 @@
 <template>
   <div id="power-ctrl">
-    <NavIcon id="power-dropdown-btn" icon="power-off" />
+    <NavIcon id="power-menu-btn" icon="power-off" />
     <b-popover
-      target="power-dropdown-btn"
+      target="power-menu-btn"
       triggers="click"
-      :show.sync="popoverShow"
       placement="bottomleft"
       container="my-container"
       ref="popover"
@@ -12,10 +11,16 @@
       @shown="onShown"
       @hidden="onHidden"
     >
-      <div>
-        <font-awesome-icon icon="sign-out-alt" />
-        <font-awesome-icon icon="sync-alt" />
-        <font-awesome-icon icon="plug" />
+      <div class="power-menu">
+        <b-button v-on:click="signOut" class="pm-option" block variant="outline-secondary">
+          <font-awesome-icon icon="sign-out-alt" /> Sign Out
+        </b-button>
+        <b-button class="pm-option" block variant="outline-secondary">
+          <font-awesome-icon icon="sync-alt" /> Restart Elf
+        </b-button>
+        <b-button class="pm-option" block variant="outline-secondary">
+          <font-awesome-icon icon="plug" /> Shutdown Elf
+        </b-button>
       </div>
     </b-popover>
   </div>
@@ -42,7 +47,18 @@ export default {
     },
     onHidden() {
       // Called just after the popover has finished hiding
+    },
+    signOut() {
+      this.$store.dispatch("auth/logout").then(() => {
+        this.$router.push("/login");
+      });
     }
   }
 };
 </script>
+
+<style scoped lang="scss">
+.pm-option {
+  text-align: left;
+}
+</style>

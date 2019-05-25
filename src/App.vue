@@ -25,7 +25,9 @@ export default {
       return new Promise(function() {
         if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
           // if you ever get an unauthorized 401 response, logout the user.
-          this.$store.dispatch("auth/logout");
+          this.$store.dispatch("auth/logout").then(() => {
+            this.$router.push("/login");
+          });
         }
         throw err;
       });
