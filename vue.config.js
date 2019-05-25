@@ -1,4 +1,4 @@
-const configureServer = require("./src/server/configure");
+const configureServer = require("./src/server/config/configure");
 
 module.exports = {
   devServer: {
