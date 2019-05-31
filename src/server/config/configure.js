@@ -10,7 +10,10 @@ const bodyParser = require("body-parser");
 const api = require("../dripdash-server.js");
 var collector = false;
 
-if (args.find(a => a.key === "collector").value == "internal") {
+if (
+    args.find(a => a.key === "collector") &&
+    args.find(a => a.key === "collector").value == "internal"
+  ) {
   console.log("Using internal data collector.")
   collector = require("../collector-internal.js");
 }
