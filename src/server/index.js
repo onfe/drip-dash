@@ -4,7 +4,7 @@ const express = require("express");
 const configureAPI = require("./config/configure");
 const app = express();
 
-const { PORT = 3000 } = process.env;
+const { PORT = 8000 } = process.env;
 
 // API
 configureAPI(app);

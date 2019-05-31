@@ -23,5 +23,5 @@ console.log(!!collector);
 module.exports = app => {
   app.use(bodyParser.json());
   app.use("/api", api);
-  if (collector) { app.use("/collector", collector) }
+  if (collector) { app.use("/collect", collector) }
 };
