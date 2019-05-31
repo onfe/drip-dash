@@ -1,7 +1,8 @@
 ![DripDash Header](public/drip-dash-header.svg)
 # DripDash
 
-To enable the internal collector (until a separate collector is built), use: `npm run serve -- --collector=internal`
+To enable the internal collector (until a separate collector is built), use:
+`--collector=internal`
 
 ## Project setup
 ```
@@ -17,7 +18,8 @@ npm run serve
 ```
 npm run build
 ```
-Production builds are not yet enabled. (Custom configuration required.)
+Running the production build: `node src/server/index.js`.  
+An external collector is assumed by default.
 
 ### Run your tests
 ```
