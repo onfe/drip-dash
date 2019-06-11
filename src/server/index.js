@@ -17,4 +17,4 @@ app.use(express.static(publicPath, staticConf));
 app.use("/", history());
 
 // Go
-app.listen(PORT, () => console.log(`App running on port ${PORT}!`));
+app.listen(PORT, () => console.log(`DripDash running on port ${PORT}!`));

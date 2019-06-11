@@ -15,10 +15,8 @@ if (
     args.find(a => a.key === "collector").value == "internal"
   ) {
   console.log("Using internal data collector.")
-  collector = require("../collector-internal.js");
+  collector = require("../collector/collector.js");
 }
-
-console.log(!!collector);
 
 module.exports = app => {
   app.use(bodyParser.json());
