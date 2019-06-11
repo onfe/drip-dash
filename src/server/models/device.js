@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     online: DataTypes.DATE
   }, {});
   Device.associate = function(models) {
-    // associations can be defined here
+    Device.hasMany(models.Data);
   };
 
   Device.prototype.getName = function() {
