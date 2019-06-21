@@ -48,9 +48,6 @@ export default {
       this.form.email = "";
       this.form.password = "";
     }
-  },
-  props: {
-    msg: String
   }
 };
 </script>
