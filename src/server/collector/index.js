@@ -11,4 +11,6 @@ app.use(bodyParser.json());
 app.use("/collect", collector);
 
 // And let it begin!
-app.listen(COLLECTOR_PORT, () => console.log(`Collector running on port ${COLLECTOR_PORT}!`));
+app.listen(COLLECTOR_PORT, () =>
+  console.log(`Collector running on port ${COLLECTOR_PORT}!`)
+);

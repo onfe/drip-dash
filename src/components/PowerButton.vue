@@ -12,7 +12,12 @@
       @hidden="onHidden"
     >
       <div class="power-menu">
-        <b-button v-on:click="signOut" class="pm-option" block variant="outline-secondary">
+        <b-button
+          v-on:click="signOut"
+          class="pm-option"
+          block
+          variant="outline-secondary"
+        >
           <font-awesome-icon icon="sign-out-alt" /> Sign Out
         </b-button>
         <b-button class="pm-option" block variant="outline-secondary">

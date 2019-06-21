@@ -6,10 +6,10 @@ const Data = require("../models").Data;
 
 module.exports = router;
 
-router.get("/:id/", function( req, res ) {
-  d = Device.getByProgName(req.params.id).then( (device) => {
+router.get("/:id/", function(req, res) {
+  d = Device.getByProgName(req.params.id).then(device => {
     if (device) {
-      device.update()
+      device.update();
       return device;
     } else {
       return Device.create({
@@ -20,15 +20,22 @@ router.get("/:id/", function( req, res ) {
     }
   });
 
-  d.then((d) => {
+  d.then(d => {
     console.log(d);
-    Data.create({
-      timestamp: new Date(),
-      data: JSON.stringify(req.body),
-      deviceId: d.id
-    }, {
-      include: Device
-    }).then(function(dat) {}).catch(function(err) {console.log(err)});
+    Data.create(
+      {
+        timestamp: new Date(),
+        data: JSON.stringify(req.body),
+        deviceId: d.id
+      },
+      {
+        include: Device
+      }
+    )
+      .then(function(dat) {})
+      .catch(function(err) {
+        console.log(err);
+      });
   });
   res.send("OK");
 });

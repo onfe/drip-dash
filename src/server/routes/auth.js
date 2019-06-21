@@ -6,6 +6,7 @@ const tokens = require("../controllers/tokens");
 module.exports = router;
 
 router.post("/request", function(req, res) {
+  // Creates default user (u: test p: test)
   users.createDefault();
   users.auth(req.body.username, req.body.password).then(user => {
     if (user) {
