@@ -5,7 +5,7 @@
         <DripDashLogo color="var(--accent)" />
       </b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-      <BreadcrumbButton />
+      <BreadcrumbButton v-bind:bc="this.bc" />
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
@@ -32,7 +32,9 @@ import PowerButton from "@/components/PowerButton.vue";
 
 export default {
   name: "DripNav",
-  props: {},
+  props: {
+    bc: Array
+  },
   components: {
     BreadcrumbButton,
     DripDashLogo,

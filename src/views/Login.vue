@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <b-container>
-      <Login msg="Welcome to Your Vue.js App" />
+      <Login />
     </b-container>
   </div>
 </template>

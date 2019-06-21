@@ -1,14 +1,14 @@
 <template>
   <div class="dashboard">
-    <DripNav />
+    <DripNav v-bind:bc="['DripDash', 'Home', 'Summary']" />
     <br />
-    <DripDash />
+    <DeviceList />
   </div>
 </template>
 
 <script>
 import DripNav from "@/components/DripNav.vue";
-import DripDash from "@/components/DripDash.vue";
+import DeviceList from "@/components/DeviceList.vue";
 
 export default {
   name: "dashboard",
@@ -16,8 +16,8 @@ export default {
     title: "Dashboard"
   },
   components: {
-    DripNav,
-    DripDash
+    DeviceList,
+    DripNav
   }
 };
 </script>
