@@ -7,7 +7,6 @@ module.exports = router;
 // we use the passport to secure routes to authenticated users only.
 router.get("/list", passport(), function(req, res) {
   Device.list().then(devices => {
-    console.log(devices);
     res.send(devices);
   });
 });

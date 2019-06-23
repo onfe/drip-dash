@@ -1,26 +1,23 @@
 const axios = require("axios");
 
 const state = {
-  devices: [],
+  list: [],
   updated: -1,
   updating: false
 };
 
-const getters = {
-  list: state => state.devices
-};
+const getters = {};
 
 const actions = {
   get: ({ state, dispatch }) => {
-    // if last updated more than 1 minute ago, call an update, otherwise return.
-    console.log(`Updated: ${state.updated}`)
-    if (Date.now() - state.updated > 60 * 1000) {
+    // if last updated more than 3 seconds ago, call an update, otherwise return.
+    if (Date.now() - state.updated > 1000 * 3) {
       dispatch("update").then(() => {
-        return state.devices;
+        return state.list;
       });
     } else {
       return new Promise(resolve => {
-        resolve(state.devices);
+        resolve(state.list);
       });
     }
   },
@@ -29,6 +26,12 @@ const actions = {
       commit("update");
       axios({ url: "api/devices/list", method: "GET" })
         .then(resp => {
+          resp.data.forEach(device => {
+            device.name = device.name || device.progName;
+            device.online = new Date(device.online);
+            device.onlineNow = Date.now() - device.online < 10 * 1000;
+            device.status = device.onlineNow ? "ok" : "offline";
+          });
           commit("updated", resp.data);
           resolve(resp.data);
           return resp.data;
@@ -47,7 +50,8 @@ const mutations = {
   },
   updated: (state, devices) => {
     state.updating = false;
-    state.devices = devices;
+    state.list = devices;
+    state.updated = new Date();
   },
   error: state => {
     state.updating = false;
