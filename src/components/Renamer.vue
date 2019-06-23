@@ -2,7 +2,12 @@
   <div v-bind:class="{ expanded: this.expanded }" class="cont">
     <NavIcon @click="toggle" :icon="this.mainIcon" />
     <span v-bind:class="{ expanded: this.expanded }" class="renamer">
-      <b-form-input v-model="text" class="renamer-input" placeholder="Rename" ref="name">
+      <b-form-input
+        v-model="text"
+        class="renamer-input"
+        placeholder="Rename"
+        ref="name"
+      >
       </b-form-input>
       <NavIcon v-if="this.expanded" @click="exit" icon="times" />
     </span>
@@ -39,7 +44,10 @@ export default {
         this.$refs.name.$el.focus();
       } else {
         // save
-        this.$emit("save", this.text);
+        if (this.text != this.startText) {
+          this.$emit("save", this.text);
+          this.startText = this.text;
+        }
       }
     },
     exit: function() {
@@ -74,7 +82,6 @@ export default {
 
   &.expanded {
     border-color: #ced4da;
-    background: var(--light);
   }
 }
 
