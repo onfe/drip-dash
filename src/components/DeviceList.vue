@@ -2,51 +2,24 @@
   <b-container>
     <b-card title="Devices">
       <div
-        class="device"
+        class="looper"
         v-for="device in this.$store.state.devices.list"
         v-bind:id="device.progName"
         v-bind:key="device.progName"
       >
-        <router-link
-          class="left"
-          :to="{ name: 'device', params: { deviceName: device.name } }"
-        >
-          <TriStateIcon :status="device.status" class="pad-right" />
-          <span class="d-name">{{ device.name }}</span>
-        </router-link>
-        <div class="right">
-          <TimeAgo
-            v-if="!device.onlineNow"
-            class="online"
-            :time="device.online"
-          />
-          <span v-else class="online">Device online</span>
-          <Renamer :startText="device.name" @save="rename"/>
-          <NavIcon icon="ellipsis-v" />
-        </div>
+        <DeviceListItem :device="device" />
       </div>
     </b-card>
   </b-container>
 </template>
 
 <script>
-import NavIcon from "@/components/NavIcon.vue";
-import TriStateIcon from "@/components/TriStateIcon.vue";
-import TimeAgo from "@/components/TimeAgo.vue";
-import Renamer from "@/components/Renamer.vue";
+import DeviceListItem from "@/components/DeviceListItem.vue";
 
 export default {
   name: "DeviceList",
   components: {
-    NavIcon,
-    TriStateIcon,
-    TimeAgo,
-    Renamer
-  },
-  methods: {
-    rename: function(e) {
-      console.log(e);
-    }
+    DeviceListItem
   },
   created: function() {
     this.$store.dispatch("devices/get");
