@@ -49,5 +49,6 @@ html {
 
 :root {
   --accent: #0db8b0;
+  --accent-darker: #009f97;
 }
 </style>

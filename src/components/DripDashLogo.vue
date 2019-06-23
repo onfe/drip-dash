@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     style() {
-      return "fill: " + this.color;
+      return "fill: " + (this.color || "var(--accent);");
     }
   }
 };

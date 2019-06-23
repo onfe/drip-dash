@@ -1,6 +1,6 @@
 <template>
   <b-navbar variant="white">
-    <b-container>
+    <b-container class="px-3">
       <b-navbar-brand to="/">
         <DripDashLogo color="var(--accent)" />
       </b-navbar-brand>
