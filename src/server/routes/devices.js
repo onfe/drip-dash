@@ -10,3 +10,13 @@ router.get("/list", passport(), function(req, res) {
     res.send(devices);
   });
 });
+
+router.post("/rename", passport(), function(req, res) {
+  const id = req.body.id;
+  const newName = req.body.name;
+  Device.getByProgName(id).then(device => {
+    console.log(req.body);
+    device.rename(newName);
+    res.send("ok");
+  });
+});

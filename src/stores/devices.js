@@ -41,6 +41,18 @@ const actions = {
           reject(err);
         });
     });
+  },
+  rename: ({ dispatch }, data) => {
+    return new Promise((resolve, reject) => {
+      axios({ url: "api/devices/rename", data: data, method: "POST" })
+        .then(resp => {
+          dispatch("update");
+          resolve(resp);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
   }
 };
 

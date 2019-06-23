@@ -37,5 +37,17 @@ module.exports = (sequelize, DataTypes) => {
     return d;
   };
 
+  Device.prototype.rename = function(name) {
+    if (name.length == 0) {
+      this.name = this.progName;
+      this.save();
+    } else if (name == this.progName) {
+      return;
+    } else {
+      this.name = name;
+      this.save();
+    }
+  };
+
   return Device;
 };
