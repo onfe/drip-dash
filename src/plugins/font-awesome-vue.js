@@ -11,7 +11,9 @@ import {
   faSyncAlt,
   faPencilAlt,
   faCheckCircle,
-  faTimesCircle
+  faTimesCircle,
+  faSave,
+  faTimes
 } from "@fortawesome/free-solid-svg-icons";
 import { faQuestionCircle as farQuestionCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -28,7 +30,9 @@ library.add(
   faPencilAlt,
   faCheckCircle,
   faTimesCircle,
-  farQuestionCircle
+  farQuestionCircle,
+  faSave,
+  faTimes
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);

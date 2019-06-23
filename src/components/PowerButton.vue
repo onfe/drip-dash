@@ -35,7 +35,7 @@
 import NavIcon from "@/components/NavIcon.vue";
 
 export default {
-  name: "DripDash",
+  name: "PowerButton",
   props: {},
   components: {
     NavIcon

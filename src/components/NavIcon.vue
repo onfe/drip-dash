@@ -1,5 +1,5 @@
 <template>
-  <a class="btn-icn">
+  <a class="btn-icn" @click="$emit('click')">
     <font-awesome-icon :icon="icon" />
   </a>
 </template>
@@ -23,7 +23,7 @@ export default {
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  margin-left: 4px;
+  margin: 0 2px;
 
   svg {
     color: var(--gray);
