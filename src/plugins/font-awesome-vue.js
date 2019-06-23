@@ -8,8 +8,12 @@ import {
   faEllipsisV,
   faSignOutAlt,
   faPlug,
-  faSyncAlt
+  faSyncAlt,
+  faPencilAlt,
+  faCheckCircle,
+  faTimesCircle
 } from "@fortawesome/free-solid-svg-icons";
+import { faQuestionCircle as farQuestionCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 // Add the required icons to keep the bundle small.
@@ -20,7 +24,11 @@ library.add(
   faEllipsisV,
   faSignOutAlt,
   faPlug,
-  faSyncAlt
+  faSyncAlt,
+  faPencilAlt,
+  faCheckCircle,
+  faTimesCircle,
+  farQuestionCircle
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
