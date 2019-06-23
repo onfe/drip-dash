@@ -19,6 +19,15 @@ const router = new Router({
       }
     },
     {
+      path: "/device/:deviceName",
+      name: "device",
+      component: () =>
+        import(/* webpackChunkName: "device" */ "./views/Device.vue"),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: "/login",
       name: "login",
       // Lazy load when required
