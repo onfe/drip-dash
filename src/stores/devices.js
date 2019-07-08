@@ -11,7 +11,7 @@ const getters = {};
 const actions = {
   get: ({ state, dispatch }) => {
     // if last updated more than 3 seconds ago, call an update, otherwise return.
-    if (Date.now() - state.updated > 1000 * 3) {
+    if (Date.now() - state.updated > 1000 * 5) {
       dispatch("update").then(() => {
         return state.list;
       });
@@ -24,7 +24,7 @@ const actions = {
   update: ({ commit }) => {
     return new Promise((resolve, reject) => {
       commit("update");
-      axios({ url: "api/devices/list", method: "GET" })
+      axios({ url: "/api/devices/", method: "GET" })
         .then(resp => {
           resp.data.forEach(device => {
             device.name = device.name || device.progName;
@@ -42,9 +42,13 @@ const actions = {
         });
     });
   },
-  rename: ({ dispatch }, data) => {
+  rename: ({ dispatch }, { id, name }) => {
     return new Promise((resolve, reject) => {
-      axios({ url: "api/devices/rename", data: data, method: "POST" })
+      axios({
+        url: `/api/devices/${id}/rename`,
+        data: { name },
+        method: "POST"
+      })
         .then(resp => {
           dispatch("update");
           resolve(resp);
