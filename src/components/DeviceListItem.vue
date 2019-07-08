@@ -1,26 +1,27 @@
 <template>
-  <div class="device">
-    <router-link
-      class="left"
-      :to="{ name: 'device', params: { deviceName: device.name } }"
-    >
-      <TriStateIcon :status="device.status" class="pad-right" />
+  <router-link
+    class="device"
+    :to="{ name: 'device', params: { deviceName: device.progName } }"
+  >
+    <div class="left">
+      <TriStateIcon :status="device.status" class="tristate" />
       <span class="d-name">{{ device.name }}</span>
       <span v-if="device.name != device.progName" class="d-id small"
         >({{ device.progName }})</span
       >
-    </router-link>
+    </div>
     <div class="right">
       <TimeAgo
         v-if="!device.onlineNow"
         class="online small"
         :time="device.online"
+        text="Last Online"
       />
       <span v-else class="online small">Device online</span>
       <Renamer :startText="device.name" @save="rename" />
       <NavIcon icon="ellipsis-v" />
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -43,8 +44,8 @@ export default {
   methods: {
     rename: function(name) {
       console.log(name);
-      const data = { id: this.device.progName, name: name };
-      this.$store.dispatch("devices/rename", data);
+      let pl = { id: this.device.progName, name: name };
+      this.$store.dispatch("devices/rename", pl);
     }
   }
 };
@@ -56,7 +57,14 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-left: -0.5em;
+  text-decoration: none;
+  border-radius: 0.5em;
+  transition: all 0.15s ease-in-out;
+  padding: 0 0.5em;
+
+  &:hover {
+    background: var(--light);
+  }
 }
 
 .small {
@@ -73,18 +81,10 @@ export default {
 }
 
 .left {
-  text-decoration: none;
   color: var(--dark);
-  border-radius: 0.5em;
-  padding: 0.5em;
-  transition: all 0.15s ease-in-out;
-
-  &:hover {
-    background: var(--light);
-  }
 }
 
-.pad-right {
+.tristate {
   padding-right: 1em;
 }
 </style>
