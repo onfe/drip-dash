@@ -1,6 +1,10 @@
 <template>
   <div class="dashboard">
-    <DripNav v-bind:bc="['DripDash', 'Home', 'Summary']" />
+    <DripNav
+      v-bind:bc="['DripDash', 'Home', 'Summary']"
+      :updated="this.$store.state.devices.updated"
+      :updating="this.$store.state.devices.updating"
+    />
     <br />
     <DeviceList />
   </div>

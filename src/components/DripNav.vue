@@ -6,6 +6,11 @@
       </b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <BreadcrumbButton v-bind:bc="this.bc" />
+      <UpdateCandy
+        v-if="this.showUpdater"
+        :updating="this.updating"
+        :updated="this.updated"
+      />
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
@@ -29,17 +34,26 @@ import BreadcrumbButton from "@/components/BreadcrumbButton.vue";
 import DripDashLogo from "@/components/DripDashLogo.vue";
 import NavIcon from "@/components/NavIcon.vue";
 import PowerButton from "@/components/PowerButton.vue";
+import UpdateCandy from "@/components/UpdateCandy.vue";
 
 export default {
   name: "DripNav",
   props: {
-    bc: Array
+    bc: Array,
+    updated: Date,
+    updating: Boolean
+  },
+  computed: {
+    showUpdater: function() {
+      return !!this.updated;
+    }
   },
   components: {
     BreadcrumbButton,
     DripDashLogo,
     NavIcon,
-    PowerButton
+    PowerButton,
+    UpdateCandy
   }
 };
 </script>
