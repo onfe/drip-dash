@@ -18,23 +18,3 @@ export default {
   }
 };
 </script>
-
-<style scoped lang="scss">
-.state-icon {
-  width: 1.5em;
-  height: 1.5em;
-  vertical-align: bottom;
-}
-
-.ok {
-  color: var(--success);
-}
-
-.unknown {
-  color: var(--secondary);
-}
-
-.ko {
-  color: var(--danger);
-}
-</style>
