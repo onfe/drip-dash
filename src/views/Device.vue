@@ -1,6 +1,8 @@
 <template>
   <div class="dashboard">
-    <DripNav v-bind:bc="['DripDash', 'Device', this.device]" />
+    <DripNav
+      v-bind:bc="['DripDash', 'Device', `${this.device.name} Dashboard`]"
+    />
   </div>
 </template>
 
@@ -11,13 +13,19 @@ export default {
   name: "device",
   metaInfo: function() {
     return {
-      title: this.device
+      title: this.$store.state.device.name
     };
   },
   computed: {
-    device: function() {
+    deviceID: function() {
       return this.$route.params.deviceName;
+    },
+    device: function() {
+      return this.$store.state.device;
     }
+  },
+  created: function() {
+    this.$store.dispatch("device/set", this.deviceID);
   },
   components: {
     DripNav
