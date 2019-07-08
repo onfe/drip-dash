@@ -1,6 +1,6 @@
 <template>
-  <div v-bind:class="{ expanded: this.expanded }" class="cont">
-    <NavIcon @click="toggle" :icon="this.mainIcon" />
+  <div v-bind:class="{ expanded: this.expanded }" class="cont" @click.prevent>
+    <NavIcon @click="toggle" :icon="this.mainIcon" class="icn-m" />
     <span v-bind:class="{ expanded: this.expanded }" class="renamer">
       <b-form-input
         v-model="text"
@@ -62,18 +62,22 @@ export default {
   display: inline-flex;
   flex-direction: row;
   align-items: center;
-  width: 1px;
+  width: 0px;
   overflow: hidden;
   transition: all 0.25s ease-in-out;
 
   &.expanded {
-    width: 12.4em;
+    width: 12.5em;
+    font-size: 0.85em;
   }
 }
 
 .cont {
+  margin: 0.5em;
+  font-size: 1em;
+  height: 2.5em;
   display: flex;
-  padding: 2px;
+  padding: 0;
   flex-direction: row;
   align-items: center;
   transition: all 0.25s ease-in-out;
@@ -82,14 +86,19 @@ export default {
 
   &.expanded {
     border-color: #ced4da;
+
+    .icn-m {
+      font-size: 0.85em;
+    }
   }
 }
 
 .renamer-input {
-  font-size: 0.85em;
+  font-size: 1em;
   border: 0;
-  width: 12em;
+  width: 10em;
   background: transparent;
+  padding: 0;
 
   &:focus,
   :active {

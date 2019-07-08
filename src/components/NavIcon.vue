@@ -1,5 +1,5 @@
 <template>
-  <a class="btn-icn" @click="$emit('click')">
+  <a class="btn-icn" @click.prevent="$emit('click')">
     <font-awesome-icon :icon="icon" />
   </a>
 </template>
@@ -38,7 +38,7 @@ export default {
   &:before {
     position: absolute;
     content: "";
-    background-color: var(--light);
+    background-color: rgba(0, 0, 0, 0.035);
     width: 0;
     height: 0;
     left: 50%;
