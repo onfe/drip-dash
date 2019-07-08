@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     this.save();
   };
 
-  Device.getByProgName = function(progName) {
+  Device.get = function(progName) {
     var d = this.findOne({ where: { progName: progName } }).then(device => {
       return device;
     });

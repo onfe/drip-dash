@@ -13,7 +13,6 @@ module.exports = {
       if (user) {
         // there is a user with this username, continue with auth.
         var passMatch = bcrypt.compareSync(password, user.passhash);
-        console.log(username + " " + password + " " + passMatch);
         if (passMatch) {
           return user;
         } else {

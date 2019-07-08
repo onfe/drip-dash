@@ -5,18 +5,25 @@ const Device = require("../models").Device;
 
 module.exports = router;
 // we use the passport to secure routes to authenticated users only.
-router.get("/list", passport(), function(req, res) {
+router.get("/", passport(), function(req, res) {
   Device.list().then(devices => {
     res.send(devices);
   });
 });
 
-router.post("/rename", passport(), function(req, res) {
-  const id = req.body.id;
-  const newName = req.body.name;
-  Device.getByProgName(id).then(device => {
-    console.log(req.body);
+router.post("/:id/rename", passport(), function(req, res) {
+  const id = req.params.id;
+  const newName = req.body.name || "";
+  Device.get(id).then(device => {
     device.rename(newName);
     res.send("ok");
   });
 });
+
+router.get("/:id/", passport(), function(req, res) {
+  Device.get(req.params.id).then(device => {
+    res.send(device);
+  });
+});
+
+router.get("/:id/data", passport(), function(req, res) {});
