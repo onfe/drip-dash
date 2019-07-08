@@ -23,13 +23,13 @@ export default {
   },
   created: function() {
     this.$store.dispatch("devices/get");
-
-    setInterval(
-      function() {
-        this.$store.dispatch("devices/get");
-      }.bind(this),
-      1000
-    );
+    const that = this;
+    this.refreshInterval = setInterval(function() {
+      that.$store.dispatch("devices/get");
+    }, 1000);
+  },
+  beforeDestroy: function() {
+    clearInterval(this.refreshInterval);
   }
 };
 </script>
