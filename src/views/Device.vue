@@ -26,6 +26,7 @@ export default {
   },
   created: function() {
     this.$store.dispatch("device/set", this.deviceID);
+    this.$store.dispatch("device/update");
   },
   components: {
     DripNav

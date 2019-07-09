@@ -12,24 +12,42 @@ const state = {
 const getters = {};
 
 const actions = {
-  set: ({ state, dispatch, commit }, id) => {
+  set: ({ state, commit }, id) => {
     if (id == state.progName) {
       return state;
     } else {
       commit("set", id);
-      dispatch("update").then(() => {
-        return state;
+      return new Promise((resolve, reject) => {
+        commit("updateDevice");
+        axios({ url: `/api/devices/${state.progName}`, method: "GET" })
+          .then(resp => {
+            commit("updatedDevice", resp.data);
+            resolve(state);
+            return state;
+          })
+          .catch(err => {
+            commit("error");
+            reject(err);
+          });
       });
     }
   },
-  update: ({ state, commit }) => {
+  update: ({ state, commit }, timeframe) => {
+    if (!timeframe) {
+      var timeframe = {};
+      timeframe.from = Date.now() - 1000 * 60 * 20;
+    }
     return new Promise((resolve, reject) => {
-      commit("update");
-      axios({ url: `/api/devices/${state.progName}`, method: "GET" })
+      commit("updateData");
+      axios({
+        url: `/api/devices/${state.progName}/data`,
+        params: timeframe,
+        method: "GET"
+      })
         .then(resp => {
-          commit("updated", resp.data);
-          resolve(resp.data);
-          return resp.data;
+          commit("updatedData", resp.data);
+          resolve(state);
+          return state;
         })
         .catch(err => {
           commit("error");
@@ -48,11 +66,11 @@ const mutations = {
     state.type = -1;
     state.updated = -1;
   },
-  update: state => {
+  updateDevice: state => {
     state.updating = true;
   },
   // eslint-disable-next-line
-  updated: (state, data) => {
+  updatedDevice: (state, data) => {
     console.log(data);
     state.name = data.name;
     state.type = data.type;
