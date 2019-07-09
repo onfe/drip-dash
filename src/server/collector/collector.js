@@ -7,7 +7,7 @@ const Data = require("../models").Data;
 module.exports = router;
 
 router.get("/:id/", function(req, res) {
-  d = Device.getByProgName(req.params.id).then(device => {
+  d = Device.get(req.params.id).then(device => {
     if (device) {
       device.update();
       return device;

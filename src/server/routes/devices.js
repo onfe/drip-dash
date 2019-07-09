@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("../passport");
 const Device = require("../models").Device;
+const Data = require("../models").Data;
 
 module.exports = router;
 // we use the passport to secure routes to authenticated users only.
@@ -26,4 +27,10 @@ router.get("/:id/", passport(), function(req, res) {
   });
 });
 
-router.get("/:id/data", passport(), function(req, res) {});
+router.get("/:id/data", passport(), function(req, res) {
+  Device.get(req.params.id).then(device => {
+    device.data().then(data => {
+      res.send(data);
+    });
+  });
+});

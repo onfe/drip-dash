@@ -16,7 +16,8 @@ export default {
   data: function() {
     return {
       t: this.time,
-      timeText: ""
+      timeText: "",
+      updateInter: this.interval || 5000
     };
   },
   methods: {
@@ -38,7 +39,7 @@ export default {
     if (this.dynamic) {
       setInterval(() => {
         this.update();
-      }, 2000);
+      }, this.updateInter);
     }
   }
 };

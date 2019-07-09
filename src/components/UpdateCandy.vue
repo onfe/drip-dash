@@ -5,7 +5,7 @@
       <b-spinner small class="loader" label="Loading..."></b-spinner>
     </template>
     <template v-else>
-      <TimeAgo :time="this.updated" text="Updated" dynamic/>
+      <TimeAgo :time="this.updated" text="Updated" dynamic />
     </template>
   </span>
 </template>
