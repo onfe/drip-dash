@@ -82,4 +82,4 @@ const devices = {
   mutations: mutations
 };
 
-module.exports = devices;
+export default devices;

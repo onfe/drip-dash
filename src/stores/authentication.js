@@ -22,7 +22,7 @@ const actions = {
           // if the auth request succeeds, get the token, and store it.
           const token = resp.data.token;
           localStorage.setItem("user-token", token); // store the token in localstorage
-          console.log(token);
+
           // set the token to be sent with every request.
           axios.defaults.headers.common["Authorization"] = token;
 
@@ -74,4 +74,4 @@ const authentication = {
   mutations: mutations
 };
 
-module.exports = authentication;
+export default authentication;
