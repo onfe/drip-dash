@@ -1,5 +1,5 @@
 "use strict";
-const { Op } = require('sequelize');
+const { Op } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   const Data = sequelize.define(
@@ -15,18 +15,23 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   Data.getSelection = function(dID, from, to) {
-    if ( !from ) {
+    if (!from) {
       var from = Date.now() - 1000 * 60 * 20;
     }
     if (!to) {
       // from only
       var to = new Date();
     }
-    return Data.findAll({ where: { DeviceId: dID, timestamp: {
-      [Op.gte]: from,
-      [Op.lte]: to
-    }}});
-  }
+    return Data.findAll({
+      where: {
+        DeviceId: dID,
+        timestamp: {
+          [Op.gte]: from,
+          [Op.lte]: to
+        }
+      }
+    });
+  };
 
   Data.prototype.getData = function() {
     return JSON.parse(this.data);

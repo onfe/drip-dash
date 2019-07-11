@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
     return sequelize.models.Data.getSelection(this.id, from, to).then(data => {
       return data;
     });
-  }
+  };
 
   return Device;
 };
