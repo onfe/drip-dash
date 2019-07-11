@@ -13,8 +13,9 @@ configureAPI(app);
 const publicPath = resolve(__dirname, "../../dist");
 const staticConf = { maxAge: "1y", etag: false };
 
+// app.use(express.static(publicPath, staticConf));
+app.use(history());
 app.use(express.static(publicPath, staticConf));
-app.use("/", history());
 
 // Go
 app.listen(PORT, () => console.log(`DripDash running on port ${PORT}!`));
