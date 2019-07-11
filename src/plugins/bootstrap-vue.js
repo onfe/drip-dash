@@ -8,7 +8,8 @@ import {
   ButtonPlugin,
   FormInputPlugin,
   FormPlugin,
-  FormGroupPlugin
+  FormGroupPlugin,
+  SpinnerPlugin
 } from "bootstrap-vue";
 
 Vue.use(LayoutPlugin);
@@ -19,6 +20,7 @@ Vue.use(ButtonPlugin);
 Vue.use(FormInputPlugin);
 Vue.use(FormPlugin);
 Vue.use(FormGroupPlugin);
+Vue.use(SpinnerPlugin);
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
