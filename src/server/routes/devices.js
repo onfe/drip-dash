@@ -30,6 +30,7 @@ router.get("/:id/", passport(), function(req, res) {
 router.get("/:id/data", passport(), function(req, res) {
   Device.get(req.params.id).then(device => {
     device.data().then(data => {
+      data = Data.simplify(data);
       res.send(data);
     });
   });

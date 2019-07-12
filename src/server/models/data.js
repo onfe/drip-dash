@@ -37,5 +37,17 @@ module.exports = (sequelize, DataTypes) => {
     return JSON.parse(this.data);
   };
 
+  Data.simplify = function(dataList) {
+    var simple = dataList.map(dat => {
+      var dataValues = JSON.parse(dat["data"]);
+      if (dataValues["timestamp"]) {
+        delete dataValues["timestamp"];
+      };
+      dataValues["timestamp"] = dat["timestamp"];
+      return dataValues;
+    });
+    return simple;
+  }
+
   return Data;
 };

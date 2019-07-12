@@ -3,13 +3,34 @@ const axios = require("axios");
 const state = {
   progName: "",
   name: "",
-  data: {},
+  data: [],
   type: -1,
   updated: -1,
   updating: false
 };
 
-const getters = {};
+const getters = {
+  getData: (state) => (field, interval, from, to) => {
+    var out = []
+    interval = interval || 0;
+    var lastTimestamp = 0;
+    console.log(interval);
+    state.data.forEach(val => {
+      // either from is not enabled or the val.timestamp > from
+      console.log(lastTimestamp + interval)
+      console.log(val.timestamp)
+      if (
+        (!from || val.timestamp >= from) &&
+        (!to || val.timestamp <= to) &&
+        (lastTimestamp < val.timestamp)
+      ) {
+        out.push({timestamp: val.timestamp, field: val[field]});
+        lastTimestamp = val.timestamp.setSeconds(val.timestamp.getSeconds() + interval);
+      }
+    });
+    return out;
+  }
+};
 
 const actions = {
   set: ({ state, commit }, id) => {
@@ -45,6 +66,9 @@ const actions = {
         method: "GET"
       })
         .then(resp => {
+          resp.data.forEach(v => {
+            v.timestamp = new Date(v.timestamp);
+          });
           commit("updatedData", resp.data);
           resolve(state);
           return state;
@@ -76,6 +100,14 @@ const mutations = {
     state.type = data.type;
     state.updating = false;
     state.updated = new Date();
+  },
+  updateData: state => {
+    state.updating = true;
+  },
+  updatedData: (state, data) => {
+    state.updating = false;
+    state.updated = new Date();
+    state.data = data;
   },
   error: state => {
     state.updating = false;
