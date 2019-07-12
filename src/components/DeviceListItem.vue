@@ -1,7 +1,7 @@
 <template>
   <router-link
     class="device"
-    :to="{ name: 'device', params: { deviceName: device.progName } }"
+    :to="{ name: 'device', params: { id: device.progName } }"
   >
     <div class="left">
       <TriStateIcon :status="device.status" class="tristate" />

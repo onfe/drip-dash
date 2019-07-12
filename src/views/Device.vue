@@ -3,11 +3,14 @@
     <DripNav
       v-bind:bc="['DripDash', 'Device', `${this.device.name} Dashboard`]"
     />
+    <br />
+    <Dashboard />
   </div>
 </template>
 
 <script>
 import DripNav from "@/components/DripNav.vue";
+import Dashboard from "@/components/Dashboard.vue";
 
 export default {
   name: "device",
@@ -18,7 +21,7 @@ export default {
   },
   computed: {
     deviceID: function() {
-      return this.$route.params.deviceName;
+      return this.$route.params.id;
     },
     device: function() {
       return this.$store.state.device;
@@ -29,7 +32,8 @@ export default {
     this.$store.dispatch("device/update");
   },
   components: {
-    DripNav
+    DripNav,
+    Dashboard
   }
 };
 </script>

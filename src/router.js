@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Dashboard from "./views/Dashboard.vue";
+import Devices from "./views/Devices.vue";
 import store from "./store";
 
 Vue.use(Router);
@@ -12,14 +12,14 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      name: "dashboard",
-      component: Dashboard,
+      name: "devices",
+      component: Devices,
       meta: {
         requiresAuth: true
       }
     },
     {
-      path: "/device/:deviceName",
+      path: "/device/:id",
       name: "device",
       component: () =>
         import(/* webpackChunkName: "device" */ "./views/Device.vue"),
