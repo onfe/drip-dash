@@ -7,7 +7,7 @@ const Data = require("../models").Data;
 module.exports = router;
 
 router.get("/:id/", function(req, res) {
-  d = Device.get(req.params.id).then(device => {
+  var d = Device.get(req.params.id).then(device => {
     if (device) {
       device.update();
       return device;
@@ -24,7 +24,7 @@ router.get("/:id/", function(req, res) {
     console.log(d);
     Data.create(
       {
-        timestamp: new Date(),
+        timestamp: Date.now(),
         data: JSON.stringify(req.body),
         deviceId: d.id
       },
@@ -32,7 +32,7 @@ router.get("/:id/", function(req, res) {
         include: Device
       }
     )
-      .then(function(dat) {})
+      .then(function() {})
       .catch(function(err) {
         console.log(err);
       });

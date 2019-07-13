@@ -16,11 +16,11 @@ module.exports = (sequelize, DataTypes) => {
 
   Data.getSelection = function(dID, from, to) {
     if (!from) {
-      var from = Date.now() - 1000 * 60 * 20;
+      from = Date.now() - 1000 * 60 * 20;
     }
     if (!to) {
       // from only
-      var to = new Date();
+      to = new Date();
     }
     return Data.findAll({
       where: {
@@ -42,12 +42,12 @@ module.exports = (sequelize, DataTypes) => {
       var dataValues = JSON.parse(dat["data"]);
       if (dataValues["timestamp"]) {
         delete dataValues["timestamp"];
-      };
+      }
       dataValues["timestamp"] = dat["timestamp"];
       return dataValues;
     });
     return simple;
-  }
+  };
 
   return Data;
 };
