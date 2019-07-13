@@ -26,7 +26,7 @@ export default {
     const that = this;
     this.refreshInterval = setInterval(function() {
       that.$store.dispatch("devices/get");
-    }, 1000);
+    }, this.$store.getters["settings/apiIntervalms"]);
   },
   beforeDestroy: function() {
     clearInterval(this.refreshInterval);

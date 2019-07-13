@@ -5,7 +5,9 @@
         <RTWaterTemp class="block-card" />
       </b-col>
       <b-col>
-        <b-card class="block-card" title="At a Glance"/>
+        <b-card class="block-card" title="At a Glance">
+          Everything is a-ok!
+        </b-card>
       </b-col>
     </b-row>
   </b-container>
@@ -18,6 +20,13 @@ export default {
   name: "Dashboard",
   props: {},
   methods: {},
+  created: function() {
+    this.$store.dispatch("device/update");
+    const that = this;
+    this.refreshInterval = setInterval(() => {
+      that.$store.dispatch("device/update");
+    }, this.$store.getters["settings/apiIntervalms"]);
+  },
   components: {
     RTWaterTemp
   }

@@ -17,7 +17,7 @@ export default {
     return {
       t: this.time,
       timeText: "",
-      updateInter: this.interval || 5000
+      updateInter: this.$store.getters["settings/uiIntervalms"]
     };
   },
   methods: {
