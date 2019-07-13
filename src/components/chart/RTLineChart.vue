@@ -12,6 +12,14 @@ export default {
           yAxes: [{
             gridLines: {
               display: true
+            },
+            ticks: {
+              suggestedMin: 20,
+              suggestedMax: 35
+            },
+            scaleLabel: {
+              display: true,
+              labelString: "Water Temperature (°C)"
             }
           }],
           xAxes: [ {
@@ -22,7 +30,7 @@ export default {
           }]
         },
         legend: {
-          display: true
+          display: false
         },
         responsive: true,
         maintainAspectRatio: false

@@ -2,6 +2,8 @@
   <div class="dashboard">
     <DripNav
       v-bind:bc="['DripDash', 'Device', `${this.device.name} Dashboard`]"
+      :updated="this.$store.state.device.updated"
+      :updating="this.$store.state.device.updating"
     />
     <br />
     <Dashboard />
