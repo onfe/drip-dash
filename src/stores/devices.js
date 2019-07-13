@@ -9,18 +9,6 @@ const state = {
 const getters = {};
 
 const actions = {
-  get: ({ state, dispatch }) => {
-    // if last updated more than 3 seconds ago, call an update, otherwise return.
-    if (Date.now() - state.updated > 1000 * 5) {
-      dispatch("update").then(() => {
-        return state.list;
-      });
-    } else {
-      return new Promise(resolve => {
-        resolve(state.list);
-      });
-    }
-  },
   update: ({ commit }) => {
     return new Promise((resolve, reject) => {
       commit("update");

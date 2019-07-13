@@ -22,10 +22,10 @@ export default {
     DeviceListItem
   },
   created: function() {
-    this.$store.dispatch("devices/get");
+    this.$store.dispatch("devices/update");
     const that = this;
-    this.refreshInterval = setInterval(function() {
-      that.$store.dispatch("devices/get");
+    this.refreshInterval = setInterval(() => {
+      that.$store.dispatch("devices/update");
     }, this.$store.getters["settings/apiIntervalms"]);
   },
   beforeDestroy: function() {
