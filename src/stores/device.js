@@ -10,24 +10,34 @@ const state = {
 };
 
 const getters = {
-  getData: (state) => (field, interval, from, to) => {
-    var out = []
+  getData: state => (field, interval, from, to) => {
+    var out = [];
     interval = interval || 0;
-    var lastTimestamp = 0;
-    console.log(interval);
+    var avTotal = 0;
+    var avCount = 0;
+    var nextTimestamp = state.data[0].timestamp;
     state.data.forEach(val => {
       // either from is not enabled or the val.timestamp > from
-      console.log(lastTimestamp + interval)
-      console.log(val.timestamp)
       if (
         (!from || val.timestamp >= from) &&
         (!to || val.timestamp <= to) &&
-        (lastTimestamp < val.timestamp)
+        nextTimestamp <= val.timestamp
       ) {
-        out.push({timestamp: val.timestamp, field: val[field]});
-        lastTimestamp = val.timestamp.setSeconds(val.timestamp.getSeconds() + interval);
+        avCount += 1;
+        avTotal += val[field];
+        out.push({ timestamp: val.timestamp, field: avTotal / avCount });
+        avCount = 0;
+        avTotal = 0;
+        nextTimestamp = new Date(val.timestamp.getTime() + interval * 1000);
+      } else {
+        avTotal += val[field];
+        avCount += 1;
       }
     });
+    if (!to) {
+      var last = state.data[state.data.length - 1];
+      out.push({ timestamp: last.timestamp, field: last[field] });
+    }
     return out;
   }
 };
@@ -54,10 +64,6 @@ const actions = {
     }
   },
   update: ({ state, commit }, timeframe) => {
-    if (!timeframe) {
-      var timeframe = {};
-      timeframe.from = Date.now() - 1000 * 60 * 20;
-    }
     return new Promise((resolve, reject) => {
       commit("updateData");
       axios({
