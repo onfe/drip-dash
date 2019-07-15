@@ -15,7 +15,12 @@ const getters = {
     interval = interval || 0;
     var avTotal = 0;
     var avCount = 0;
-    var nextTimestamp = state.data[0].timestamp;
+    try {
+      var nextTimestamp = state.data[0].timestamp;
+    } catch {
+      return []
+    }
+
     state.data.forEach(val => {
       // either from is not enabled or the val.timestamp > from
       if (

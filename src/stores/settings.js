@@ -1,6 +1,7 @@
 const state = {
-  apiInterval: 5,
-  uiInterval: 1
+  apiInterval: 120,
+  uiInterval: 1,
+  chartColors: ["#0db8b0", "#0468c4", "#04C44E", "#04A3CF", "#04CF8B"]
 };
 
 const getters = {

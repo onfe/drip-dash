@@ -2,7 +2,7 @@
   <b-container>
     <b-row class="eq-height">
       <b-col cols="8">
-        <RTWaterTemp class="block-card" />
+        <RTTempCard class="block-card" />
       </b-col>
       <b-col>
         <b-card class="block-card" title="At a Glance">
@@ -10,11 +10,13 @@
         </b-card>
       </b-col>
     </b-row>
+    <b-row class="eq-height">
+    </b-row>
   </b-container>
 </template>
 
 <script>
-import RTWaterTemp from "@/components/RTWaterTemp.vue";
+import RTTempCard from "@/components/RTTemp.vue";
 
 export default {
   name: "Dashboard",
@@ -28,7 +30,7 @@ export default {
     }, this.$store.getters["settings/apiIntervalms"]);
   },
   components: {
-    RTWaterTemp
+    RTTempCard
   }
 };
 </script>
