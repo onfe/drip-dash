@@ -66,7 +66,7 @@ export default {
       console.log("exec");
       var sets = [];
       this.fields.forEach((field, i) => {
-        var data = this.$store.getters["device/getData"](field, 30).map(
+        var data = this.$store.getters["device/getData"](field, this.interval).map(
           d => {
             return { x: d.timestamp, y: d.field };
           });

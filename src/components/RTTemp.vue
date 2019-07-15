@@ -6,6 +6,7 @@
       :fields="['waterTemp', 'airTemp']"
       :labels="['Water Temperature', 'Air Temperature']"
       :legend="true"
+      interval="60"
     />
   </b-card>
 </template>
