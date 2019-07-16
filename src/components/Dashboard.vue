@@ -10,13 +10,25 @@
         </b-card>
       </b-col>
     </b-row>
+    <br />
     <b-row class="eq-height">
+      <b-col cols="3">
+        <RTStatCard class="block-card" field="humidity" title="Humidity" unit="%"/>
+      </b-col>
+      <b-col cols="3">
+        <RTStatCard class="block-card" field="light" title="Light" unit="Lux"/>
+      </b-col>
+      <b-col cols="6">
+        <RTWaterLevelCard />
+      </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import RTTempCard from "@/components/RTTemp.vue";
+import RTTempCard from "@/components/chart/RTTemp.vue";
+import RTWaterLevelCard from "@/components/chart/RTWaterLevel.vue";
+import RTStatCard from "@/components/RTStat.vue";
 
 export default {
   name: "Dashboard",
@@ -30,7 +42,9 @@ export default {
     }, this.$store.getters["settings/apiIntervalms"]);
   },
   components: {
-    RTTempCard
+    RTTempCard,
+    RTStatCard,
+    RTWaterLevelCard
   }
 };
 </script>
