@@ -44,7 +44,19 @@ const getters = {
       out.push({ timestamp: last.timestamp, field: last[field] });
     }
     return out;
+  },
+
+  getLatest: state => field => {
+    if (!state.data[state.data.length - 1]) {return {
+      timestamp: Date.now(),
+      field: "-"
+    }}
+    return {
+      timestamp: state.data[state.data.length - 1].timestamp,
+      field: state.data[state.data.length - 1][field]
+    }
   }
+
 };
 
 const actions = {
