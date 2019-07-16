@@ -49,24 +49,20 @@ const getters = {
 
 const actions = {
   set: ({ state, commit }, id) => {
-    if (id == state.progName) {
-      return state;
-    } else {
-      commit("set", id);
-      return new Promise((resolve, reject) => {
-        commit("updateDevice");
-        axios({ url: `/api/devices/${state.progName}`, method: "GET" })
-          .then(resp => {
-            commit("updatedDevice", resp.data);
-            resolve(state);
-            return state;
-          })
-          .catch(err => {
-            commit("error");
-            reject(err);
-          });
-      });
-    }
+    commit("set", id);
+    return new Promise((resolve, reject) => {
+      commit("updateDevice");
+      axios({ url: `/api/devices/${state.progName}`, method: "GET" })
+        .then(resp => {
+          commit("updatedDevice", resp.data);
+          resolve(state);
+          return state;
+        })
+        .catch(err => {
+          commit("error");
+          reject(err);
+        });
+    });
   },
   update: ({ state, commit }, timeframe) => {
     return new Promise((resolve, reject) => {
