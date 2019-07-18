@@ -1,7 +1,7 @@
 <template>
   <b-card :title="this.title" class="rtstat">
     <div class="wrap">
-      <h1 class="display-3">
+      <h1 class="display-3 adaptive">
         {{this.stat.field}}
         <span class="lead"> {{this.unit}} </span>
       </h1>
@@ -30,6 +30,19 @@ export default {
 <style lang="scss" scoped>
 .rtstat {
   position: relative;
+}
+
+.adaptive {
+  font-size: 2rem;
+
+  @include sm {
+    font-size: 2.5rem;
+  }
+
+  @include lg {
+    font-size: 3.5rem;
+  }
+
 }
 
 .wrap {

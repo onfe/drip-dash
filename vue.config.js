@@ -20,5 +20,12 @@ module.exports = {
   },
   devServer: {
     before: configureServer
+  },
+  css: {
+    loaderOptions: {
+      sass: {
+        data: `@import "@/style/_breakpoints.scss";`
+      }
+    }
   }
 };

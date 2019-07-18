@@ -6,20 +6,21 @@
     <div class="left">
       <TriStateIcon :status="device.status" class="tristate" />
       <span class="d-name">{{ device.name }}</span>
-      <span v-if="device.name != device.progName" class="d-id small"
-        >({{ device.progName }})</span
-      >
+      <span v-if="device.name != device.progName" class="d-id small">
+        ({{ device.progName }})
+      </span>
     </div>
     <div class="right">
       <TimeAgo
         v-if="!device.onlineNow"
         class="online small"
         :time="device.online"
-        text="Last Online"
+        text="Online"
       />
       <span v-else class="online small">Device online</span>
-      <Renamer :startText="device.name" @save="rename" />
+      <Renamer class="rname-sa" :startText="device.name" @save="rename" />
       <NavIcon icon="ellipsis-v" />
+      <!-- TODO add renamer to dropdown under sm breakpoint -->
     </div>
   </router-link>
 </template>
@@ -61,16 +62,35 @@ export default {
   border-radius: 0.5em;
   transition: all 0.15s ease-in-out;
   padding: 0 0.5em;
+  min-height: 3.5em;
 
   &:hover {
     background: var(--light);
   }
 }
 
+.d-id {
+  display: none;
+
+  @include md {
+    display: inline;
+  }
+
+}
+
 .small {
   font-size: 0.85em;
   margin: 0 0.5em;
   color: var(--secondary);
+}
+
+.rname-sa {
+  display: none;
+
+  @include sm {
+    display: flex;
+  }
+
 }
 
 .right,
