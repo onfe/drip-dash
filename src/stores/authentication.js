@@ -1,3 +1,5 @@
+import router from "../router"
+
 const axios = require("axios");
 
 const state = {
@@ -17,7 +19,7 @@ const actions = {
       // Set the state to loading whilst we get authenticated.
       commit("request");
 
-      axios({ url: "api/auth/request", data: user, method: "POST" })
+      axios({ url: "/api/auth/request", data: user, method: "POST" })
         .then(resp => {
           // if the auth request succeeds, get the token, and store it.
           const token = resp.data.token;
@@ -28,8 +30,6 @@ const actions = {
 
           commit("success", token);
 
-          // using the token, complete log-in
-          // dispatch("user/request");
           resolve(resp);
         })
         .catch(err => {
@@ -47,6 +47,58 @@ const actions = {
       delete axios.defaults.headers.common["Authorization"];
       resolve();
     });
+  },
+
+  prepareLogin: () => {
+    return new Promise((resolve, reject) => {
+      axios({ url: "/api/auth/reqres", method: "GET" })
+        .then(resp => {
+          if (resp.data) {
+            // registration is required, redirect.
+            router.push("/register");
+          }
+          resolve(resp.data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  },
+
+  prepareRegister: () => {
+    return new Promise((resolve, reject) => {
+      axios({ url: "/api/auth/reqres", method: "GET" })
+        .then(resp => {
+          if (!resp.data) {
+            // registration is NOT required, redirect.
+            router.push("/");
+          }
+          resolve(resp.data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  },
+
+  create: ({ commit, dispatch }, user) => {
+    if (user.password != user.passwordConf) {
+      commit("error");
+      return;
+    } else {
+      return new Promise((resolve, reject) => {
+        axios({ url: "/api/auth/create", data: user, method: "POST" })
+          .then(resp => {
+            // account created, complete log-in.
+            dispatch("user/request", user);
+            resolve(resp);
+          })
+          .catch(err => {
+            commit("error", err);
+            reject(err);
+          });
+      });
+    }
   }
 };
 

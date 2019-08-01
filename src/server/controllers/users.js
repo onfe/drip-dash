@@ -27,12 +27,14 @@ module.exports = {
     return u;
   },
 
-  createDefault() {
-    User.findAll({}).then(userList => {
-      console.log(userList.length);
+  exists() {
+    var u = User.findAll({}).then(userList => {
       if (userList.length == 0) {
-        this.create("test", "test");
+        return false;
+      } else {
+        return true;
       }
     });
+    return u;
   }
 };

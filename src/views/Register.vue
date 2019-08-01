@@ -1,25 +1,25 @@
 <template>
   <div class="home">
     <b-container>
-      <Login />
+      <Register />
     </b-container>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Login from "@/components/Login.vue";
+import Register from "@/components/Register.vue";
 
 export default {
   name: "home",
   metaInfo: {
-    title: "Login"
+    title: "Register"
   },
   components: {
-    Login
+    Register
   },
   created: function() {
-    this.$store.dispatch("auth/prepareLogin");
+    this.$store.dispatch("auth/prepareRegister");
   }
 };
 </script>
