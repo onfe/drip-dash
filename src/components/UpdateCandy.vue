@@ -1,6 +1,6 @@
 <template>
   <span class="updatecandy">
-    <template v-if="this.updating">
+    <template v-if="this.trueUpdating">
       Updating
       <b-spinner small class="loader" label="Loading..."></b-spinner>
     </template>
@@ -17,9 +17,17 @@ export default {
   name: "UpdateCandy",
   props: {
     updating: Boolean,
-    updated: Date
+    updated: [Date, Number]
   },
-  computed: {},
+  computed: {
+    trueUpdating: function() {
+      if (typeof this.updated === "number") {
+        return true;
+      } else {
+        return this.updating
+      }
+    }
+  },
   components: {
     TimeAgo
   }

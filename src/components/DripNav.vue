@@ -39,7 +39,7 @@ export default {
   name: "DripNav",
   props: {
     bc: Array,
-    updated: Date,
+    updated: [Date, Number],
     updating: Boolean
   },
   computed: {
