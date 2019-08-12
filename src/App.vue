@@ -21,12 +21,14 @@ export default {
       axios.defaults.headers.common["Authorization"] = token;
     }
 
-    axios.interceptors.response.use(undefined, function(err) {
+    var that = this;
+    axios.interceptors.response.use(undefined, function(error) {
+      var err = error.response;
       return new Promise(function() {
         if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
           // if you ever get an unauthorized 401 response, logout the user.
-          this.$store.dispatch("auth/logout").then(() => {
-            this.$router.push("/login");
+          that.$store.dispatch("auth/logout").then(() => {
+            that.$router.push("/login");
           });
         }
         throw err;
