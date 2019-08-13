@@ -31,12 +31,20 @@ export default {
   name: "Dashboard",
   props: {},
   methods: {},
+  data() {
+    return {
+      refreshInterval: ""
+    }
+  },
   created: function() {
     this.$store.dispatch("device/update");
     const that = this;
     this.refreshInterval = setInterval(() => {
       that.$store.dispatch("device/update");
     }, this.$store.getters["settings/apiIntervalms"]);
+  },
+  beforeDestroy: function() {
+    clearInterval(this.refreshInterval);
   },
   components: {
     RTTempCard,

@@ -21,6 +21,11 @@ export default {
   components: {
     DeviceListItem
   },
+  data() {
+    return {
+      refreshInterval: ""
+    }
+  },
   created: function() {
     this.$store.dispatch("devices/update");
     const that = this;
