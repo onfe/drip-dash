@@ -24,7 +24,6 @@ export default {
   },
   computed: {
     getLegend() {
-      console.log(typeof this.legend)
       var disp = this.legend
       return {
         display: disp
@@ -63,7 +62,6 @@ export default {
       };
     },
     datasets() {
-      console.log("exec");
       var sets = [];
       this.fields.forEach((field, i) => {
         var data = this.$store.getters["device/getData"](field, this.interval).map(
