@@ -1,10 +1,12 @@
-import router from "../router"
+import router from "../router";
 
 const axios = require("axios");
 
 const state = {
   token: localStorage.getItem("user-token") || "",
-  status: ""
+  expires: localStorage.getItem("user-token-expires") || "",
+  status: "",
+  refreshTimeout: ""
 };
 
 const getters = {
@@ -14,7 +16,7 @@ const getters = {
 
 const actions = {
   // Request an auth token
-  request: ({ commit }, user) => {
+  request: ({ commit, dispatch }, user) => {
     return new Promise((resolve, reject) => {
       // Set the state to loading whilst we get authenticated.
       commit("request");
@@ -23,12 +25,51 @@ const actions = {
         .then(resp => {
           // if the auth request succeeds, get the token, and store it.
           const token = resp.data.token;
+          const expires = new Date(resp.data.expires);
+          console.log(expires);
           localStorage.setItem("user-token", token); // store the token in localstorage
+          localStorage.setItem("user-token-expires", expires);
 
-          // set the token to be sent with every request.
-          axios.defaults.headers.common["Authorization"] = token;
+          commit("success", { token, expires });
 
-          commit("success", token);
+          var tillRefresh = expires.getTime() - Date.now() - 30000;
+          console.log(tillRefresh);
+          var timeout = setTimeout(function() { dispatch("refresh") }, tillRefresh)
+
+          commit("nextRefresh", timeout);
+
+          resolve(resp);
+        })
+        .catch(err => {
+          commit("error", err);
+          localStorage.removeItem("user-token"); // if the request fails, remove any possible user token if possible
+          reject(err);
+        });
+    });
+  },
+  // eslint-disable-next-line
+  refresh: ({ commit, state, dispatch }) => {
+    return new Promise((resolve, reject) => {
+      // Set the state to refreshing.
+      commit("refresh");
+
+      var pl = { token: state.token };
+      axios({ url: "/api/auth/refresh", data: pl, method: "POST" })
+        .then(resp => {
+          // if the auth request succeeds, get the token, and store it.
+          const token = resp.data.token;
+          const expires = new Date(resp.data.expires);
+          console.log(expires);
+          localStorage.setItem("user-token", token); // store the token in localstorage
+          localStorage.setItem("user-token-expires", expires);
+
+          commit("success", { token, expires });
+
+          var tillRefresh = expires.getTime() - Date.now() - 30000;
+          console.log(tillRefresh);
+          var timeout = setTimeout(function() { dispatch("refresh") }, tillRefresh)
+
+          commit("nextRefresh", timeout);
 
           resolve(resp);
         })
@@ -104,17 +145,28 @@ const actions = {
 
 const mutations = {
   request: state => {
+    clearTimeout(state.refreshTimeout);
     state.status = "loading";
   },
-  success: (state, token) => {
+  success: (state, { token, expires }) => {
     state.status = "success";
     state.token = token;
+    state.expires = expires;
+    // set the token to be sent with every request.
+    axios.defaults.headers.common["Authorization"] = token;
   },
   error: state => {
     state.status = "error";
   },
   logout: state => {
     state.token = "";
+  },
+  refresh: state => {
+    clearTimeout(state.refreshTimeout);
+    state.status = "refreshing"
+  },
+  nextRefresh: (state, timeout) => {
+    state.refreshTimeout = timeout;
   }
 };
 

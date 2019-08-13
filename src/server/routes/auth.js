@@ -3,18 +3,40 @@ const router = express.Router();
 const users = require("../controllers/users");
 const tokens = require("../controllers/tokens");
 
+const tokenExpiresIn = 1000 * 60 * 5;
+
 module.exports = router;
 
 router.post("/request", function(req, res) {
   users.auth(req.body.username, req.body.password).then(user => {
     if (user) {
       console.log("creating token!!");
-      var t = tokens.create(user);
-      res.json({ token: t, username: user.username }).send();
+      var t = tokens.create(user, tokenExpiresIn);
+      var exp = new Date(Date.now() + tokenExpiresIn);
+      res.json({ token: t, username: user.username, expires: exp }).send();
     } else {
       res.status(403).send("Authentication Failed.");
     }
   });
+});
+
+router.post("/refresh", function(req, res) {
+  var t = tokens.check(req.body.token);
+  if (t) {
+    // token is valid.
+    users.get(t.username).then(user => {
+      if (user) {
+        console.log("refreshing token!!");
+        var t = tokens.create(user, tokenExpiresIn);
+        var exp = new Date(Date.now() + tokenExpiresIn);
+        res.json({ token: t, username: user.username, expires: exp }).send();
+      } else {
+        res.status(401).send("Token contains invalid payload.");
+      }
+    });
+  } else {
+    res.status(401).send("Token invalid.");
+  }
 });
 
 router.get("/reqres", function(req, res) {

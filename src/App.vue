@@ -19,6 +19,7 @@ export default {
       let token = this.$store.state.auth.token;
       console.log(`Loaded authorization token. (${token.substr(0, 4)}...)`);
       axios.defaults.headers.common["Authorization"] = token;
+      this.$store.dispatch("auth/refresh");
     }
 
     var that = this;

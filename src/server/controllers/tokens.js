@@ -2,15 +2,15 @@ const jwt = require("jsonwebtoken");
 const privatekey = "894dfb33-e865-4c26-83db-8b16627a0fd7";
 
 module.exports = {
-  create(user) {
-    return jwt.sign({ username: user.username }, privatekey, { expiresIn: "1h" });
+  create(user, expiresIn) {
+    return jwt.sign({ username: user.username }, privatekey, { expiresIn: `${expiresIn}` });
   },
 
   check(token) {
     try {
       var payload = jwt.verify(token, privatekey);
       if (payload) {
-        return true;
+        return payload;
       } else {
         return false;
       }

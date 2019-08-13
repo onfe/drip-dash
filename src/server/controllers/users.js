@@ -36,5 +36,16 @@ module.exports = {
       }
     });
     return u;
-  }
+  },
+
+  get(username) {
+    var u = User.findOne({ where: { username: username } }).then(user => {
+      if (user) {
+        return user;
+      } else {
+        return false;
+      }
+    });
+    return u;
+  },
 };
