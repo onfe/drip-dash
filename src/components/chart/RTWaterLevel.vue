@@ -6,7 +6,7 @@
       :fields="['waterLevel1', 'waterLevel2', 'waterLevel3']"
       :labels="['Bed 1', 'Bed 2', 'Bed 3']"
       :legend="true"
-      interval="60"
+      :interval="60"
     />
   </b-card>
 </template>
