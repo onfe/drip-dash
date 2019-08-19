@@ -20,8 +20,11 @@ router.get("/:id/", function(req, res) {
     }
   });
 
+  console.log(`ID: ${req.params.id} @ ${new Date().toLocaleTimeString()}`);
+  console.log(req.body);
+
+
   d.then(d => {
-    console.log(d);
     Data.create(
       {
         timestamp: Date.now(),
