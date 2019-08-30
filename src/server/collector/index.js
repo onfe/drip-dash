@@ -4,7 +4,7 @@ const app = express();
 const collector = require("./collector.js");
 const bodyParser = require("body-parser");
 
-const { COLLECTOR_PORT = 8000 } = process.env;
+const { COLLECTOR_PORT = 8363 } = process.env;
 
 app.use(bodyParser.json());
 app.use("/collect", collector);
