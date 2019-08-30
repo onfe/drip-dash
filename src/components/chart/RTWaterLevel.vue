@@ -3,7 +3,11 @@
     <RTLineChart
       class="rtline"
       scale="Level (cm)"
-      :fields="['waterLevel1', 'waterLevel2', 'waterLevel3']"
+      :fields="[
+        ['beds', 0, 'level'],
+        ['beds', 1, 'level'],
+        ['beds', 2, 'level']
+      ]"
       :labels="['Bed 1', 'Bed 2', 'Bed 3']"
       :legend="true"
       :interval="60"

@@ -23,25 +23,25 @@ const getters = {
 
     state.data.forEach(val => {
       // either from is not enabled or the val.timestamp > from
+      avTotal += window._dripdash.$utils.accessValue(val, field);
+      avCount += 1;
       if (
         (!from || val.timestamp >= from) &&
         (!to || val.timestamp <= to) &&
         nextTimestamp <= val.timestamp
       ) {
-        avCount += 1;
-        avTotal += val[field];
         out.push({ timestamp: val.timestamp, field: avTotal / avCount });
         avCount = 0;
         avTotal = 0;
         nextTimestamp = new Date(val.timestamp.getTime() + interval * 1000);
-      } else {
-        avTotal += val[field];
-        avCount += 1;
       }
     });
     if (!to) {
       var last = state.data[state.data.length - 1];
-      out.push({ timestamp: last.timestamp, field: last[field] });
+      out.push({
+        timestamp: last.timestamp,
+        field: window._dripdash.$utils.accessValue(last, field)
+      });
     }
     return out;
   },

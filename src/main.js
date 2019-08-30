@@ -6,13 +6,14 @@ import "./plugins/font-awesome-vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import "./plugins/utils";
 import "./registerServiceWorker";
 import VueMeta from "vue-meta";
 
 Vue.config.productionTip = false;
 Vue.use(VueMeta);
 
-new Vue({
+window._dripdash = new Vue({
   router,
   store,
   render: h => h(App)
