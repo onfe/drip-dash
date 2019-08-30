@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       refreshInterval: ""
-    }
+    };
   },
   created: function() {
     this.$store.dispatch("devices/update");

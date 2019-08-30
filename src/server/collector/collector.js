@@ -23,6 +23,7 @@ router.get("/:id/", function(req, res) {
   console.log(`ID: ${req.params.id} @ ${new Date().toLocaleTimeString()}`);
   console.log(req.body);
 
+  // TODO: remove state from data
 
   d.then(d => {
     Data.create(

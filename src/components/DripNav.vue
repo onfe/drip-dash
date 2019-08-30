@@ -4,7 +4,7 @@
       <b-navbar-brand to="/" class="logo">
         <DripDashLogo color="var(--accent)" />
       </b-navbar-brand>
-      <BreadcrumbButton v-bind:bc="this.bc" class="bc-btn"/>
+      <BreadcrumbButton v-bind:bc="this.bc" class="bc-btn" />
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -77,5 +77,4 @@ export default {
     margin-right: 1rem;
   }
 }
-
 </style>

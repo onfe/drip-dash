@@ -24,7 +24,7 @@ export default {
       if (typeof this.updated === "number") {
         return true;
       } else {
-        return this.updating
+        return this.updating;
       }
     }
   },

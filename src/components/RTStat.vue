@@ -2,15 +2,14 @@
   <b-card :title="this.title" class="rtstat">
     <div class="wrap">
       <h1 class="display-3 adaptive">
-        {{this.stat.field}}
-        <span class="lead"> {{this.unit}} </span>
+        {{ this.stat.field }}
+        <span class="lead"> {{ this.unit }} </span>
       </h1>
     </div>
   </b-card>
 </template>
 
 <script>
-
 export default {
   name: "RTStatCard",
   props: {
@@ -42,7 +41,6 @@ export default {
   @include lg {
     font-size: 3.5rem;
   }
-
 }
 
 .wrap {
@@ -53,5 +51,4 @@ export default {
   justify-content: center;
   padding-bottom: 2.5em;
 }
-
 </style>

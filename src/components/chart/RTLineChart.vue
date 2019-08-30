@@ -14,17 +14,17 @@ export default {
   },
   data() {
     return {
-      chartData: {datasets: this.datasets}
+      chartData: { datasets: this.datasets }
     };
   },
   watch: {
     datasets: function(o, n) {
-      this.chartData = {datasets: n}
+      this.chartData = { datasets: n };
     }
   },
   computed: {
     getLegend() {
-      var disp = this.legend
+      var disp = this.legend;
       return {
         display: disp
       };
@@ -64,10 +64,12 @@ export default {
     datasets() {
       var sets = [];
       this.fields.forEach((field, i) => {
-        var data = this.$store.getters["device/getData"](field, this.interval).map(
-          d => {
-            return { x: d.timestamp, y: d.field };
-          });
+        var data = this.$store.getters["device/getData"](
+          field,
+          this.interval
+        ).map(d => {
+          return { x: d.timestamp, y: d.field };
+        });
 
         var label = this.labels[i] || "";
 
@@ -79,7 +81,6 @@ export default {
           label: label,
           data: data
         });
-
       });
 
       return sets;

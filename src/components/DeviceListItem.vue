@@ -75,7 +75,6 @@ export default {
   @include md {
     display: inline;
   }
-
 }
 
 .small {
@@ -90,7 +89,6 @@ export default {
   @include sm {
     display: flex;
   }
-
 }
 
 .right,

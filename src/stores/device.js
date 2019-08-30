@@ -18,7 +18,7 @@ const getters = {
     try {
       var nextTimestamp = state.data[0].timestamp;
     } catch {
-      return []
+      return [];
     }
 
     state.data.forEach(val => {
@@ -47,16 +47,17 @@ const getters = {
   },
 
   getLatest: state => field => {
-    if (!state.data[state.data.length - 1]) {return {
-      timestamp: Date.now(),
-      field: "-"
-    }}
+    if (!state.data[state.data.length - 1]) {
+      return {
+        timestamp: Date.now(),
+        field: "-"
+      };
+    }
     return {
       timestamp: state.data[state.data.length - 1].timestamp,
       field: state.data[state.data.length - 1][field]
-    }
+    };
   }
-
 };
 
 const actions = {

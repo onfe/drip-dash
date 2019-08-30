@@ -3,7 +3,9 @@ const privatekey = "894dfb33-e865-4c26-83db-8b16627a0fd7";
 
 module.exports = {
   create(user, expiresIn) {
-    return jwt.sign({ username: user.username }, privatekey, { expiresIn: `${expiresIn}` });
+    return jwt.sign({ username: user.username }, privatekey, {
+      expiresIn: `${expiresIn}`
+    });
   },
 
   check(token) {
@@ -14,7 +16,7 @@ module.exports = {
       } else {
         return false;
       }
-    } catch(err) {
+    } catch (err) {
       console.log(err);
       return false;
     }

@@ -64,9 +64,11 @@ export default {
   methods: {
     register() {
       const { username, password, passwordConf } = this.form;
-      this.$store.dispatch("auth/create", { username, password, passwordConf }).then(() => {
-        this.$router.push({ path: "/" });
-      });
+      this.$store
+        .dispatch("auth/create", { username, password, passwordConf })
+        .then(() => {
+          this.$router.push({ path: "/" });
+        });
     },
     reset() {
       // Reset our form values

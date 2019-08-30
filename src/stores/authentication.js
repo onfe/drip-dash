@@ -34,7 +34,9 @@ const actions = {
 
           var tillRefresh = expires.getTime() - Date.now() - 30000;
           console.log(tillRefresh);
-          var timeout = setTimeout(function() { dispatch("refresh") }, tillRefresh)
+          var timeout = setTimeout(function() {
+            dispatch("refresh");
+          }, tillRefresh);
 
           commit("nextRefresh", timeout);
 
@@ -67,7 +69,9 @@ const actions = {
 
           var tillRefresh = expires.getTime() - Date.now() - 30000;
           console.log(tillRefresh);
-          var timeout = setTimeout(function() { dispatch("refresh") }, tillRefresh)
+          var timeout = setTimeout(function() {
+            dispatch("refresh");
+          }, tillRefresh);
 
           commit("nextRefresh", timeout);
 
@@ -163,7 +167,7 @@ const mutations = {
   },
   refresh: state => {
     clearTimeout(state.refreshTimeout);
-    state.status = "refreshing"
+    state.status = "refreshing";
   },
   nextRefresh: (state, timeout) => {
     state.refreshTimeout = timeout;
