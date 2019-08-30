@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
       progName: DataTypes.STRING,
       name: DataTypes.STRING,
       type: DataTypes.INTEGER,
-      online: DataTypes.DATE
+      online: DataTypes.DATE,
+      rssi: DataTypes.INTEGER
     },
     {}
   );
@@ -18,8 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     return this.name ? this.name : this.progName;
   };
 
-  Device.prototype.update = function() {
+  Device.prototype.update = function(rssi) {
     this.online = new Date();
+    this.rssi = rssi;
     this.save();
   };
 

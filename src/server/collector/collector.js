@@ -9,7 +9,7 @@ module.exports = router;
 router.get("/:id/", function(req, res) {
   var d = Device.get(req.params.id).then(device => {
     if (device) {
-      device.update();
+      device.update(req.body.rssi);
       return device;
     } else {
       return Device.create({
