@@ -26,7 +26,12 @@ export default {
     axios.interceptors.response.use(undefined, function(error) {
       var err = error.response;
       return new Promise(function() {
-        if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+        if (
+          err &&
+          err.status === 401 &&
+          err.config &&
+          !err.config.__isRetryRequest
+        ) {
           // if you ever get an unauthorized 401 response, logout the user.
           that.$store.dispatch("auth/logout").then(() => {
             that.$router.push("/login");
