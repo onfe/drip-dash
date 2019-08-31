@@ -1,5 +1,6 @@
 <script>
 import { Line, mixins } from "vue-chartjs";
+import ta from "time-ago";
 const { reactiveData } = mixins;
 
 export default {
@@ -52,6 +53,23 @@ export default {
               type: "time",
               gridLines: {
                 display: false
+              },
+              time: {
+                unit: "minute",
+                displayFormats: {
+                  minute: "YYYY-MM-DDTHH:mm:ss.sssZ"
+                },
+                stepSize: 2,
+              },
+              ticks: {
+                callback: function(value) {
+                  console.log(value);
+                  if (Date.now() - Date.parse(value) < 10000) {
+                    return "now";
+                  } else {
+                    return ta.ago(value, true);
+                  }
+                }
               }
             }
           ]
