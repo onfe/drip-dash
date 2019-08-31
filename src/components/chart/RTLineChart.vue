@@ -63,7 +63,6 @@ export default {
               },
               ticks: {
                 callback: function(value) {
-                  console.log(value);
                   if (Date.now() - Date.parse(value) < 10000) {
                     return "now";
                   } else {

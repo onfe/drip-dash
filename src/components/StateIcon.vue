@@ -2,8 +2,9 @@
   <a class="btn-icn">
     <font-awesome-icon v-if="isOK" class="state-icon ok" icon="check-circle" />
     <font-awesome-icon v-if="isKO" class="state-icon ko" icon="times-circle" />
+    <font-awesome-icon v-if="isWarn" class="state-icon warn" icon="exclamation-circle" />
     <font-awesome-icon
-      v-if="!isKO && !isOK"
+      v-if="!isKO && !isOK && !isWarn"
       class="state-icon unknown"
       :icon="['far', 'question-circle']"
     />
@@ -12,7 +13,7 @@
 
 <script>
 export default {
-  name: "TriStateIcon",
+  name: "StateIcon",
   props: {
     status: String
   },
@@ -22,6 +23,9 @@ export default {
     },
     isKO: function() {
       return this.status == "ko";
+    },
+    isWarn: function() {
+      return this.status == "warn";
     }
   }
 };
@@ -40,6 +44,10 @@ export default {
 
 .unknown {
   color: var(--secondary);
+}
+
+.warn {
+  color: var(--warning);
 }
 
 .ko {

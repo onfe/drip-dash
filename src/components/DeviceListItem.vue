@@ -27,7 +27,7 @@
 
 <script>
 import NavIcon from "@/components/NavIcon.vue";
-import TriStateIcon from "@/components/TriStateIcon.vue";
+import TriStateIcon from "@/components/StateIcon.vue";
 import TimeAgo from "@/components/TimeAgo.vue";
 import Renamer from "@/components/Renamer.vue";
 

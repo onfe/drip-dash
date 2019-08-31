@@ -5,9 +5,7 @@
         <RTTempCard class="block-card" />
       </b-col>
       <b-col md="4">
-        <b-card class="block-card" title="At a Glance">
-          Everything is a-ok!
-        </b-card>
+        <AtAGlance class="block-card"/>
       </b-col>
       <b-col cols="6" md="3">
         <RTStatCard
@@ -31,6 +29,7 @@
 import RTTempCard from "@/components/chart/RTTemp.vue";
 import RTWaterLevelCard from "@/components/chart/RTWaterLevel.vue";
 import RTStatCard from "@/components/RTStat.vue";
+import AtAGlance from "@/components/glances/AtAGlanceCard.vue";
 
 export default {
   name: "Dashboard",
@@ -54,7 +53,8 @@ export default {
   components: {
     RTTempCard,
     RTStatCard,
-    RTWaterLevelCard
+    RTWaterLevelCard,
+    AtAGlance
   }
 };
 </script>

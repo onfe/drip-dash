@@ -12,6 +12,7 @@ import {
   faPencilAlt,
   faCheckCircle,
   faTimesCircle,
+  faExclamationCircle,
   faSave,
   faTimes
 } from "@fortawesome/free-solid-svg-icons";
@@ -30,6 +31,7 @@ library.add(
   faPencilAlt,
   faCheckCircle,
   faTimesCircle,
+  faExclamationCircle,
   farQuestionCircle,
   faSave,
   faTimes
