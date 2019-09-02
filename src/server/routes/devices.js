@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("../passport");
-const status = require("../controllers/status");
+const dA = require("../controllers/dAnalytics");
 const Device = require("../models").Device;
 const Data = require("../models").Data;
 
@@ -9,7 +9,7 @@ module.exports = router;
 // we use the passport to secure routes to authenticated users only.
 router.get("/", passport(), function(req, res) {
   Device.list().then(devices => {
-    devices = devices.map(device => ({ ...device, status: status.get().status}));
+    devices = devices.map(d => ({ ...d, status: dA.status(d) }));
     res.send(devices);
   });
 });
@@ -29,8 +29,10 @@ function getDeviceHandle(req, res, latest=false) {
   Device.get(req.params.id).then(device => {
     device.data().then(data => {
       data = Data.simplify(data);
-      device.status = "ok";
-      device.glances = {};
+      device = device.dataValues;
+      device.status = dA.status(device);
+      device.glances = dA.glances(device, data);
+      console.log(device);
       res.json({device, data});
     });
   });

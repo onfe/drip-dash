@@ -102,6 +102,7 @@ const mutations = {
   updatedDevice: (state, data) => {
     state.name = data.name;
     state.type = data.type;
+    state.glances = data.glances;
     state.updating = false;
     state.updated = new Date();
   },
