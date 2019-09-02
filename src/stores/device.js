@@ -4,6 +4,7 @@ const state = {
   progName: "",
   name: "",
   data: [],
+  glances: [],
   type: -1,
   updated: -1,
   updating: false
@@ -61,35 +62,19 @@ const getters = {
 };
 
 const actions = {
-  set: ({ state, commit }, id) => {
+  set: ({ commit, dispatch }, id) => {
     commit("set", id);
+    dispatch("update");
+  },
+  update: ({ state, commit }) => {
     return new Promise((resolve, reject) => {
       commit("updateDevice");
       axios({ url: `/api/devices/${state.progName}`, method: "GET" })
         .then(resp => {
-          commit("updatedDevice", resp.data);
-          resolve(state);
-          return state;
-        })
-        .catch(err => {
-          commit("error");
-          reject(err);
-        });
-    });
-  },
-  update: ({ state, commit }, timeframe) => {
-    return new Promise((resolve, reject) => {
-      commit("updateData");
-      axios({
-        url: `/api/devices/${state.progName}/data`,
-        params: timeframe,
-        method: "GET"
-      })
-        .then(resp => {
-          resp.data.forEach(v => {
-            v.timestamp = new Date(v.timestamp);
-          });
-          commit("updatedData", resp.data);
+          commit("updatedDevice", resp.data.device);
+          commit("updateData");
+          resp.data.data.forEach(v => {v.timestamp = new Date(v.timestamp);})
+          commit("updatedData", resp.data.data);
           resolve(state);
           return state;
         })
@@ -115,7 +100,6 @@ const mutations = {
   },
   // eslint-disable-next-line
   updatedDevice: (state, data) => {
-    console.log(data);
     state.name = data.name;
     state.type = data.type;
     state.updating = false;

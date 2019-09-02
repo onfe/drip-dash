@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   Device.list = function() {
-    var d = this.findAll().then(devices => {
+    var d = this.findAll({ raw: true }).then(devices => {
       return devices;
     });
     return d;

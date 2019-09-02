@@ -18,7 +18,6 @@ const actions = {
             device.name = device.name || device.progName;
             device.online = new Date(device.online);
             device.onlineNow = Date.now() - device.online < 10 * 1000;
-            device.status = device.onlineNow ? "ok" : "offline";
           });
           commit("updated", resp.data);
           resolve(resp.data);
