@@ -9,17 +9,17 @@
       </b-col>
       <b-col cols="6" md="3">
         <RTStatCard
-          class="block-card"
+          class="block-card fix"
           field="humidity"
           title="Humidity"
           unit="%"
         />
       </b-col>
       <b-col cols="6" md="3">
-        <RTStatCard class="block-card" field="light" title="Light" unit="Lux" />
+        <RTStatCard class="block-card fix" field="light" title="Light" unit="Lux" />
       </b-col>
       <b-col md="6">
-        <RTWaterLevelCard />
+        <RTWaterLevelCard class="wl"/>
       </b-col>
     </b-row>
   </b-container>
@@ -75,5 +75,13 @@ export default {
 .block-card {
   width: 100%;
   height: 100%;
+}
+
+.fix {
+  height: 16em;
+}
+
+.wl {
+  height: 15em;
 }
 </style>
