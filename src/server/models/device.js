@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Device.associate = function(models) {
-    Device.hasMany(models.Data);
+    Device.hasMany(models.Data, { foreignKey: "deviceId" });
   };
 
   Device.prototype.getName = function() {

@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     return Data.findAll({
       where: {
-        DeviceId: dID,
+        deviceId: dID,
         timestamp: {
           [Op.gte]: from,
           [Op.lte]: to
