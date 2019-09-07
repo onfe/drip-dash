@@ -1,16 +1,23 @@
 const jwt = require("jsonwebtoken");
-const privatekey = "894dfb33-e865-4c26-83db-8b16627a0fd7";
+const privatekey = require("crypto")
+  .randomBytes(48)
+  .toString("base64")
+  .replace(/\//g, "_")
+  .replace(/\+/g, "-");
 
 module.exports = {
   create(user, expiresIn) {
     return jwt.sign({ username: user.username }, privatekey, {
-      expiresIn: `${expiresIn}`
+      expiresIn: `${expiresIn}`,
+      algorithm: "HS256"
     });
   },
 
   check(token) {
     try {
-      var payload = jwt.verify(token, privatekey);
+      var payload = jwt.verify(token, privatekey, {
+        algorithms: ["HS256"]
+      });
       if (payload) {
         return payload;
       } else {
