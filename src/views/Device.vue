@@ -5,7 +5,7 @@
       :updated="this.$store.state.device.updated"
       :updating="this.$store.state.device.updating"
     />
-    <br />
+    <span class="spacer"></span>
     <Dashboard />
   </div>
 </template>
@@ -39,3 +39,10 @@ export default {
   }
 };
 </script>
+
+<style scoped lang="scss">
+.spacer {
+  display: block;
+  height: 30px;
+}
+</style>

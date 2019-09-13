@@ -5,7 +5,7 @@
         <RTTempCard class="block-card" />
       </b-col>
       <b-col md="4">
-        <AtAGlance class="block-card"/>
+        <AtAGlance class="block-card" />
       </b-col>
       <b-col cols="6" md="3">
         <RTStatCard
@@ -16,10 +16,21 @@
         />
       </b-col>
       <b-col cols="6" md="3">
-        <RTStatCard class="block-card fix" field="light" title="Light" unit="Lux" />
+        <RTStatCard
+          class="block-card fix"
+          field="light"
+          title="Light"
+          unit="Lux"
+        />
       </b-col>
       <b-col md="6">
-        <RTWaterLevelCard class="wl"/>
+        <RTWaterLevelCard class="wl" />
+      </b-col>
+      <b-col md="8">
+        <BedStatusCard />
+      </b-col>
+      <b-col md="4">
+        <ControlCard />
       </b-col>
     </b-row>
   </b-container>
@@ -30,6 +41,8 @@ import RTTempCard from "@/components/chart/RTTemp.vue";
 import RTWaterLevelCard from "@/components/chart/RTWaterLevel.vue";
 import RTStatCard from "@/components/RTStat.vue";
 import AtAGlance from "@/components/glances/AtAGlanceCard.vue";
+import ControlCard from "@/components/ControlCard.vue";
+import BedStatusCard from "@/components/BedStatusCard.vue";
 
 export default {
   name: "Dashboard",
@@ -54,7 +67,9 @@ export default {
     RTTempCard,
     RTStatCard,
     RTWaterLevelCard,
-    AtAGlance
+    AtAGlance,
+    BedStatusCard,
+    ControlCard
   }
 };
 </script>
@@ -78,7 +93,7 @@ export default {
 }
 
 .fix {
-  height: 16em;
+  height: 15em;
 }
 
 .wl {
