@@ -25,7 +25,7 @@ router.post("/:id/rename", passport(), function(req, res) {
 
 router.get("/:id/", passport(), getDeviceHandle);
 
-function getDeviceHandle(req, res, latest=false) {
+function getDeviceHandle(req, res, latest = false) {
   Device.get(req.params.id).then(device => {
     device.data().then(data => {
       data = Data.simplify(data);
@@ -33,7 +33,7 @@ function getDeviceHandle(req, res, latest=false) {
       device.status = dA.status(device);
       device.glances = dA.glances(device, data);
       console.log(device);
-      res.json({device, data});
+      res.json({ device, data });
     });
   });
 }

@@ -2,7 +2,7 @@
   <div class="glance">
     <div class="title">
       <span>{{ title }}</span>
-      <StateIcon :status="state" class="icon"/>
+      <StateIcon :status="state" class="icon" />
     </div>
     <p v-if="showText" class="text">{{ text }}</p>
   </div>
@@ -16,7 +16,7 @@ export default {
   props: {
     title: String,
     text: String,
-    state: String,
+    state: String
   },
   components: {
     StateIcon
@@ -30,7 +30,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .title {
   display: flex;
   flex-direction: row;
@@ -42,5 +41,4 @@ export default {
   font-size: 0.85em;
   color: var(--secondary);
 }
-
 </style>

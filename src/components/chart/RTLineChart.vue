@@ -59,7 +59,7 @@ export default {
                 displayFormats: {
                   minute: "YYYY-MM-DDTHH:mm:ss.sssZ"
                 },
-                stepSize: 2,
+                stepSize: 2
               },
               ticks: {
                 callback: function(value) {

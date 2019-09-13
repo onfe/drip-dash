@@ -2,7 +2,11 @@
   <a class="btn-icn">
     <font-awesome-icon v-if="isOK" class="state-icon ok" icon="check-circle" />
     <font-awesome-icon v-if="isKO" class="state-icon ko" icon="times-circle" />
-    <font-awesome-icon v-if="isWarn" class="state-icon warn" icon="exclamation-circle" />
+    <font-awesome-icon
+      v-if="isWarn"
+      class="state-icon warn"
+      icon="exclamation-circle"
+    />
     <font-awesome-icon
       v-if="!isKO && !isOK && !isWarn"
       class="state-icon unknown"

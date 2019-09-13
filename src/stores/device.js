@@ -73,7 +73,9 @@ const actions = {
         .then(resp => {
           commit("updatedDevice", resp.data.device);
           commit("updateData");
-          resp.data.data.forEach(v => {v.timestamp = new Date(v.timestamp);})
+          resp.data.data.forEach(v => {
+            v.timestamp = new Date(v.timestamp);
+          });
           commit("updatedData", resp.data.data);
           resolve(state);
           return state;
