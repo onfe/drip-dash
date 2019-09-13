@@ -14,7 +14,9 @@ import {
   faTimesCircle,
   faExclamationCircle,
   faSave,
-  faTimes
+  faTimes,
+  faArrowUp,
+  faArrowDown
 } from "@fortawesome/free-solid-svg-icons";
 import { faQuestionCircle as farQuestionCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -34,7 +36,9 @@ library.add(
   faExclamationCircle,
   farQuestionCircle,
   faSave,
-  faTimes
+  faTimes,
+  faArrowUp,
+  faArrowDown
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
