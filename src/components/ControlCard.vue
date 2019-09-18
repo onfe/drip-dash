@@ -1,7 +1,10 @@
 <template>
   <b-card title="Control">
+    <b-alert show variant="warning"
+      >Control isn't yet enabled on WaterElf devices.</b-alert
+    >
     <b-form @click="doUpdate">
-      <b-form-checkbox v-model="autoBed" name="check-button" switch>
+      <b-form-checkbox v-model="autoBed" name="check-button" disabled switch>
         Automatic Bed Control
       </b-form-checkbox>
       <div v-if="!autoBed" class="manualBed">
@@ -29,12 +32,12 @@ export default {
   components: {},
   data() {
     return {
-      autoBed: true,
-    }
+      autoBed: true
+    };
   },
   methods: {
     doUpdate() {
-      console.log('click');
+      console.log("click");
     }
   }
 };

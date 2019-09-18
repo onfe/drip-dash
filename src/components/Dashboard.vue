@@ -2,7 +2,13 @@
   <b-container>
     <b-row class="eq-height autospace">
       <b-col md="8">
-        <RTTempCard class="block-card" />
+        <router-link
+          :to="{
+            name: 'deviceDetail',
+            params: { device: this.$route.params.id, detail: 'temperature' }
+          }"
+          ><RTTempCard class="block-card"
+        /></router-link>
       </b-col>
       <b-col md="4">
         <AtAGlance class="block-card" />
@@ -27,10 +33,10 @@
         <RTWaterLevelCard class="fifteen" />
       </b-col>
       <b-col md="8">
-        <BedStatusCard class="seventeen"/>
+        <BedStatusCard class="seventeen" />
       </b-col>
       <b-col md="4">
-        <ControlCard class="seventeen"/>
+        <ControlCard class="seventeen" />
       </b-col>
     </b-row>
   </b-container>
