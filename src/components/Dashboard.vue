@@ -3,37 +3,71 @@
     <b-row class="eq-height autospace">
       <b-col md="8">
         <router-link
+          class="block-link"
           :to="{
             name: 'deviceDetail',
             params: { device: this.$route.params.id, detail: 'temperature' }
           }"
-          ><RTTempCard class="block-card"
-        /></router-link>
+        >
+          <RTTempCard class="block-card" />
+        </router-link>
       </b-col>
       <b-col md="4">
         <AtAGlance class="block-card" />
       </b-col>
       <b-col cols="6" md="3">
-        <RTStatCard
-          class="block-card fifteen"
-          field="humidity"
-          title="Humidity"
-          unit="%"
-        />
+        <router-link
+          class="block-link"
+          :to="{
+            name: 'deviceDetail',
+            params: { device: this.$route.params.id, detail: 'humidity' }
+          }"
+        >
+          <RTStatCard
+            class="block-card fifteen"
+            field="humidity"
+            title="Humidity"
+            unit="%"
+          />
+        </router-link>
       </b-col>
       <b-col cols="6" md="3">
-        <RTStatCard
-          class="block-card fifteen"
-          field="light"
-          title="Light"
-          unit="Lux"
-        />
+        <router-link
+          class="block-link"
+          :to="{
+            name: 'deviceDetail',
+            params: { device: this.$route.params.id, detail: 'light' }
+          }"
+        >
+          <RTStatCard
+            class="block-card fifteen"
+            field="light"
+            title="Light"
+            unit="Lux"
+          />
+        </router-link>
       </b-col>
       <b-col md="6">
-        <RTWaterLevelCard class="fifteen" />
+        <router-link
+          class="block-link"
+          :to="{
+            name: 'deviceDetail',
+            params: { device: this.$route.params.id, detail: 'water level' }
+          }"
+        >
+          <RTWaterLevelCard class="fifteen" />
+        </router-link>
       </b-col>
       <b-col md="8">
-        <BedStatusCard class="seventeen" />
+        <router-link
+          class="block-link"
+          :to="{
+            name: 'deviceDetail',
+            params: { device: this.$route.params.id, detail: 'beds' }
+          }"
+        >
+          <BedStatusCard class="seventeen" />
+        </router-link>
       </b-col>
       <b-col md="4">
         <ControlCard class="seventeen" />
@@ -96,6 +130,14 @@ export default {
 .block-card {
   width: 100%;
   height: 100%;
+}
+
+.block-link {
+  color: inherit;
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 .fifteen {
