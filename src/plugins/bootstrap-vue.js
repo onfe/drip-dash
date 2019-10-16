@@ -12,7 +12,8 @@ import {
   FormGroupPlugin,
   SpinnerPlugin,
   FormCheckboxPlugin,
-  AlertPlugin
+  AlertPlugin,
+  ModalPlugin
 } from "bootstrap-vue";
 
 Vue.use(LayoutPlugin);
@@ -27,6 +28,7 @@ Vue.use(FormGroupPlugin);
 Vue.use(SpinnerPlugin);
 Vue.use(FormCheckboxPlugin);
 Vue.use(AlertPlugin);
+Vue.use(ModalPlugin);
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";

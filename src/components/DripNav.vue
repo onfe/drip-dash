@@ -4,7 +4,12 @@
       <b-navbar-brand to="/" class="logo">
         <DripDashLogo color="var(--accent)" />
       </b-navbar-brand>
-      <BreadcrumbButton v-bind:bc="this.bc" class="bc-btn" />
+      <BreadcrumbButton
+        v-b-modal.switcher
+        v-bind:bc="this.bc"
+        class="bc-btn"
+      />
+      <QuickSwitch />
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -34,6 +39,7 @@ import DripDashLogo from "@/components/DripDashLogo.vue";
 import NavIcon from "@/components/NavIcon.vue";
 import PowerButton from "@/components/PowerButton.vue";
 import UpdateCandy from "@/components/UpdateCandy.vue";
+import QuickSwitch from "@/components/QuickSwitch.vue";
 
 export default {
   name: "DripNav",
@@ -52,7 +58,8 @@ export default {
     DripDashLogo,
     NavIcon,
     PowerButton,
-    UpdateCandy
+    UpdateCandy,
+    QuickSwitch
   }
 };
 </script>
