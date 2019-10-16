@@ -1,11 +1,11 @@
 <template>
-  <b-button class="bc-btn" variant="outline-light">
+  <b-button @click="toggle" class="bc-btn" variant="outline-light">
     <div class="bc-btn">
       <div class="bc-mini">
         {{ crumbs }}
       </div>
       <div class="bc-main">{{ text }}</div>
-      <div class="bc-icn"><font-awesome-icon icon="angle-down" /></div>
+      <div :class="iconCls"><font-awesome-icon icon="angle-down" /></div>
     </div>
   </b-button>
 </template>
@@ -22,6 +22,20 @@ export default {
     },
     text() {
       return this.bc[this.bc.length - 1];
+    },
+    iconCls() {
+      return this.isOpen ? "bc-icn turn" : "bc-icn"
+    }
+  },
+  data() {
+    return {
+      isOpen: false
+    }
+  },
+  methods: {
+    toggle() {
+      this.isOpen = !this.isOpen;
+      this.$emit("toggle", this.isOpen)
     }
   }
 };
@@ -54,6 +68,11 @@ export default {
 
   svg {
     color: var(--dark);
+    transition: transform 250ms ease-in-out;
+  }
+
+  &.turn svg {
+    transform: rotate(180deg);
   }
 }
 

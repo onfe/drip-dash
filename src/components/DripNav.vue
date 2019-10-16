@@ -1,15 +1,10 @@
 <template>
-  <b-navbar variant="white" toggleable="md">
-    <b-container>
+  <b-navbar class="navbar" variant="white" toggleable="md">
+    <b-container class="nav-cont">
       <b-navbar-brand to="/" class="logo">
         <DripDashLogo color="var(--accent)" />
       </b-navbar-brand>
-      <BreadcrumbButton
-        v-b-modal.switcher
-        v-bind:bc="this.bc"
-        class="bc-btn"
-      />
-      <QuickSwitch />
+      <BreadcrumbButton @toggle="switcher" v-bind:bc="this.bc" class="bc-btn" />
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -30,6 +25,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-container>
+    <QuickSwitch :active="isSwitching"/>
   </b-navbar>
 </template>
 
@@ -51,6 +47,16 @@ export default {
   computed: {
     showUpdater: function() {
       return !!this.updated;
+    }
+  },
+  data() {
+    return {
+      isSwitching: false,
+    }
+  },
+  methods: {
+    switcher(e) {
+      this.isSwitching = e;
     }
   },
   components: {
@@ -83,5 +89,14 @@ export default {
   .logo {
     margin-right: 1rem;
   }
+}
+
+.nav-cont {
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar {
+  flex-direction: column;
 }
 </style>
