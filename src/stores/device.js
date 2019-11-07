@@ -62,12 +62,17 @@ const getters = {
 };
 
 const actions = {
-  set: ({ commit, dispatch }, id) => {
-    commit("set", id);
+  set: ({ commit, dispatch, rootState }, id) => {
+    const name = rootState.devices.list.find(e => e.progName == id).name; // this is the error line!
+    commit("setDevice", { id, name });
     dispatch("update");
   },
   update: ({ state, commit }) => {
     return new Promise((resolve, reject) => {
+      if (!state.progName || !state.name) {
+        // Don't allow an update without a device id being set!
+        return reject("Device ID and name not set. aborting.");
+      }
       commit("updateDevice");
       axios({ url: `/api/devices/${state.progName}`, method: "GET" })
         .then(resp => {
@@ -85,14 +90,18 @@ const actions = {
           reject(err);
         });
     });
+  },
+  reset: ({ commit }) => {
+    commit("setDevice", { id: "", name: "" });
   }
 };
 
 const mutations = {
-  set: (state, id) => {
+  setDevice: (state, { id, name }) => {
+    console.log({ id, name });
     state.updating = true;
     state.progName = id;
-    state.name = id;
+    state.name = name;
     state.data = {};
     state.type = -1;
     state.updated = -1;
