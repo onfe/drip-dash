@@ -25,7 +25,7 @@ router.post("/:id/rename", passport(), function(req, res) {
 
 router.get("/:id/", passport(), getDeviceHandle);
 
-function getDeviceHandle(req, res, latest = false) {
+function getDeviceHandle(req, res) {
   Device.get(req.params.id).then(device => {
     device.data().then(data => {
       data = Data.simplify(data);

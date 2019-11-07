@@ -23,9 +23,8 @@ module.exports = {
     ];
   },
 
-  connection(device, data) {
+  connection(device) {
     let rssi = device.rssi;
-    let state = "unknown";
     let online = Date.now() - Date.parse(device.online) < 1000 * 10;
     if (online && rssi <= -75) {
       return {
@@ -51,7 +50,6 @@ module.exports = {
   temperature(device, data) {
     let latest = data[data.length - 1];
     let waterTemp = latest.waterTemp;
-    let airTemp = latest.airTemp;
     if (waterTemp < 0) {
       return {
         title: "Temperature",

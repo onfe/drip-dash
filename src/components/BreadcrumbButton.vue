@@ -24,18 +24,18 @@ export default {
       return this.bc[this.bc.length - 1];
     },
     iconCls() {
-      return this.isOpen ? "bc-icn turn" : "bc-icn"
+      return this.isOpen ? "bc-icn turn" : "bc-icn";
     }
   },
   data() {
     return {
       isOpen: false
-    }
+    };
   },
   methods: {
     toggle() {
       this.isOpen = !this.isOpen;
-      this.$emit("toggle", this.isOpen)
+      this.$emit("toggle", this.isOpen);
     }
   }
 };

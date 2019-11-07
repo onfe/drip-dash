@@ -102,6 +102,7 @@ export default {
   },
   beforeDestroy: function() {
     clearInterval(this.refreshInterval);
+    this.$store.dispatch("device/reset");
   },
   components: {
     RTTempCard,
