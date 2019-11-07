@@ -1,14 +1,19 @@
 <template>
   <div id="app">
+    <DripNav />
     <router-view />
   </div>
 </template>
 
 <script>
 const axios = require("axios");
+import DripNav from "@/components/DripNav.vue";
 
 export default {
   name: "dripdash",
+  components: {
+    DripNav
+  },
   metaInfo: {
     title: "Home",
     titleTemplate: "%s :: DripDash"

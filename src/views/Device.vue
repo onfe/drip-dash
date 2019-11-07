@@ -1,17 +1,15 @@
 <template>
   <div class="dashboard">
-    <DripNav
-      v-bind:bc="['DripDash', 'Device', `${this.device.name} Dashboard`]"
+    <!-- <DripNav
       :updated="this.$store.state.device.updated"
       :updating="this.$store.state.device.updating"
-    />
+    /> -->
     <span class="spacer"></span>
     <Dashboard />
   </div>
 </template>
 
 <script>
-import DripNav from "@/components/DripNav.vue";
 import Dashboard from "@/components/Dashboard.vue";
 
 export default {
@@ -32,9 +30,13 @@ export default {
   created: function() {
     this.$store.dispatch("device/set", this.deviceID);
     this.$store.dispatch("device/update");
+    this.$store.dispatch("nav/setBc", [
+      "DripDash",
+      "Device",
+      this.$store.state.device.name
+    ]);
   },
   components: {
-    DripNav,
     Dashboard
   }
 };

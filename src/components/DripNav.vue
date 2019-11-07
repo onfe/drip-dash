@@ -25,7 +25,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-container>
-    <QuickSwitch :active="isSwitching"/>
+    <QuickSwitch :active="isSwitching" />
   </b-navbar>
 </template>
 
@@ -40,19 +40,21 @@ import QuickSwitch from "@/components/QuickSwitch.vue";
 export default {
   name: "DripNav",
   props: {
-    bc: Array,
     updated: [Date, Number],
     updating: Boolean
   },
   computed: {
-    showUpdater: function() {
+    showUpdater() {
       return !!this.updated;
+    },
+    bc() {
+      return this.$store.state.nav.bc;
     }
   },
   data() {
     return {
-      isSwitching: false,
-    }
+      isSwitching: false
+    };
   },
   methods: {
     switcher(e) {

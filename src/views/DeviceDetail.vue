@@ -1,23 +1,11 @@
 <template>
   <div class="dashboard">
-    <DripNav
-      v-bind:bc="[
-        'DripDash',
-        'Device',
-        this.device.name,
-        this.$utils.toTitleCase(this.detail)
-      ]"
-      :updated="this.$store.state.device.updated"
-      :updating="this.$store.state.device.updating"
-    />
     <span class="spacer"></span>
     TODO: Make the detail page
   </div>
 </template>
 
 <script>
-import DripNav from "@/components/DripNav.vue";
-
 export default {
   name: "device",
   metaInfo: function() {
@@ -39,10 +27,14 @@ export default {
   created: function() {
     this.$store.dispatch("device/set", this.deviceID);
     this.$store.dispatch("device/update");
+    this.$store.dispatch("nav/setBc", [
+      "DripDash",
+      "Device",
+      this.device.name,
+      this.$utils.toTitleCase(this.detail)
+    ]);
   },
-  components: {
-    DripNav
-  }
+  components: {}
 };
 </script>
 
