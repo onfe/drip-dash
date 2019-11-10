@@ -85,11 +85,13 @@ const actions = {
     });
   },
 
-  logout: ({ commit }) => {
+  logout: ({ commit, dispatch }) => {
     return new Promise(resolve => {
       commit("logout");
       localStorage.removeItem("user-token"); // clear your user's token from localstorage
       delete axios.defaults.headers.common["Authorization"];
+      dispatch("device/reset", {}, { root: true });
+      dispatch("nav/setBc", [], { root: true });
       resolve();
     });
   },
