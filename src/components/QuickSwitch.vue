@@ -40,7 +40,9 @@ export default {
     }
   },
   created: function() {
-    this.$store.dispatch("devices/update");
+    if (this.$store.getters["auth/isAuthenticated"]) {
+      this.$store.dispatch("devices/update");
+    }
   },
   methods: {
     getDeviceClass(device) {
