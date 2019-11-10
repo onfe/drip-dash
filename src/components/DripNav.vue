@@ -4,7 +4,12 @@
       <b-navbar-brand to="/" class="logo">
         <DripDashLogo color="var(--accent)" />
       </b-navbar-brand>
-      <BreadcrumbButton @toggle="switcher" v-bind:bc="this.bc" class="bc-btn" />
+      <BreadcrumbButton
+        v-if="this.bc.length > 0"
+        @toggle="switcher"
+        v-bind:bc="this.bc"
+        class="bc-btn"
+      />
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
