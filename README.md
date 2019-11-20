@@ -13,6 +13,8 @@ opening your aquaponics hardware to the internet.
 
 
 ## Installation
+These installations assume you have `nodejs`, `npm` and `git` installed.
+
 1. To install DripDash, clone the repository.  
 GitLab: `git clone https://gitlab.com/Onfe/drip-dash.git`  
 GitHub: `git clone https://github.com/onfe/drip-dash.git`  
@@ -20,13 +22,15 @@ GitHub: `git clone https://github.com/onfe/drip-dash.git`
 2. Open the folder `cd drip-dash`, then install the required dependencies using
 `npm install`.
 
-3. Set your database configuration in `src/server/config/sequelize-config.json`.  
+3. `cp .env.example .env` and add your database credentials.
 We recommend [PostgreSQL](https://www.postgresql.org) or
 [MariaDB](https://mariadb.org/).  
 
-4. Prepare the Database with `npm run prepdb`.
+4. Set the environment variable `NODE_ENV` to `production`. 
 
-5. Finally, build DripDash with `npm run build`.
+5. Prepare the Database with `npm run prepdb`.
+
+6. Finally, build DripDash with `npm run build`.
 
 ### Updating
 To update DripDash run `git pull`.
