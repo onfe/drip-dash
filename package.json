@@ -7,8 +7,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "collector": "node src/server/collector",
-    "production": "node src/server/index",
-    "prepdb": "npx sequelize-cli db:migrate"
+    "prepdb": "npx sequelize-cli db:migrate",
+    "production": "node src/server/index"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
@@ -21,7 +21,7 @@
     "bootstrap-vue": "^2.0.0-rc.28",
     "chart.js": "^2.8.0",
     "connect-history-api-fallback": "^1.6.0",
-    "core-js": "^2.6.9",
+    "core-js": "^3.4.4",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "jquery": "^3.4.1",
@@ -40,10 +40,10 @@
   },
   "devDependencies": {
     "@babel/polyfill": "^7.4.4",
-    "@vue/cli-plugin-babel": "^3.11.0",
-    "@vue/cli-plugin-eslint": "^3.11.0",
-    "@vue/cli-plugin-pwa": "^3.11.0",
-    "@vue/cli-service": "^3.11.0",
+    "@vue/cli-plugin-babel": "^4.1.2",
+    "@vue/cli-plugin-eslint": "^4.1.2",
+    "@vue/cli-plugin-pwa": "^4.1.2",
+    "@vue/cli-service": "^4.1.2",
     "@vue/eslint-config-prettier": "^4.0.1",
     "babel-eslint": "^10.0.3",
     "bootstrap": "^4.3.1",
