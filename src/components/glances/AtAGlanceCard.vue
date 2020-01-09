@@ -1,6 +1,10 @@
 <template>
   <b-card title="At a Glance">
-    <div class="glance" v-for="glance in this.$store.state.device.glances">
+    <div
+      class="glance"
+      v-for="(glance, idx) in this.$store.state.device.glances"
+      v-bind:key="idx"
+    >
       <Glance :title="glance.title" :text="glance.text" :state="glance.state" />
     </div>
   </b-card>

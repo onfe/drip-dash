@@ -12,10 +12,10 @@
           {{ device.name }}
         </router-link>
       </div>
-      <div :class="getAttribClass()">
+      <div v-if="$store.state.device.progName != ''" :class="getAttribClass()">
         <router-link
-          v-if="$store.state.device.progName != ''"
-          v-for="attrib in $store.state.device.fields"
+          v-for="(attrib, idx) in $store.state.device.fields"
+          v-bind:key="idx"
           :to="{
             name: 'deviceDetail',
             params: { device: $store.state.device.progName, detail: attrib.lnk }

@@ -4,6 +4,7 @@
       <Bed
         v-for="(bed, index) in this.$store.getters['device/getLatest']('beds')
           .field"
+        v-bind:key="index"
         :bed="bed"
         :id="index + 1"
       />
