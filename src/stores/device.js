@@ -93,6 +93,21 @@ const actions = {
   },
   reset: ({ commit }) => {
     commit("setDevice", { id: "", name: "" });
+  },
+  download: ({ state }) => {
+    axios({
+      url: `/api/devices/${state.progName}/download`,
+      responseType: "blob",
+      method: "GET"
+    }).then(resp => {
+      console.log('dkkshdfsd')
+      const url = window.URL.createObjectURL(new Blob([resp.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `${state.progName}.json`);
+      document.body.appendChild(link);
+      link.click();
+    }).catch(err => console.log(err));
   }
 };
 

@@ -23,6 +23,20 @@ router.post("/:id/rename", passport(), function(req, res) {
   });
 });
 
+router.get("/:id/download", function(req, res) {
+  console.log("download");
+  var from = Date.now() - 1000 * 60 * 60 * 24 * 30; // last 30 days
+  Device.get(req.params.id).then(device => {
+    device.data(from).then(data => {
+      data = Data.simplify(data);
+      data = JSON.stringify(data);
+      res.setHeader("Content-disposition", "attachment; filename=File.json");
+      res.setHeader("Content-type", "application/json");
+      res.send(data);
+    });
+  });
+});
+
 router.get("/:id/", passport(), getDeviceHandle);
 
 function getDeviceHandle(req, res) {

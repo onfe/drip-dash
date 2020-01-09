@@ -24,7 +24,11 @@
 
         <b-navbar-nav class="ml-auto">
           <!-- Right aligned nav items -->
-          <NavIcon icon="ellipsis-v" />
+          <NavIcon
+            v-if="$store.state.device.progName != ''"
+            icon="ellipsis-v"
+            @click="$store.dispatch('device/download')"
+          />
           <NavIcon icon="cog" />
           <PowerButton />
         </b-navbar-nav>
