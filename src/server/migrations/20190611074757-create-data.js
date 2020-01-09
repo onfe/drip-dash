@@ -12,7 +12,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      DeviceId: {
+      deviceId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
