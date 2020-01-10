@@ -47,6 +47,16 @@ If running your database on the same server as dripdash, check out the instructi
 - To run the *external* data collector, ensure the **internal collector is not
 enabled** then use `npm run collector`
 
+### Backup
+The easiest way to backup DripDash completely is to dump the database. The following instructions are for PostgreSQL.
+```bash
+# Dump the 'dripdash' database to dripdash.bak
+sudo -u postgres pg_dump dripdash > dripdash.bak
+
+# Restore from a .bak (into an existing, but empty database)
+sudo -u postgres psql dripdash_restored < database.bak
+```
+
 ## Development
 ### Compiles and hot-reloads for development
 ```
