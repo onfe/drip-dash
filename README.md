@@ -13,28 +13,32 @@ opening your aquaponics hardware to the internet.
 
 
 ## Installation
-These installations assume you have `nodejs`, `npm` and `git` installed.
+These installations assume you have `nodejs` (& therefore `npm`) and `git` installed.
+```bash
+sudo apt-get install nodejs git
+```
+
+DripDash uses Node 13.
 
 1. To install DripDash, clone the repository.  
-GitLab: `git clone https://gitlab.com/Onfe/drip-dash.git`  
-GitHub: `git clone https://github.com/onfe/drip-dash.git`  
-
+  GitLab: `git clone https://gitlab.com/Onfe/drip-dash.git`  
+  GitHub: `git clone https://github.com/onfe/drip-dash.git`  
 2. Open the folder `cd drip-dash`, then install the required dependencies using
-`npm install`.
-
+  `npm install`.
 3. `cp .env.example .env` and add your database credentials.
-We recommend [PostgreSQL](https://www.postgresql.org) or
-[MariaDB](https://mariadb.org/).  
-
-4. Set the environment variable `NODE_ENV` to `production`. 
-
+  We recommend [PostgreSQL](https://www.postgresql.org) or
+  [MariaDB](https://mariadb.org/).  
+4. Set the environment variable `NODE_ENV` to `production`.
 5. Prepare the Database with `npm run prepdb`.
-
 6. Finally, build DripDash with `npm run build`.
 
 ### Updating
 To update DripDash run `git pull`.
 Then complete steps 4 and 5 of the installation.
+
+### Database installation
+
+If running your database on the same server as dripdash, check out the instructions [here](docs/PostgreSQL%20Setup.md).
 
 ## Running DripDash
 - To run DripDash, use `npm run production`.
