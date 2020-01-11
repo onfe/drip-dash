@@ -56,6 +56,9 @@ sudo -u postgres pg_dump dripdash > dripdash.bak
 # Restore from a .bak (into an existing, but empty database)
 sudo -u postgres psql dripdash_restored < database.bak
 ```
+### HTTPS
+DripDash (and the external collector if enabled) use HTTP by default.  
+To use HTTPS, we recommend using NGINX or Apache as a HTTPS proxy, and Let's Encrypt as the CA.
 
 ## Development
 ### Compiles and hot-reloads for development
