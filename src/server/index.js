@@ -13,7 +13,7 @@ const app = express();
 const api = require("./api");
 const collector = require("./collector/collector");
 
-const { PORT = 8000, COLLECTOR = 'internal' } = process.env;
+const { PORT = 8000, COLLECTOR = "internal" } = process.env;
 
 // Express configuration
 app.use(bodyParser.json());
@@ -29,7 +29,7 @@ app.use(express.static(publicPath, staticConf));
 app.use("/api", api);
 
 // Collector
-if (COLLECTOR == 'internal') {
+if (COLLECTOR == "internal") {
   app.use("/collect", collector);
 }
 

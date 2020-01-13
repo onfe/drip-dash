@@ -22,6 +22,7 @@ export default {
     // if we're authenticated, set the header in axios.
     if (this.$store.getters["auth/isAuthenticated"]) {
       let token = this.$store.state.auth.token;
+      // eslint-disable-next-line no-console
       console.log(`Loaded authorization token. (${token.substr(0, 4)}...)`);
       axios.defaults.headers.common["Authorization"] = token;
       this.$store.dispatch("auth/refresh");

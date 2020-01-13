@@ -99,21 +99,21 @@ const actions = {
       url: `/api/devices/${state.progName}/download`,
       responseType: "blob",
       method: "GET"
-    }).then(resp => {
-      console.log('dkkshdfsd')
-      const url = window.URL.createObjectURL(new Blob([resp.data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", `${state.progName}.json`);
-      document.body.appendChild(link);
-      link.click();
-    }).catch(err => console.log(err));
+    })
+      .then(resp => {
+        const url = window.URL.createObjectURL(new Blob([resp.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", `${state.progName}.json`);
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch(err => console.error(err)); // eslint-disable-line no-console
   }
 };
 
 const mutations = {
   setDevice: (state, { id, name }) => {
-    console.log({ id, name });
     state.updating = true;
     state.progName = id;
     state.name = name;

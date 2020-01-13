@@ -7,7 +7,6 @@ const auth = require("./routes/auth");
 const priv = require("./routes/private");
 const devices = require("./routes/devices");
 
-
 module.exports = router;
 
 router.use("/auth", auth);
