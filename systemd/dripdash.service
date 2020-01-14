@@ -2,7 +2,7 @@
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=cd /home/ubuntu/drip-dash && /usr/bin/npm run production
+ExecStart=/bin/bash -c "cd /home/ubuntu/drip-dash && /usr/bin/npm run production"
 
 [Install]
 WantedBy=multi-user.target
