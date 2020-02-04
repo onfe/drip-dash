@@ -9,6 +9,7 @@ module.exports = {
     use_env_variable: "DATABASE_URL",
     dialectOptions: {
       ssl: true
-    }
+    },
+    logging: false
   }
 };
