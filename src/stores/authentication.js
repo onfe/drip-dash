@@ -33,7 +33,6 @@ const actions = {
           commit("success", { token, expires });
 
           var tillRefresh = expires.getTime() - Date.now() - 30000;
-          console.log(tillRefresh);
           var timeout = setTimeout(function() {
             dispatch("refresh");
           }, tillRefresh);
@@ -61,14 +60,12 @@ const actions = {
           // if the auth request succeeds, get the token, and store it.
           const token = resp.data.token;
           const expires = new Date(resp.data.expires);
-          console.log(expires);
           localStorage.setItem("user-token", token); // store the token in localstorage
           localStorage.setItem("user-token-expires", expires);
 
           commit("success", { token, expires });
 
           var tillRefresh = expires.getTime() - Date.now() - 30000;
-          console.log(tillRefresh);
           var timeout = setTimeout(function() {
             dispatch("refresh");
           }, tillRefresh);

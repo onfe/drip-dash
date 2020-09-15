@@ -31,7 +31,7 @@ const router = new Router({
       path: "/device/:id/:detail",
       name: "deviceDetail",
       component: () =>
-        import(/* webpackChunkName: "device" */ "./views/DeviceDetail.vue"),
+        import(/* webpackChunkName: "deviceDetail" */ "./views/DeviceDetail.vue"),
       meta: {
         requiresAuth: true
       }
