@@ -16,7 +16,7 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        data: `@import "@/style/_breakpoints.scss";`
+        additionalData: `@import "@/style/_breakpoints.scss";`
       }
     }
   }
