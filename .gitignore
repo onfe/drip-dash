@@ -22,6 +22,7 @@ yarn-error.log*
 
 # Development Database
 *.sqlite3
+*.db
 
 # Enviroment file
 .env

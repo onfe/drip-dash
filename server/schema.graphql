@@ -1,0 +1,66 @@
+scalar DateTime
+
+type User {
+  id: Int!
+  username: String!
+  location: Location
+  devices: [Device]!
+  # device(id: Int): Device!
+  groups: [Group]!
+  # group(id: Int): Group!
+}
+
+type Location {
+  latitude: Float!
+  longitude: Float!
+}
+
+type Device {
+  id: Int!
+  name: String!
+  nickname: String
+  owner: User!
+  location: Location
+  data: [DataEntry]!
+  latest: DataEntry!
+}
+
+type Group {
+  id: Int!
+  name: String!
+  members: [User]!
+  devices: [Device]!
+}
+
+type DataEntry {
+  id: Int!
+  timestamp: DateTime!
+  device: Device!
+
+  waterTemp: Float
+  airTemp: Float
+  humidity: Float
+  light: Float
+  ph: Float
+  rssi: Float
+  beds: [BedEntry]!
+}
+
+type BedEntry {
+  id: Int!
+  dataEntry: DataEntry!
+  status: Int
+  level: Float
+}
+
+type Query {
+  user(id: Int): User!
+  # groups: [Group]!
+  group(id: Int): Group!
+  self: User
+}
+
+type Mutation {
+  login(username: String, password: String): String
+  register(username: String, password: String): Boolean
+}

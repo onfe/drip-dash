@@ -20,12 +20,10 @@ module.exports = {
       });
       if (payload) {
         return payload;
-      } else {
-        return false;
       }
     } catch (err) {
-      console.log(err);
-      return false;
+      return null;
     }
+    return null;
   }
 };

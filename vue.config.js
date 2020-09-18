@@ -1,7 +1,8 @@
-const configureServer = require("./src/server/dev");
+// const configureServer = require("./src/server-old/dev");
 const IgnorePlugin = require("webpack").IgnorePlugin;
 
 module.exports = {
+  lintOnSave: false,
   chainWebpack: config => {
     config.plugin("webpack-moment-lite").use(IgnorePlugin, [
       {
@@ -10,9 +11,9 @@ module.exports = {
       }
     ]);
   },
-  devServer: {
-    before: configureServer
-  },
+  // devServer: {
+  //   before: configureServer
+  // },
   css: {
     loaderOptions: {
       sass: {
