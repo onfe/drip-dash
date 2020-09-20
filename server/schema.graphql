@@ -22,7 +22,7 @@ type Device {
   owner: User!
   location: Location
   data: [DataEntry]!
-  latest: DataEntry!
+  latest: DataEntry
 }
 
 type Group {
