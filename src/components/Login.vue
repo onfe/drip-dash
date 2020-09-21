@@ -30,6 +30,7 @@
 
 <script>
 import DripDashLogo from "@/components/DripDashLogo.vue";
+
 export default {
   name: "Login",
   components: {
@@ -44,22 +45,20 @@ export default {
     };
   },
   methods: {
-    login() {
+    async login() {
       const { username, password } = this.form;
       this.$store.dispatch("auth/request", { username, password }).then(() => {
-        this.$router.push({ path: "/" });
+        this.reset();
       });
     },
     reset() {
-      // Reset our form values
-      this.form.email = "";
+      this.form.username = "";
       this.form.password = "";
     }
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .login {
   width: 20em;

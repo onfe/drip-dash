@@ -17,9 +17,6 @@ export default {
   },
   components: {
     Register
-  },
-  created: function() {
-    this.$store.dispatch("auth/prepareRegister");
   }
 };
 </script>
