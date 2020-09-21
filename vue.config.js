@@ -1,4 +1,4 @@
-// const configureServer = require("./src/server-old/dev");
+const configureServer = require("./server/main");
 const IgnorePlugin = require("webpack").IgnorePlugin;
 
 module.exports = {
@@ -11,9 +11,9 @@ module.exports = {
       }
     ]);
   },
-  // devServer: {
-  //   before: configureServer
-  // },
+  devServer: {
+    before: configureServer
+  },
   css: {
     loaderOptions: {
       sass: {

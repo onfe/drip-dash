@@ -1,35 +1,37 @@
 /*
- * DripDash Production Server
+ * DripDash Server
  */
-
-// require("dotenv").config();
 
 const { resolve } = require("path");
 const history = require("connect-history-api-fallback");
 const express = require("express");
 const bodyParser = require("body-parser");
-const app = express();
 
 const api = require("./api");
 // const collector = require("./collector");
 
 const { PORT = 8000 } = process.env;
 
-// Express configuration
-app.use(bodyParser.json());
+const configure = app => {
+  app.use(bodyParser.json());
+  api.applyMiddleware({ app, path: "/api" });
+  // app.use("/collect", collector);
+}
 
-// API with Apollo Server
-api.applyMiddleware({ app, path: "/api" });
+if (require.main === module) {
+  const app = express();
 
-// Vue UI History Mode
-const publicPath = resolve(__dirname, "../dist");
-const staticConf = { maxAge: "1y", etag: false };
+  configure(app);
 
-app.use(history());
-app.use(express.static(publicPath, staticConf));
+  // Vue UI History Mode
+  const publicPath = resolve(__dirname, "../dist");
+  const staticConf = { maxAge: "1y", etag: false };
 
-// Collector
-// app.use("/collect", collector);
+  app.use(history());
+  app.use(express.static(publicPath, staticConf));
 
-// Go
-app.listen(PORT, () => console.log(`🚀 DripDash server running at http://localhost:${PORT}`));
+  app.listen(PORT, () => console.log(`🚀 DripDash server running at http://localhost:${PORT}`));
+}
+
+
+module.exports = configure;
