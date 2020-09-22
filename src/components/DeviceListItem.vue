@@ -1,14 +1,12 @@
 <template>
   <router-link
     class="device"
-    :to="{ name: 'device', params: { id: device.name } }"
+    :to="{ name: 'device', params: { id: device.id } }"
   >
     <div class="left">
       <TriStateIcon status="ok" class="tristate" />
-      <span class="d-name">{{ device.nickname || device.name}}</span>
-      <span v-if="device.name != device.nickname" class="d-id small">
-        ({{ device.name }})
-      </span>
+      <span class="d-name">{{ device.name || device.id }}</span>
+      <span v-if="device.name" class="d-id small"> ({{ device.name }}) </span>
     </div>
     <div class="right">
       <TimeAgo
@@ -18,7 +16,11 @@
         text="Online"
       />
       <span v-else class="online small">Device online</span>
-      <Renamer class="rname-sa" :startText="device.name" @save="rename" />
+      <Renamer
+        class="rname-sa"
+        :startText="device.name || device.id"
+        @save="rename"
+      />
       <NavIcon icon="ellipsis-v" />
       <!-- TODO add renamer to dropdown under sm breakpoint -->
     </div>

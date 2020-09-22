@@ -131,33 +131,8 @@
       "tag": "CreateField",
       "model": "Device",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Device",
-          "field": "id"
-        },
-        "directive": "default"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Device",
-          "field": "id"
-        },
-        "directive": "default"
-      },
-      "argument": "",
-      "value": "autoincrement()"
     },
     {
       "tag": "CreateDirective",
@@ -174,13 +149,6 @@
       "tag": "CreateField",
       "model": "Device",
       "field": "name",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Device",
-      "field": "nickname",
       "type": "String",
       "arity": "Optional"
     },
@@ -394,7 +362,7 @@
       "tag": "CreateField",
       "model": "DataEntry",
       "field": "deviceId",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {

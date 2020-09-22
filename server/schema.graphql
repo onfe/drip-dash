@@ -16,9 +16,8 @@ type Location {
 }
 
 type Device {
-  id: Int!
-  name: String!
-  nickname: String
+  id: String!
+  name: String
   owner: User!
   location: Location
   data: [DataEntry]!
@@ -56,6 +55,7 @@ type BedEntry {
 type Query {
   user(id: Int): User!
   # groups: [Group]!
+  device(id: String): Device!
   group(id: Int): Group!
   self: User
 }
@@ -70,10 +70,10 @@ type Mutation {
   deleteGroup(id: Int): Group
   # renameGroup(id: Int): Group
   addUserToGroup(userId: Int, groupId: Int): Group
-  addDeviceToGroup(deviceId: Int, groupId: Int): Group
-  removeDeviceFromGroup(deviceId: Int, groupId: Int): Group
+  addDeviceToGroup(deviceId: String, groupId: Int): Group
+  removeDeviceFromGroup(deviceId: String, groupId: Int): Group
 
-  addDevice(name: String): Device
-  removeDevice(id: Int): Boolean
-  renameDevice(id: Int, nickname: String): Device
+  addDevice(id: String): Device
+  removeDevice(id: String): Boolean
+  renameDevice(id: String, name: String): Device
 }

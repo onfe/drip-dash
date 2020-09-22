@@ -12,7 +12,7 @@
           <RTTempCard class="block-card" />
         </router-link>
       </b-col>
-      <b-col md="4">
+      <!-- <b-col md="4">
         <AtAGlance class="block-card" />
       </b-col>
       <b-col cols="6" md="3">
@@ -71,7 +71,7 @@
       </b-col>
       <b-col md="4">
         <ControlCard class="seventeen" />
-      </b-col>
+      </b-col> -->
     </b-row>
   </b-container>
 </template>
@@ -93,24 +93,24 @@ export default {
       refreshInterval: ""
     };
   },
-  created: function() {
-    this.$store.dispatch("device/update");
-    const that = this;
-    this.refreshInterval = setInterval(() => {
-      that.$store.dispatch("device/update");
-    }, this.$store.getters["settings/apiIntervalms"]);
-  },
-  beforeDestroy: function() {
-    clearInterval(this.refreshInterval);
-    this.$store.dispatch("device/reset");
-  },
+  // created: function() {
+  //   this.$store.dispatch("device/update");
+  //   const that = this;
+  //   this.refreshInterval = setInterval(() => {
+  //     that.$store.dispatch("device/update");
+  //   }, this.$store.getters["settings/apiIntervalms"]);
+  // },
+  // beforeDestroy: function() {
+  //   clearInterval(this.refreshInterval);
+  //   this.$store.dispatch("device/reset");
+  // },
   components: {
-    RTTempCard,
-    RTStatCard,
-    RTWaterLevelCard,
-    AtAGlance,
-    BedStatusCard,
-    ControlCard
+    RTTempCard
+    // RTStatCard,
+    // RTWaterLevelCard,
+    // AtAGlance,
+    // BedStatusCard,
+    // ControlCard
   }
 };
 </script>

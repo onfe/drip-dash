@@ -18,9 +18,8 @@ model User {
 }
 
 model Device {
-  id          Int         @default(autoincrement()) @id
-  name        String
-  nickname    String?
+  id          String      @id
+  name        String?
   owner       User        @relation(fields: [ownerId], references: [id])
   ownerId     Int
   groups      Group[]
@@ -33,7 +32,7 @@ model DataEntry {
   id          Int         @default(autoincrement()) @id
   timestamp   DateTime    @default(now())
   device      Device      @relation(fields: [deviceId], references: [id])
-  deviceId    Int
+  deviceId    String
 
   waterTemp   Float?
   airTemp     Float?

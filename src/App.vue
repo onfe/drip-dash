@@ -28,21 +28,25 @@ export default {
   mounted: function() {
     // if we still have a current (in-date) token, check it's valid.
     if (this.$store.getters["user/isAuthenticated"]) {
-      this.$apollo.query({
-        query: gql` query {
-          self {
-            id
+      this.$apollo
+        .query({
+          query: gql`
+            query {
+              self {
+                id
+              }
+            }
+          `
+        })
+        .then(pl => {
+          if (pl.data.self) {
+            // The token was accepted by the server. Refresh to get newer token.
+            this.$store.dispatch("user/refresh");
+          } else {
+            // The token was invalidated by the server. Require log-in.
+            this.$store.dispatch("user/logout");
           }
-        }`
-      }).then(pl => {
-        if (pl.data.self) {
-          // The token was accepted by the server. Refresh to get newer token.
-          this.$store.dispatch("user/refresh");
-        } else {
-          // The token was invalidated by the server. Require log-in.
-          this.$store.dispatch("user/logout");
-        }
-      });
+        });
     }
   }
 };

@@ -13,7 +13,7 @@ const getters = {
   isAuthenticated: state => {
     if (!state.token) return false;
     const body = jwt.decode(state.token);
-    return (body.exp * 1000 - Date.now()) > 0;
+    return body.exp * 1000 - Date.now() > 0;
   }
 };
 
@@ -71,23 +71,27 @@ const actions = {
     return new Promise((res, rej) => {
       // Set the state to refreshing.
       commit("loading");
-      apolloClient.mutate({
-        mutation: gql`mutation {
-          refresh
-        }`
-      }).then(pl => {
-        const token = pl.data.refresh;
-        if (!token) {
-          localStorage.removeItem("user-token");
-          dispatch("logout");
-          return rej("Couldn't refresh token.");
-        }
+      apolloClient
+        .mutate({
+          mutation: gql`
+            mutation {
+              refresh
+            }
+          `
+        })
+        .then(pl => {
+          const token = pl.data.refresh;
+          if (!token) {
+            localStorage.removeItem("user-token");
+            dispatch("logout");
+            return rej("Couldn't refresh token.");
+          }
 
-        localStorage.setItem("user-token", token);
-        commit("login", token);
+          localStorage.setItem("user-token", token);
+          commit("login", token);
 
-        res("Token refreshed.");
-      });
+          res("Token refreshed.");
+        });
     });
   },
 
@@ -99,6 +103,31 @@ const actions = {
       // dispatch("nav/setBc", [], { root: true });
       router.push({ path: "/login" });
       resolve();
+    });
+  },
+
+  register: ({ commit, dispatch }, { username, password }) => {
+    return new Promise((res, rej) => {
+      commit("loading");
+
+      apolloClient
+        .mutate({
+          mutation: gql`
+            mutation($username: String!, $password: String!) {
+              register(username: $username, password: $password)
+            }
+          `,
+
+          variables: {
+            username,
+            password
+          }
+        })
+        .then(pl => {
+          if (!pl.data.register) return rej("Unable to create user.");
+
+          res(dispatch("login", { username, password }));
+        });
     });
   }
 
@@ -131,9 +160,6 @@ const mutations = {
   login: (state, token) => {
     state.status = "authenticated";
     state.token = token;
-  },
-  error: state => {
-    state.status = "error";
   },
   logout: state => {
     state.token = "";

@@ -4,8 +4,8 @@
       <div
         class="looper"
         v-for="device in this.self.devices"
-        v-bind:id="device.name"
-        v-bind:key="device.name"
+        v-bind:id="device.id"
+        v-bind:key="device.id"
       >
         <DeviceListItem :device="device" />
       </div>
@@ -30,16 +30,15 @@ export default {
   },
   apollo: {
     self: gql`
-    query {
-      self {
-        id
-        devices {
+      query {
+        self {
           id
-          name
-          nickname
+          devices {
+            id
+            name
+          }
         }
       }
-    }
     `
   }
 };

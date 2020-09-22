@@ -117,11 +117,11 @@ const Mutation = {
     })
   },
 
-  addDevice: async (_, { name }, ctx) => {
+  addDevice: async (_, { id }, ctx) => {
     if (!ctx.user) return null;
-    return prisma.device.create({
+    return await prisma.device.create({
       data: {
-        name,
+        id,
         owner: {
           connect: { id: ctx.user.id }
         }
@@ -134,10 +134,10 @@ const Mutation = {
     return !!result;
   },
 
-  renameDevice: async (_, { id, nickname }) => {
+  renameDevice: async (_, { id, name }) => {
     return await prisma.device.update({
       where: { id },
-      data: { nickname }
+      data: { name }
     })
   }
 }

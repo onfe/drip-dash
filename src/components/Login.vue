@@ -2,7 +2,7 @@
   <div class="login-wrap">
     <b-card class="login">
       <h2><DripDashLogo />&nbsp;DripDash</h2>
-      <b-form @submit.prevent="login" @reset.prevent="reset">
+      <b-form @submit.prevent="login">
         <b-form-group>
           <b-form-input
             id="input-1"
@@ -23,6 +23,10 @@
         <b-button type="submit" block class="login-btn" variant="primary">
           Login
         </b-button>
+        <hr />
+        <router-link class="register" to="/register"
+          >No account? Sign Up.</router-link
+        >
       </b-form>
     </b-card>
   </div>
@@ -48,10 +52,6 @@ export default {
     async login() {
       const { username, password } = this.form;
       this.$store.dispatch("user/login", { username, password });
-    },
-    reset() {
-      this.form.username = "";
-      this.form.password = "";
     }
   }
 };
@@ -61,6 +61,10 @@ export default {
 .login {
   width: 20em;
   text-align: center;
+}
+
+.register {
+  color: var(--primary);
 }
 
 h2 {
