@@ -33,6 +33,13 @@ const Mutation = {
     }
   },
 
+  refresh: (_, {}, ctx) => {
+    // Old (but still valid) token is in the header.
+    // if it's not present, or has already expired, return null.
+    if (!(ctx.user && ctx.user.id && ctx.user.id)) return null;
+    return tokens.create(ctx.user);
+  },
+
   createGroup: async (_, { name }, ctx) => {
     if (!ctx.user) return null;
     if (name.length === 0) return null;

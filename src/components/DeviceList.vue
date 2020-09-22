@@ -3,9 +3,9 @@
     <b-card title="Devices">
       <div
         class="looper"
-        v-for="device in this.$store.state.devices.list"
-        v-bind:id="device.progName"
-        v-bind:key="device.progName"
+        v-for="device in this.self.devices"
+        v-bind:id="device.name"
+        v-bind:key="device.name"
       >
         <DeviceListItem :device="device" />
       </div>
@@ -15,6 +15,7 @@
 
 <script>
 import DeviceListItem from "@/components/DeviceListItem.vue";
+import gql from "graphql-tag";
 
 export default {
   name: "DeviceList",
@@ -23,18 +24,23 @@ export default {
   },
   data() {
     return {
-      refreshInterval: ""
+      refreshInterval: "",
+      self: {}
     };
   },
-  created: function() {
-    this.$store.dispatch("devices/update");
-    const that = this;
-    this.refreshInterval = setInterval(() => {
-      that.$store.dispatch("devices/update");
-    }, this.$store.getters["settings/apiIntervalms"]);
-  },
-  beforeDestroy: function() {
-    clearInterval(this.refreshInterval);
+  apollo: {
+    self: gql`
+    query {
+      self {
+        id
+        devices {
+          id
+          name
+          nickname
+        }
+      }
+    }
+    `
   }
 };
 </script>

@@ -54,9 +54,7 @@ export default {
       // Called just after the popover has finished hiding
     },
     signOut() {
-      this.$store.dispatch("auth/logout").then(() => {
-        this.$router.push("/login");
-      });
+      this.$store.dispatch("user/logout");
     }
   }
 };

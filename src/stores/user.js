@@ -10,12 +10,16 @@ const state = {
 };
 
 const getters = {
-  isAuthenticated: state => !!state.token
+  isAuthenticated: state => {
+    if (!state.token) return false;
+    const body = jwt.decode(state.token);
+    return (body.exp * 1000 - Date.now()) > 0;
+  }
 };
 
 const actions = {
   // Request an auth token
-  request: ({ commit }, user) => {
+  login: ({ commit }, user) => {
     return new Promise((res, rej) => {
       // Set the state to authenticated whilst we wait for a response.
       commit("loading");
@@ -51,46 +55,41 @@ const actions = {
           // }, tillRefresh);
 
           // Save the auth token, and log in!
+          localStorage.setItem("user-token", token);
           commit("login", token);
+
+          // Reset the GraphQL store, as the data available will change.
+          apolloClient.resetStore();
 
           router.push({ path: "/" });
           res(body.id);
         });
     });
   },
-  // eslint-disable-next-line
-  // refresh: ({ commit, state, dispatch }) => {
-  //   return new Promise((resolve, reject) => {
-  //     // Set the state to refreshing.
-  //     commit("refresh");
 
-  //     var pl = { token: state.token };
-  //     axios({ url: "/api/auth/refresh", data: pl, method: "POST" })
-  //       .then(resp => {
-  //         // if the auth request succeeds, get the token, and store it.
-  //         const token = resp.data.token;
-  //         const expires = new Date(resp.data.expires);
-  //         localStorage.setItem("user-token", token); // store the token in localstorage
-  //         localStorage.setItem("user-token-expires", expires);
+  refresh: ({ commit, state, dispatch }) => {
+    return new Promise((res, rej) => {
+      // Set the state to refreshing.
+      commit("loading");
+      apolloClient.mutate({
+        mutation: gql`mutation {
+          refresh
+        }`
+      }).then(pl => {
+        const token = pl.data.refresh;
+        if (!token) {
+          localStorage.removeItem("user-token");
+          dispatch("logout");
+          return rej("Couldn't refresh token.");
+        }
 
-  //         commit("success", { token, expires });
+        localStorage.setItem("user-token", token);
+        commit("login", token);
 
-  //         var tillRefresh = expires.getTime() - Date.now() - 30000;
-  //         var timeout = setTimeout(function() {
-  //           dispatch("refresh");
-  //         }, tillRefresh);
-
-  //         commit("nextRefresh", timeout);
-
-  //         resolve(resp);
-  //       })
-  //       .catch(err => {
-  //         commit("error", err);
-  //         localStorage.removeItem("user-token"); // if the request fails, remove any possible user token if possible
-  //         reject(err);
-  //       });
-  //   });
-  // },
+        res("Token refreshed.");
+      });
+    });
+  },
 
   logout: ({ commit }) => {
     return new Promise(resolve => {
@@ -98,6 +97,7 @@ const actions = {
       localStorage.removeItem("user-token"); // clear your user's token from localstorage
       // dispatch("device/reset", {}, { root: true });
       // dispatch("nav/setBc", [], { root: true });
+      router.push({ path: "/login" });
       resolve();
     });
   }
@@ -131,7 +131,6 @@ const mutations = {
   login: (state, token) => {
     state.status = "authenticated";
     state.token = token;
-    localStorage.setItem("user-token", token);
   },
   error: state => {
     state.status = "error";
@@ -148,7 +147,7 @@ const mutations = {
   }
 };
 
-const authentication = {
+const user = {
   namespaced: true,
   state: state,
   getters: getters,
@@ -156,4 +155,4 @@ const authentication = {
   mutations: mutations
 };
 
-export default authentication;
+export default user;

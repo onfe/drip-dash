@@ -63,6 +63,7 @@ type Query {
 type Mutation {
   login(username: String, password: String): String
   register(username: String, password: String): Boolean
+  refresh(token: String): String
 
   createGroup(name: String): Group
   leaveGroup(id: Int): Group

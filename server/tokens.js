@@ -1,11 +1,9 @@
 const jwt = require("jsonwebtoken");
-// const privatekey = require("crypto")
-//   .randomBytes(48)
-//   .toString("base64")
-//   .replace(/\//g, "_")
-//   .replace(/\+/g, "-");
-
-const privatekey = "abc";
+const privatekey = require("crypto")
+  .randomBytes(48)
+  .toString("base64")
+  .replace(/\//g, "_")
+  .replace(/\+/g, "-");
 
 module.exports = {
   create(user) {

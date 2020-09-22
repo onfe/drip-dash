@@ -47,9 +47,7 @@ export default {
   methods: {
     async login() {
       const { username, password } = this.form;
-      this.$store.dispatch("auth/request", { username, password }).then(() => {
-        this.reset();
-      });
+      this.$store.dispatch("user/login", { username, password });
     },
     reset() {
       this.form.username = "";

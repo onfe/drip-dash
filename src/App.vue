@@ -6,8 +6,8 @@
 </template>
 
 <script>
-const axios = require("axios");
 import DripNav from "@/components/DripNav.vue";
+import gql from "graphql-tag";
 
 export default {
   name: "dripdash",
@@ -18,34 +18,32 @@ export default {
     title: "Home",
     titleTemplate: "%s :: DripDash"
   },
-  created: function() {
-    // if we're authenticated, set the header in axios.
-    if (this.$store.getters["auth/isAuthenticated"]) {
-      let token = this.$store.state.auth.token;
-      // eslint-disable-next-line no-console
-      console.log(`Loaded authorization token. (${token.substr(0, 4)}...)`);
-      axios.defaults.headers.common["Authorization"] = token;
-      this.$store.dispatch("auth/refresh");
-    }
-
-    var that = this;
-    axios.interceptors.response.use(undefined, function(error) {
-      var err = error.response;
-      return new Promise(function() {
-        if (
-          err &&
-          err.status === 401 &&
-          err.config &&
-          !err.config.__isRetryRequest
-        ) {
-          // if you ever get an unauthorized 401 response, logout the user.
-          that.$store.dispatch("auth/logout").then(() => {
-            that.$router.push("/login");
-          });
+  data() {
+    return {
+      self: {
+        unloaded: true
+      }
+    };
+  },
+  mounted: function() {
+    // if we still have a current (in-date) token, check it's valid.
+    if (this.$store.getters["user/isAuthenticated"]) {
+      this.$apollo.query({
+        query: gql` query {
+          self {
+            id
+          }
+        }`
+      }).then(pl => {
+        if (pl.data.self) {
+          // The token was accepted by the server. Refresh to get newer token.
+          this.$store.dispatch("user/refresh");
+        } else {
+          // The token was invalidated by the server. Require log-in.
+          this.$store.dispatch("user/logout");
         }
-        throw err;
       });
-    });
+    }
   }
 };
 </script>

@@ -1,13 +1,13 @@
 <template>
   <router-link
     class="device"
-    :to="{ name: 'device', params: { id: device.progName } }"
+    :to="{ name: 'device', params: { id: device.name } }"
   >
     <div class="left">
-      <TriStateIcon :status="device.status" class="tristate" />
-      <span class="d-name">{{ device.name }}</span>
-      <span v-if="device.name != device.progName" class="d-id small">
-        ({{ device.progName }})
+      <TriStateIcon status="ok" class="tristate" />
+      <span class="d-name">{{ device.nickname || device.name}}</span>
+      <span v-if="device.name != device.nickname" class="d-id small">
+        ({{ device.name }})
       </span>
     </div>
     <div class="right">

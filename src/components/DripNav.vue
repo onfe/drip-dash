@@ -5,7 +5,7 @@
         <DripDashLogo color="var(--accent)" />
       </b-navbar-brand>
       <BreadcrumbButton
-        v-if="this.bc.length > 0"
+        v-if="(this.bc.length > 0) && $store.getters['user/isAuthenticated']"
         @toggle="switcher"
         v-bind:bc="this.bc"
         class="bc-btn"
