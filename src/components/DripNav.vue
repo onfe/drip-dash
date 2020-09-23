@@ -11,9 +11,8 @@
         class="bc-btn"
       />
 
-      <b-navbar-nav>
+      <b-navbar-nav v-if="$store.getters['user/isAuthenticated']" class="updater">
         <UpdateCandy
-          v-if="this.showUpdater"
           :updating="this.updating"
           :updated="this.updated"
         />
@@ -52,9 +51,6 @@ export default {
     updating: Boolean
   },
   computed: {
-    showUpdater() {
-      return !!this.updated;
-    },
     bc() {
       return this.$store.state.nav.bc;
     }
@@ -82,14 +78,18 @@ export default {
 <style scoped lang="scss">
 .bc-btn {
   flex-grow: 1;
-  margin: 0 0.5em;
+  margin: 0 1em;
 }
 
 .logo {
   margin-right: 0;
 }
 
-@include md {
+.updater {
+  display: none;
+}
+
+@include sm {
   .bc-btn {
     flex-grow: 0;
     margin: 0;
@@ -97,6 +97,14 @@ export default {
 
   .logo {
     margin-right: 1rem;
+  }
+
+  .updater {
+    display: block;
+  }
+
+  .nav-cont {
+    padding: 0 15px;
   }
 }
 

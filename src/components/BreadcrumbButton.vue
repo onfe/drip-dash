@@ -1,12 +1,10 @@
 <template>
   <b-button @click="toggle" class="bc-btn" variant="outline-light">
-    <div class="bc-btn">
-      <div class="bc-mini">
-        {{ crumbs }}
-      </div>
-      <div class="bc-main">{{ text }}</div>
-      <div :class="iconCls"><font-awesome-icon icon="angle-down" /></div>
+    <div class="bc-mini">
+      {{ crumbs }}
     </div>
+    <div class="bc-main">{{ text }}</div>
+    <div :class="iconCls"><font-awesome-icon icon="angle-down" /></div>
   </b-button>
 </template>
 
@@ -82,5 +80,6 @@ export default {
   padding: 0 4px;
   text-align: left;
   min-width: 12rem;
+  flex-grow: 0;
 }
 </style>

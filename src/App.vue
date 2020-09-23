@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <DripNav />
+    <DripNav :updating="updating" :updated="updated"/>
     <router-view />
   </div>
 </template>
@@ -20,11 +20,27 @@ export default {
   },
   data() {
     return {
-      self: {
-        unloaded: true
-      }
+      fetchCount: 0,
+      updated: new Date()
     };
   },
+
+  computed: {
+    updating: function() {
+      return !!this.fetchCount
+    }
+  },
+
+  created: function() {
+    document.addEventListener("apollo-status", e => {
+      if (e.detail == "fetching") this.fetchCount += 1;
+      if (e.detail == "fetched") {
+        this.fetchCount -=1;
+        this.updated = new Date();
+      }
+    });
+  },
+
   mounted: function() {
     // if we still have a current (in-date) token, check it's valid.
     if (this.$store.getters["user/isAuthenticated"]) {
