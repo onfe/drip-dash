@@ -67,7 +67,7 @@ const actions = {
     });
   },
 
-  refresh: ({ commit, state, dispatch }) => {
+  refresh: ({ commit, dispatch }) => {
     return new Promise((res, rej) => {
       // Set the state to refreshing.
       commit("loading");

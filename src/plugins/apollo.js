@@ -30,8 +30,8 @@ const postLink = new ApolloLink((operation, forward) => {
       new CustomEvent("apollo-status", { detail: "fetched" })
     );
     return response;
-  })
-})
+  });
+});
 
 export const apolloClient = new ApolloClient({
   // request -> apply auth -> send http request.

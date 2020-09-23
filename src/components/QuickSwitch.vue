@@ -1,5 +1,5 @@
 <template lang="html">
-  <!-- <b-container :class="classes" title="Quick Switch">
+  <b-container :class="classes" title="Quick Switch">
     <div class="wrap">
       <div class="col">
         <router-link
@@ -25,7 +25,7 @@
         </router-link>
       </div>
     </div>
-  </b-container> -->
+  </b-container>
 </template>
 
 <script>

@@ -78,11 +78,11 @@
 
 <script>
 import RTTempCard from "@/components/chart/RTTemp.vue";
-import RTWaterLevelCard from "@/components/chart/RTWaterLevel.vue";
-import RTStatCard from "@/components/RTStat.vue";
-import AtAGlance from "@/components/glances/AtAGlanceCard.vue";
-import ControlCard from "@/components/ControlCard.vue";
-import BedStatusCard from "@/components/BedStatusCard.vue";
+// import RTWaterLevelCard from "@/components/chart/RTWaterLevel.vue";
+// import RTStatCard from "@/components/RTStat.vue";
+// import AtAGlance from "@/components/glances/AtAGlanceCard.vue";
+// import ControlCard from "@/components/ControlCard.vue";
+// import BedStatusCard from "@/components/BedStatusCard.vue";
 
 export default {
   name: "Dashboard",

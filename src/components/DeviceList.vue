@@ -4,7 +4,11 @@
       <div class="card-body">
         <div class="header">
           <h4 class="card-title">Your Devices</h4>
-          <NavIcon icon="plus" class="add" @click="$router.push('/add-device')"/>
+          <NavIcon
+            icon="plus"
+            class="add"
+            @click="$router.push('/add-device')"
+          />
         </div>
         <div
           class="alert-light alert bg-light my-0 text-center py-4"

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <DripNav :updating="updating" :updated="updated"/>
+    <DripNav :updating="updating" :updated="updated" />
     <router-view />
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
 
   computed: {
     updating: function() {
-      return !!this.fetchCount
+      return !!this.fetchCount;
     }
   },
 
@@ -35,7 +35,7 @@ export default {
     document.addEventListener("apollo-status", e => {
       if (e.detail == "fetching") this.fetchCount += 1;
       if (e.detail == "fetched") {
-        this.fetchCount -=1;
+        this.fetchCount -= 1;
         this.updated = new Date();
       }
     });

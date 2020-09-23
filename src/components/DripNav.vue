@@ -11,11 +11,11 @@
         class="bc-btn"
       />
 
-      <b-navbar-nav v-if="$store.getters['user/isAuthenticated']" class="updater">
-        <UpdateCandy
-          :updating="this.updating"
-          :updated="this.updated"
-        />
+      <b-navbar-nav
+        v-if="$store.getters['user/isAuthenticated']"
+        class="updater"
+      >
+        <UpdateCandy :updating="this.updating" :updated="this.updated" />
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto">
@@ -33,7 +33,6 @@
         />
       </b-navbar-nav>
     </b-container>
-    <QuickSwitch :active="isSwitching" />
   </b-navbar>
 </template>
 
@@ -42,7 +41,6 @@ import BreadcrumbButton from "@/components/BreadcrumbButton.vue";
 import DripDashLogo from "@/components/DripDashLogo.vue";
 import NavIcon from "@/components/NavIcon.vue";
 import UpdateCandy from "@/components/UpdateCandy.vue";
-import QuickSwitch from "@/components/QuickSwitch.vue";
 
 export default {
   name: "DripNav",
@@ -69,8 +67,7 @@ export default {
     BreadcrumbButton,
     DripDashLogo,
     NavIcon,
-    UpdateCandy,
-    QuickSwitch
+    UpdateCandy
   }
 };
 </script>

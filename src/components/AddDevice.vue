@@ -1,28 +1,28 @@
 <template>
-<b-container>
-  <b-card title="Add a Device">
-    <p>Set your device's endpoint to:</p>
-    <p><pre class="endpoint"><code>{{ collectorEndpoint }}</code></pre></p>
-    <p>Once it's connected to DripDash, it'll appear below.</p>
-    <hr>
-    <div
-          class="alert-light alert bg-light my-0 text-center py-4"
-          v-if="unregisteredDevices && unregisteredDevices.length == 0"
-        >
-          There are no unregistered devices.
-        </div>
-    <ListItem
-      v-for="device in unregisteredDevices"
-      v-bind:key="device.id"
-      @click="addDevice(device.id)"
-    >
-      <div class="left">
-        {{ device.id }}
+  <b-container>
+    <b-card title="Add a Device">
+      <p>Set your device's endpoint to:</p>
+      <pre class="endpoint"><code>{{ collectorEndpoint }}</code></pre>
+      <p>Once it's connected to DripDash, it'll appear below.</p>
+      <hr />
+      <div
+        class="alert-light alert bg-light my-0 text-center py-4"
+        v-if="unregisteredDevices && unregisteredDevices.length == 0"
+      >
+        There are no unregistered devices.
       </div>
-      <b-button size="sm" variant="info">Add</b-button>
-    </ListItem>
-  </b-card>
-</b-container>
+      <ListItem
+        v-for="device in unregisteredDevices"
+        v-bind:key="device.id"
+        @click="addDevice(device.id)"
+      >
+        <div class="left">
+          {{ device.id }}
+        </div>
+        <b-button size="sm" variant="info">Add</b-button>
+      </ListItem>
+    </b-card>
+  </b-container>
 </template>
 
 <script>
@@ -36,29 +36,31 @@ export default {
   data() {
     return {
       unregisteredDevices: []
-    }
+    };
   },
   computed: {
     collectorEndpoint: function() {
-      return window.location.origin + '/collect';
+      return window.location.origin + "/collect";
     }
   },
   methods: {
     addDevice: function(id) {
-      this.$apollo.mutate({
-        mutation: gql`
-          mutation($deviceId: String!) {
-            addDevice(id: $deviceId) {
-              id
+      this.$apollo
+        .mutate({
+          mutation: gql`
+            mutation($deviceId: String!) {
+              addDevice(id: $deviceId) {
+                id
+              }
             }
+          `,
+          variables: {
+            deviceId: id
           }
-        `,
-        variables: {
-          deviceId: id
-        }
-      }).then((data) => {
-        this.$router.push('/');
-      })
+        })
+        .then(() => {
+          this.$router.push("/");
+        });
     }
   },
   apollo: {
@@ -73,7 +75,7 @@ export default {
       pollInterval: 2000
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
