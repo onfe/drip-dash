@@ -19,6 +19,15 @@ const router = new Router({
       }
     },
     {
+      path: "/add-device",
+      name: "Add Device",
+      component: () =>
+        import(/* webpackChunkName: "add-device" */ "./views/AddDevice.vue"),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: "/device/:id",
       name: "device",
       component: () =>

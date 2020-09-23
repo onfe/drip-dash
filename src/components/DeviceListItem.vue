@@ -1,8 +1,5 @@
 <template>
-  <router-link
-    class="device"
-    :to="{ name: 'device', params: { id: device.id } }"
-  >
+  <ListItem :to="{ name: 'device', params: { id: device.id } }">
     <div class="left">
       <TriStateIcon status="ok" class="tristate" />
       <span class="d-name">{{ device.name || device.id }}</span>
@@ -24,7 +21,7 @@
       <NavIcon icon="ellipsis-v" />
       <!-- TODO add renamer to dropdown under sm breakpoint -->
     </div>
-  </router-link>
+  </ListItem>
 </template>
 
 <script>
@@ -32,10 +29,12 @@ import NavIcon from "@/components/NavIcon.vue";
 import TriStateIcon from "@/components/StateIcon.vue";
 import TimeAgo from "@/components/TimeAgo.vue";
 import Renamer from "@/components/Renamer.vue";
+import ListItem from "@/components/ListItem.vue";
 
 export default {
   name: "DeviceListItem",
   components: {
+    ListItem,
     NavIcon,
     TriStateIcon,
     TimeAgo,
@@ -55,22 +54,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.device {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  text-decoration: none;
-  border-radius: 0.5em;
-  transition: all 0.15s ease-in-out;
-  padding: 0 0.5em;
-  min-height: 3.5em;
-
-  &:hover {
-    background: var(--light);
-  }
-}
-
 .d-id {
   display: none;
 
@@ -105,6 +88,6 @@ export default {
 }
 
 .tristate {
-  padding-right: 1em;
+  margin-right: 1rem;
 }
 </style>

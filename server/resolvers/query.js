@@ -10,6 +10,26 @@ const Query = {
       }
     });
     return a;
+  },
+  unregisteredDevices: async () => {
+    const thirtyminsago = new Date(Date.now() - (1000 * 60 * 30))
+    const devices = await prisma.unregisteredDevice.findMany({
+      where: {
+        online: {
+          gte: thirtyminsago
+        }
+      }
+    })
+
+    prisma.unregisteredDevice.deleteMany({
+      where: {
+        online: {
+          lt: thirtyminsago
+        }
+      }
+    })
+
+    return devices;
   }
 }
 

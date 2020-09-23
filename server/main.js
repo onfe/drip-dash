@@ -8,14 +8,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const api = require("./api");
-// const collector = require("./collector");
+const collector = require("./collector");
 
 const { PORT = 8000 } = process.env;
 
 const configure = app => {
   app.use(bodyParser.json());
   api.applyMiddleware({ app, path: "/api" });
-  // app.use("/collect", collector);
+  app.use("/collect", collector);
 }
 
 if (require.main === module) {

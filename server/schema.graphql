@@ -52,11 +52,17 @@ type BedEntry {
   level: Float
 }
 
+type UnregisteredDevice {
+  id: String!
+  # timestamp: DateTime!
+}
+
 type Query {
   user(id: Int): User!
   # groups: [Group]!
   device(id: String): Device!
   group(id: Int): Group!
+  unregisteredDevices: [UnregisteredDevice]!
   self: User
 }
 

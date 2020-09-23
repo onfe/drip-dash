@@ -119,6 +119,11 @@ const Mutation = {
 
   addDevice: async (_, { id }, ctx) => {
     if (!ctx.user) return null;
+    
+    await prisma.unregisteredDevice.delete({
+      where: { id }
+    })
+
     return await prisma.device.create({
       data: {
         id,

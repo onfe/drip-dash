@@ -595,6 +595,35 @@
       "field": "devices",
       "type": "Device",
       "arity": "List"
+    },
+    {
+      "tag": "CreateModel",
+      "model": "UnregisteredDevice"
+    },
+    {
+      "tag": "CreateField",
+      "model": "UnregisteredDevice",
+      "field": "id",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "UnregisteredDevice",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "UnregisteredDevice",
+      "field": "online",
+      "type": "DateTime",
+      "arity": "Required"
     }
   ]
 }

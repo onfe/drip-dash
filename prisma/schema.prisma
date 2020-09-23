@@ -57,3 +57,8 @@ model Group {
   members     User[]
   devices     Device[]
 }
+
+model UnregisteredDevice {
+  id          String      @id
+  online      DateTime
+}
