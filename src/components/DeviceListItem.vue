@@ -17,7 +17,7 @@
         :startText="device.name || device.id"
         @save="rename"
       />
-      <NavIcon icon="ellipsis-v" />
+      <NavIcon icon="trash-alt" @click="remove" />
       <!-- TODO add renamer to dropdown under sm breakpoint -->
     </div>
   </ListItem>
@@ -46,7 +46,7 @@ export default {
   data: function() {
     return {
       timestamp: new Date(this.device.latest.timestamp)
-    }
+    };
   },
   watch: {
     device: {
@@ -58,21 +58,33 @@ export default {
   },
   methods: {
     rename: function(name) {
-      console.log(name);
       this.$apollo.mutate({
         mutation: gql`
-        mutation($id: String!, $name: String!) {
-          renameDevice(id: $id, name: $name) {
-            id
-            name
+          mutation($id: String!, $name: String!) {
+            renameDevice(id: $id, name: $name) {
+              id
+              name
+            }
           }
-        }
         `,
         variables: {
           id: this.device.id,
           name: name
         }
-      })
+      });
+    },
+    remove: function() {
+      this.$apollo.mutate({
+        mutation: gql`
+          mutation($id: String!) {
+            removeDevice(id: $id)
+          }
+        `,
+
+        variables: {
+          id: this.device.id
+        }
+      });
     }
   }
 };
