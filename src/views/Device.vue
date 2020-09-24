@@ -1,43 +1,87 @@
 <template>
   <div class="dashboard">
-    <!-- <DripNav
-      :updated="this.$store.state.device.updated"
-      :updating="this.$store.state.device.updating"
-    /> -->
     <span class="spacer"></span>
-    <Dashboard />
+    <b-container>
+        <RTStat 
+          :data="this.device.latest.humidity"
+          title="Humidity"
+          unit="%"
+        />
+        <br />
+        <RTStat 
+          :data="this.device.latest.light"
+          title="Light"
+          unit="lux"
+        />
+        <br />
+        <RTStat 
+          :data="this.device.latest.airTemp"
+          title="Air Temperature"
+          unit="°C"
+        />
+        <br />
+        <RTStat 
+          :data="this.device.latest.waterTemp"
+          title="Water Temperature"
+          unit="°C"
+        />
+        <br />
+        <RTStat 
+          :data="this.device.latest.light"
+          title="pH"
+          unit=""
+        />
+    </b-container>
   </div>
 </template>
 
 <script>
-import Dashboard from "@/components/Dashboard.vue";
+// import Dashboard from "@/components/Dashboard.vue";
+import RTStat from "@/components/RTStat.vue";
+import gql from "graphql-tag";
 
 export default {
   name: "device",
   metaInfo: function() {
     return {
-      title: this.$store.state.device.name
+      title: this.device.name || this.device.id
     };
   },
-  computed: {
-    deviceID: function() {
-      return this.$route.params.id;
-    },
-    device: function() {
-      return this.$store.state.device;
+  components: {
+    // Dashboard
+    RTStat
+  },
+  data() {
+    return {
+      device: {
+        latest: {}
+      }
     }
   },
-  created: function() {
-    this.$store.dispatch("device/set", this.deviceID);
-    this.$store.dispatch("device/update");
-    this.$store.dispatch("nav/setBc", [
-      "DripDash",
-      "Device",
-      this.$store.state.device.name
-    ]);
-  },
-  components: {
-    Dashboard
+  apollo: {
+    device: {
+      query: gql`
+        query($id: String!) {
+          device(id: $id) {
+            id
+            name
+            latest {
+              humidity
+              light
+              airTemp
+              waterTemp
+              ph
+            }
+          }
+        }
+      `,
+      variables() {
+        return {
+          id: this.$route.params.id
+        }
+      },
+      pollInterval: 2000,
+    }
   }
 };
 </script>

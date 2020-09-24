@@ -2,7 +2,7 @@
   <b-card :title="this.title" class="rtstat">
     <div class="wrap">
       <h1 class="display-3 adaptive">
-        {{ this.stat.field }}
+        {{ this.data }}
         <span class="lead"> {{ this.unit }} </span>
       </h1>
     </div>
@@ -13,16 +13,10 @@
 export default {
   name: "RTStatCard",
   props: {
-    field: String,
+    data: [Number, String],
     title: String,
     unit: String
-  },
-  computed: {
-    stat() {
-      return this.$store.getters["device/getLatest"](this.field) || {};
-    }
-  },
-  components: {}
+  }
 };
 </script>
 

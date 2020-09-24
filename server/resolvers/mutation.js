@@ -143,10 +143,7 @@ const Mutation = {
       }
     })
     await prisma.dataEntry.deleteMany({ where: { deviceId: id}})
-    const result = await prisma.device.delete({
-      where: { id },
-      
-    })
+    const result = await prisma.device.delete({ where: { id } })
     return !!result;
   },
 

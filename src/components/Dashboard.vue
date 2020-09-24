@@ -93,17 +93,6 @@ export default {
       refreshInterval: ""
     };
   },
-  // created: function() {
-  //   this.$store.dispatch("device/update");
-  //   const that = this;
-  //   this.refreshInterval = setInterval(() => {
-  //     that.$store.dispatch("device/update");
-  //   }, this.$store.getters["settings/apiIntervalms"]);
-  // },
-  // beforeDestroy: function() {
-  //   clearInterval(this.refreshInterval);
-  //   this.$store.dispatch("device/reset");
-  // },
   components: {
     RTTempCard
     // RTStatCard,

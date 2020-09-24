@@ -30,6 +30,10 @@ const Query = {
     })
 
     return devices;
+  },
+  device: async (_, { id }, ctx) => {
+    if (!ctx.user) return null;
+    return await prisma.device.findOne({ where: { id } })
   }
 }
 
