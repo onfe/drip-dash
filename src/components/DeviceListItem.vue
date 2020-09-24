@@ -1,18 +1,17 @@
 <template>
   <ListItem :to="{ name: 'device', params: { id: device.id } }">
     <div class="left">
-      <TriStateIcon status="ok" class="tristate" />
+      <TriStateIcon status="offline" class="tristate" />
       <span class="d-name">{{ device.name || device.id }}</span>
-      <span v-if="device.name" class="d-id small"> ({{ device.name }}) </span>
+      <span v-if="device.name" class="d-id small"> ({{ device.id }}) </span>
     </div>
     <div class="right">
       <TimeAgo
-        v-if="!device.onlineNow"
         class="online small"
-        :time="device.online"
+        :time="timestamp"
         text="Online"
+        :dynamic="true"
       />
-      <span v-else class="online small">Device online</span>
       <Renamer
         class="rname-sa"
         :startText="device.name || device.id"
@@ -30,6 +29,7 @@ import TriStateIcon from "@/components/StateIcon.vue";
 import TimeAgo from "@/components/TimeAgo.vue";
 import Renamer from "@/components/Renamer.vue";
 import ListItem from "@/components/ListItem.vue";
+import gql from "graphql-tag";
 
 export default {
   name: "DeviceListItem",
@@ -43,11 +43,36 @@ export default {
   props: {
     device: Object
   },
+  data: function() {
+    return {
+      timestamp: new Date(this.device.latest.timestamp)
+    }
+  },
+  watch: {
+    device: {
+      deep: true,
+      handler(device) {
+        this.timestamp = new Date(device.latest.timestamp);
+      }
+    }
+  },
   methods: {
     rename: function(name) {
       console.log(name);
-      let pl = { id: this.device.progName, name: name };
-      this.$store.dispatch("devices/rename", pl);
+      this.$apollo.mutate({
+        mutation: gql`
+        mutation($id: String!, $name: String!) {
+          renameDevice(id: $id, name: $name) {
+            id
+            name
+          }
+        }
+        `,
+        variables: {
+          id: this.device.id,
+          name: name
+        }
+      })
     }
   }
 };

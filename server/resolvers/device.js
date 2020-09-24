@@ -21,7 +21,8 @@ const Device = {
       orderBy: { timestamp: "desc" },
       take: 1
     })
-    return latest.length === 1 ? latest : null;
+    
+    return latest.length === 1 ? latest[0] : null;
   }
 }
 

@@ -21,7 +21,7 @@ const Query = {
       }
     })
 
-    prisma.unregisteredDevice.deleteMany({
+    await prisma.unregisteredDevice.deleteMany({
       where: {
         online: {
           lt: thirtyminsago

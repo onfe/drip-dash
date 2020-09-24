@@ -52,12 +52,16 @@ export default {
             devices {
               id
               name
+              latest {
+                timestamp
+              }
             }
           }
         }
       `,
       pollInterval: 2000,
-      notifyOnNetworkStatusChange: true
+      notifyOnNetworkStatusChange: true,
+      deep: true
     }
   }
 };

@@ -22,8 +22,9 @@ export default {
   },
   methods: {
     update() {
+      this.t = this.time;
       if (Date.now() - this.t < 5000) {
-        this.timeText = "just now";
+        this.timeText = "now";
       } else {
         this.timeText = ta.ago(this.t);
       }

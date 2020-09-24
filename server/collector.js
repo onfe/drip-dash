@@ -12,7 +12,21 @@ router.all("/:id/", async function(req, res) {
   });
 
   if (device) {
-    // todo
+    await prisma.dataEntry.create({
+      data: {
+        timestamp: new Date(),
+        device: {
+          connect: { id: req.params.id }
+        },
+
+        waterTemp: req.body.waterTemp,
+        airTemp: req.body.airTemp,
+        humidity: req.body.humidity,
+        light: req.body.light,
+        ph: req.body.pH,
+        beds: req.body.beds ? { create: req.body.beds } : null
+      }
+    })
   } else {
     // unregistered device
     await prisma.unregisteredDevice.upsert({
