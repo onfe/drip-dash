@@ -9,9 +9,8 @@ export default {
   props: {
     fields: Array,
     labels: Array,
-    interval: Number,
-    legend: Boolean,
-    scale: String
+    scale: String,
+    data: Array
   },
   data() {
     return {
@@ -25,9 +24,8 @@ export default {
   },
   computed: {
     getLegend() {
-      var disp = this.legend;
       return {
-        display: disp
+        display: this.fields.length > 1
       };
     },
     getScaleLabel() {
@@ -81,11 +79,8 @@ export default {
     datasets() {
       var sets = [];
       this.fields.forEach((field, i) => {
-        var data = this.$store.getters["device/getData"](
-          field,
-          this.interval
-        ).map(d => {
-          return { x: d.timestamp, y: d.field };
+        var data = this.data.map(d => {
+          return { x: d.timestamp, y: d[field] };
         });
 
         var label = this.labels[i] || "";
@@ -104,6 +99,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.chartData, this.options)
     this.renderChart(this.chartData, this.options);
   }
 };

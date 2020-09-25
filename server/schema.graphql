@@ -29,7 +29,7 @@ type Device {
   status: Status!
   glances: [Glance]!
   location: Location
-  data: [DataEntry]!
+  data(from: DateTime): [DataEntry]!
   latest: DataEntry
 }
 
@@ -82,19 +82,19 @@ type Query {
 }
 
 type Mutation {
-  login(username: String, password: String): String
-  register(username: String, password: String): Boolean
-  refresh(token: String): String
+  login(username: String!, password: String!): String
+  register(username: String!, password: String!): Boolean
+  refresh: String
 
-  createGroup(name: String): Group
-  leaveGroup(id: Int): Group
-  deleteGroup(id: Int): Group
+  createGroup(name: String!): Group
+  leaveGroup(id: Int!): Group
+  deleteGroup(id: Int!): Group
   # renameGroup(id: Int): Group
-  addUserToGroup(userId: Int, groupId: Int): Group
-  addDeviceToGroup(deviceId: String, groupId: Int): Group
-  removeDeviceFromGroup(deviceId: String, groupId: Int): Group
+  addUserToGroup(userId: Int!, groupId: Int!): Group
+  addDeviceToGroup(deviceId: String!, groupId: Int!): Group
+  removeDeviceFromGroup(deviceId: String!, groupId: Int!): Group
 
-  addDevice(id: String): Device
-  removeDevice(id: String): Boolean
-  renameDevice(id: String, name: String): Device
+  addDevice(id: String!): Device
+  removeDevice(id: String!): Boolean
+  renameDevice(id: String!, name: String!): Device
 }

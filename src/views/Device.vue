@@ -6,6 +6,15 @@
         :glances="this.device.glances"
       />
       <br />
+      <b-card>
+        <RTLineChart
+          :fields="['waterTemp', 'airTemp']"
+          :labels="['Water Temperature', 'Air Temperature']"
+          scale="Temperature (°C)"
+          :data="this.device.data"
+        />
+      </b-card>
+      <br />
       <RTStat 
         :data="this.device.latest.humidity"
         title="Humidity"
@@ -43,6 +52,7 @@
 // import Dashboard from "@/components/Dashboard.vue";
 import RTStat from "@/components/RTStat.vue";
 import AtAGlance from "@/components/glances/AtAGlanceCard.vue";
+import RTLineChart from "@/components/charts/RTLineChart.vue";
 import gql from "graphql-tag";
 
 export default {
@@ -55,20 +65,22 @@ export default {
   components: {
     // Dashboard
     RTStat,
-    AtAGlance
+    AtAGlance,
+    RTLineChart
   },
   data() {
     return {
       device: {
         latest: {},
-        glances: []
+        glances: [],
+        data: []
       }
     }
   },
   apollo: {
     device: {
       query: gql`
-        query($id: String!) {
+        query($id: String!, $from: DateTime!) {
           device(id: $id) {
             id
             name
@@ -83,13 +95,20 @@ export default {
               airTemp
               waterTemp
               ph
+            },
+            data(from: $from) {
+              id
+              timestamp
+              waterTemp
+              airTemp
             }
           }
         }
       `,
       variables() {
         return {
-          id: this.$route.params.id
+          id: this.$route.params.id,
+          from: new Date(Date.now() - 1000 * 60 * 5)
         }
       },
       pollInterval: 2000,

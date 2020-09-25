@@ -12,8 +12,13 @@ const Device = {
       longitude: device.longitude
     }
   },
-  data: async (device) => {
-    return await prisma.dataEntry.findMany({ where: { deviceId: device.id }})
+  data: async (device, { from }) => {
+    return await prisma.dataEntry.findMany({
+      where: {
+        deviceId: device.id,
+        timestamp: from ? { gte: new Date(from) } : {}
+      }
+    })
   },
   latest: async (device) => {
     const latest = await prisma.dataEntry.findMany({

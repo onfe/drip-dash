@@ -12,6 +12,7 @@ const Query = {
     return a;
   },
   unregisteredDevices: async () => {
+    if (!ctx.user) return null;
     const thirtyminsago = new Date(Date.now() - (1000 * 60 * 30))
     const devices = await prisma.unregisteredDevice.findMany({
       where: {
