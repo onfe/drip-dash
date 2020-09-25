@@ -15,7 +15,11 @@ export default {
   name: "Glance",
   props: {
     title: String,
-    text: String,
+    text: {
+      required: false,
+      type: String,
+      default: ""
+    },
     state: String
   },
   components: {
@@ -23,7 +27,7 @@ export default {
   },
   computed: {
     showText() {
-      return this.text.length > 0;
+      return this.text && (this.text.length > 0);
     }
   }
 };
@@ -40,5 +44,6 @@ export default {
 .text {
   font-size: 0.85em;
   color: var(--secondary);
+  margin-bottom: 0;
 }
 </style>

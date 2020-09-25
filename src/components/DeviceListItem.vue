@@ -1,7 +1,7 @@
 <template>
   <ListItem :to="{ name: 'device', params: { id: device.id } }">
     <div class="left">
-      <TriStateIcon status="offline" class="tristate" />
+      <TriStateIcon :status="device.status" class="tristate" />
       <span class="d-name">{{ device.name || device.id }}</span>
       <span v-if="device.name" class="d-id small"> ({{ device.id }}) </span>
     </div>

@@ -1,5 +1,12 @@
 scalar DateTime
 
+enum Status {
+  UNKNOWN
+  OK
+  WARN
+  KO
+}
+
 type User {
   id: Int!
   username: String!
@@ -19,9 +26,17 @@ type Device {
   id: String!
   name: String
   owner: User!
+  status: Status!
+  glances: [Glance]!
   location: Location
   data: [DataEntry]!
   latest: DataEntry
+}
+
+type Glance {
+  status: Status!
+  title: String!
+  text: String
 }
 
 type Group {

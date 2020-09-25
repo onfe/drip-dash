@@ -55,6 +55,7 @@ export default {
               latest {
                 timestamp
               }
+              status
             }
           }
         }

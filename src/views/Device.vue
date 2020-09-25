@@ -2,35 +2,39 @@
   <div class="dashboard">
     <span class="spacer"></span>
     <b-container>
-        <RTStat 
-          :data="this.device.latest.humidity"
-          title="Humidity"
-          unit="%"
-        />
-        <br />
-        <RTStat 
-          :data="this.device.latest.light"
-          title="Light"
-          unit="lux"
-        />
-        <br />
-        <RTStat 
-          :data="this.device.latest.airTemp"
-          title="Air Temperature"
-          unit="°C"
-        />
-        <br />
-        <RTStat 
-          :data="this.device.latest.waterTemp"
-          title="Water Temperature"
-          unit="°C"
-        />
-        <br />
-        <RTStat 
-          :data="this.device.latest.light"
-          title="pH"
-          unit=""
-        />
+      <AtAGlance
+        :glances="this.device.glances"
+      />
+      <br />
+      <RTStat 
+        :data="this.device.latest.humidity"
+        title="Humidity"
+        unit="%"
+      />
+      <br />
+      <RTStat 
+        :data="this.device.latest.light"
+        title="Light"
+        unit="lux"
+      />
+      <br />
+      <RTStat 
+        :data="this.device.latest.airTemp"
+        title="Air Temperature"
+        unit="°C"
+      />
+      <br />
+      <RTStat 
+        :data="this.device.latest.waterTemp"
+        title="Water Temperature"
+        unit="°C"
+      />
+      <br />
+      <RTStat 
+        :data="this.device.latest.light"
+        title="pH"
+        unit=""
+      />
     </b-container>
   </div>
 </template>
@@ -38,6 +42,7 @@
 <script>
 // import Dashboard from "@/components/Dashboard.vue";
 import RTStat from "@/components/RTStat.vue";
+import AtAGlance from "@/components/glances/AtAGlanceCard.vue";
 import gql from "graphql-tag";
 
 export default {
@@ -49,12 +54,14 @@ export default {
   },
   components: {
     // Dashboard
-    RTStat
+    RTStat,
+    AtAGlance
   },
   data() {
     return {
       device: {
-        latest: {}
+        latest: {},
+        glances: []
       }
     }
   },
@@ -65,6 +72,11 @@ export default {
           device(id: $id) {
             id
             name
+            glances {
+              title
+              text
+              status
+            }
             latest {
               humidity
               light
@@ -81,6 +93,7 @@ export default {
         }
       },
       pollInterval: 2000,
+      deep: true
     }
   }
 };

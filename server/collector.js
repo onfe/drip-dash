@@ -24,6 +24,7 @@ router.all("/:id/", async function(req, res) {
         humidity: req.body.humidity,
         light: req.body.light,
         ph: req.body.pH,
+        rssi: req.body.rssi,
         beds: req.body.beds ? { create: req.body.beds } : null
       }
     })

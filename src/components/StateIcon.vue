@@ -23,13 +23,13 @@ export default {
   },
   computed: {
     isOK: function() {
-      return this.status == "ok";
+      return this.status == "OK";
     },
     isKO: function() {
-      return this.status == "ko";
+      return this.status == "KO";
     },
     isWarn: function() {
-      return this.status == "warn";
+      return this.status == "WARN";
     }
   }
 };
