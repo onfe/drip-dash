@@ -9,8 +9,17 @@ export default {
   props: {
     fields: Array,
     labels: Array,
-    scale: String,
-    data: Array
+    scale: {
+      required: false,
+      default: null,
+      type: String
+    },
+    data: Array,
+    average: {
+      type: Number,
+      required: false,
+      default: 0
+    }
   },
   data() {
     return {
@@ -80,8 +89,29 @@ export default {
       var sets = [];
       this.fields.forEach((field, i) => {
         var data = this.data.map(d => {
-          return { x: d.timestamp, y: d[field] };
+          return { x: new Date(d.timestamp), y: d[field] };
         });
+
+        if (this.average > 1) {
+          let sum = 0;
+          let cnt = 0;
+          let averagedData = []
+          data.forEach(({x, y}, i) => {
+            sum += y;
+            cnt += 1;
+            if (i % this.average == this.average - 1) {
+              averagedData.push({x, y: sum / cnt});
+              sum = 0;
+              cnt = 0;
+            }
+          });
+
+          if (cnt && sum) {
+            averagedData.push({ x: data[data.length - 1].x, y: sum / cnt})
+          }
+
+          data = averagedData;
+        }
 
         var label = this.labels[i] || "";
 
@@ -105,4 +135,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+* {
+  height: Calc(100% - 2.25rem);
+}
+</style>

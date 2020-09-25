@@ -1,51 +1,35 @@
 <template>
-  <div class="dashboard">
-    <span class="spacer"></span>
-    <b-container>
-      <AtAGlance
-        :glances="this.device.glances"
+  <b-container class="dashboard">
+    <AtAGlance
+      :glances="this.device.glances"
+    />
+    <b-card title="Temperature" class="span-2 h-2">
+      <RTLineChart
+        :fields="['waterTemp', 'airTemp']"
+        :labels="['Water', 'Air']"
+        :data="this.device.data"
+        :average="6"
       />
-      <br />
-      <b-card>
-        <RTLineChart
-          :fields="['waterTemp', 'airTemp']"
-          :labels="['Water Temperature', 'Air Temperature']"
-          scale="Temperature (°C)"
-          :data="this.device.data"
-        />
-      </b-card>
-      <br />
-      <RTStat 
-        :data="this.device.latest.humidity"
-        title="Humidity"
-        unit="%"
-      />
-      <br />
-      <RTStat 
-        :data="this.device.latest.light"
-        title="Light"
-        unit="lux"
-      />
-      <br />
-      <RTStat 
-        :data="this.device.latest.airTemp"
-        title="Air Temperature"
-        unit="°C"
-      />
-      <br />
-      <RTStat 
-        :data="this.device.latest.waterTemp"
-        title="Water Temperature"
-        unit="°C"
-      />
-      <br />
-      <RTStat 
-        :data="this.device.latest.light"
-        title="pH"
-        unit=""
-      />
-    </b-container>
-  </div>
+    </b-card>
+    <RTStat 
+      :data="this.device.latest.humidity"
+      title="Humidity"
+      unit="%"
+      class="h-1"
+    />
+    <RTStat 
+      :data="this.device.latest.light"
+      title="Light"
+      unit="lux"
+      class="h-1"
+    />
+    <RTStat 
+      :data="this.device.latest.light"
+      title="pH"
+      unit="pH"
+      class="h-1"
+    />
+  </b-container>
 </template>
 
 <script>
@@ -108,7 +92,7 @@ export default {
       variables() {
         return {
           id: this.$route.params.id,
-          from: new Date(Date.now() - 1000 * 60 * 5)
+          from: new Date(Date.now() - 1000 * 60 * 10)
         }
       },
       pollInterval: 2000,
@@ -119,8 +103,29 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.spacer {
-  display: block;
-  height: 30px;
+.dashboard {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  grid-template-columns: 1fr;
+
+  @include md {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.span-2 {
+  @include md {
+    grid-column-end: span 2;
+  }
+}
+
+.h-1 {
+  height: 12.5rem;
+}
+
+.h-2 {
+  height: 20rem;
+  position: relative;
 }
 </style>
