@@ -80,16 +80,12 @@ const Mutation = {
     return group;
   },
 
-  deleteGroup: async (_, { id }) => {
-    return await prisma.group.delete({ where: { id }});
-  },
-
-  addUserToGroup: async (_, { userId, groupId }) => {
+  addUserToGroup: async (_, { username, groupId }) => {
     return await prisma.group.update({
       where: { id: groupId },
       data: {
         members: {
-          connect: { id: userId }
+          connect: { username }
         }
       }
     })
@@ -111,7 +107,7 @@ const Mutation = {
       where: { id: groupId },
       data: {
         devices: {
-          disconnect: { id: deviceId }
+          disconnect: [{ id: deviceId }]
         }
       }
     })

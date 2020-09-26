@@ -10,7 +10,6 @@ export default {
   props: {
     time: Date,
     text: String,
-    short: Boolean,
     dynamic: Boolean
   },
   data: function() {

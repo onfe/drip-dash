@@ -14,10 +14,11 @@
       />
       <Renamer
         class="rname-sa"
+        v-if="detailed"
         :startText="device.name || device.id"
         @save="rename"
       />
-      <NavIcon icon="trash-alt" @click="remove" />
+      <NavIcon icon="trash-alt" @click="remove" v-if="detailed" />
       <!-- TODO add renamer to dropdown under sm breakpoint -->
     </div>
   </ListItem>
@@ -41,7 +42,12 @@ export default {
     Renamer
   },
   props: {
-    device: Object
+    device: Object,
+    detailed: {
+      type: Boolean,
+      required: false,
+      default: true
+    }
   },
   data: function() {
     return {

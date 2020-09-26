@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Devices from "./views/Devices.vue";
+import Home from "./views/Home.vue";
 import store from "./store";
 
 Vue.use(Router);
@@ -12,8 +12,8 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      name: "devices",
-      component: Devices,
+      name: "home",
+      component: Home,
       meta: {
         requiresAuth: true
       }

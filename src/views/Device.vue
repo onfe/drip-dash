@@ -44,7 +44,7 @@
 // import Dashboard from "@/components/Dashboard.vue";
 import RTStat from "@/components/RTStat.vue";
 import AtAGlance from "@/components/glances/AtAGlanceCard.vue";
-import RTLineChart from "@/components/charts/RTLineChart.vue";
+import RTLineChart from "@/components/RTLineChart.vue";
 import gql from "graphql-tag";
 
 export default {
