@@ -29,6 +29,14 @@
       unit="pH"
       class="h-1"
     />
+    <b-card title="Water Levels" class="span-2 h-2">
+      <RTLineChart
+        :fields="['beds[0].level', 'beds[1].level', 'beds[2].level']"
+        :labels="['Bed 1', 'Bed 2', 'Bed 3']"
+        :data="this.device.data"
+        :average="6"
+      />
+    </b-card>
   </b-container>
 </template>
 
@@ -85,6 +93,9 @@ export default {
               timestamp
               waterTemp
               airTemp
+              beds {
+                level
+              }
             }
           }
         }

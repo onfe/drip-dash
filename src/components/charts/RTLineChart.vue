@@ -2,6 +2,7 @@
 import { Line, mixins } from "vue-chartjs";
 import ta from "time-ago";
 const { reactiveData } = mixins;
+const _get = require("lodash/get");
 
 export default {
   extends: Line,
@@ -89,7 +90,7 @@ export default {
       var sets = [];
       this.fields.forEach((field, i) => {
         var data = this.data.map(d => {
-          return { x: new Date(d.timestamp), y: d[field] };
+          return { x: new Date(d.timestamp), y: _get(d, field)};
         });
 
         if (this.average > 1) {
@@ -129,7 +130,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.chartData, this.options)
     this.renderChart(this.chartData, this.options);
   }
 };
