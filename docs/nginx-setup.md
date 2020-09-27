@@ -1,6 +1,6 @@
 # Nginx Proxy Setup
 
-We recommend against running DripDash with `sudo` in order to bind to port 80, instead run on `PORT=8000` (default or set in .env) and use Nginx to proxy your server.
+We recommend against running DripDash with `sudo` in order to bind to port 80, instead run on `PORT=8000` (default for production) and use Nginx to proxy your server.
 
 ## Installing Nginx
 
@@ -43,7 +43,7 @@ If everything has gone according to plan, this command won't return anything.
 
 ## Configuring DripDash
 
-Ensure DripDash is running with `npm run production`, with the port set to 8000 in `.env`.
+Ensure DripDash is running with `npm run production`.
 
 Open up your browser and navigate to `yourdomain.com` (no port) and you should see DripDash running. This means Nginx is working as a proxy, as intended.
 

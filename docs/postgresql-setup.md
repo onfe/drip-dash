@@ -37,7 +37,7 @@ Just to be safe it's a good idea to restart the `postgresql` service: `sudo serv
 
 ## `.env` configuration
 
-If you've setup PostgreSQL locally as shown above, your `.env` will look like this:
+If you've setup PostgreSQL locally as shown above, your `prisma/.env` will look like this:
 
 ```
 DATABASE_URL=postgresql://dripdash:password@localhost:5432/dripdash
