@@ -1,8 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import authentication from "./stores/authentication.js";
-import devices from "./stores/devices.js";
-import device from "./stores/device.js";
+import user from "./stores/user.js";
 import settings from "./stores/settings.js";
 import nav from "./stores/nav.js";
 
@@ -10,9 +8,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    auth: authentication,
-    devices: devices,
-    device: device,
+    user: user,
     settings: settings,
     nav: nav
   },

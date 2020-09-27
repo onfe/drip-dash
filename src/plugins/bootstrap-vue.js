@@ -4,7 +4,6 @@ import {
   LayoutPlugin,
   CardPlugin,
   NavbarPlugin,
-  PopoverPlugin,
   ButtonPlugin,
   ButtonGroupPlugin,
   FormInputPlugin,
@@ -13,13 +12,14 @@ import {
   SpinnerPlugin,
   FormCheckboxPlugin,
   AlertPlugin,
-  ModalPlugin
+  ModalPlugin,
+  InputGroupPlugin,
+  FormSelectPlugin
 } from "bootstrap-vue";
 
 Vue.use(LayoutPlugin);
 Vue.use(CardPlugin);
 Vue.use(NavbarPlugin);
-Vue.use(PopoverPlugin);
 Vue.use(ButtonPlugin);
 Vue.use(ButtonGroupPlugin);
 Vue.use(FormInputPlugin);
@@ -29,6 +29,8 @@ Vue.use(SpinnerPlugin);
 Vue.use(FormCheckboxPlugin);
 Vue.use(AlertPlugin);
 Vue.use(ModalPlugin);
+Vue.use(InputGroupPlugin);
+Vue.use(FormSelectPlugin);
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";

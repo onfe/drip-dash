@@ -7,11 +7,11 @@
         class="renamer-input"
         placeholder="Rename"
         ref="name"
+        v-on:keydown.enter.prevent="toggle"
       >
       </b-form-input>
       <NavIcon v-if="this.expanded" @click="exit" icon="times" />
     </span>
-    <!-- <NavIcon v-if="this.expanded" @click="save" icon="save" /> -->
   </div>
 </template>
 
@@ -42,16 +42,17 @@ export default {
       this.expanded = !this.expanded;
       if (this.expanded) {
         this.$refs.name.$el.focus();
+        this.$refs.name.$el.select();
       } else {
         // save
         if (this.text != this.startText) {
           this.$emit("save", this.text);
-          this.startText = this.text;
         }
       }
     },
     exit: function() {
       this.expanded = false;
+      this.text = this.startText;
     }
   }
 };
@@ -73,7 +74,6 @@ export default {
 }
 
 .cont {
-  margin: 0.5em;
   font-size: 1em;
   height: 2.5em;
   display: flex;

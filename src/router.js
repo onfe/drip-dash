@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Devices from "./views/Devices.vue";
+import Home from "./views/Home.vue";
 import store from "./store";
 
 Vue.use(Router);
@@ -12,8 +12,17 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      name: "devices",
-      component: Devices,
+      name: "home",
+      component: Home,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/add-device",
+      name: "Add Device",
+      component: () =>
+        import(/* webpackChunkName: "add-device" */ "./views/AddDevice.vue"),
       meta: {
         requiresAuth: true
       }
@@ -31,7 +40,9 @@ const router = new Router({
       path: "/device/:id/:detail",
       name: "deviceDetail",
       component: () =>
-        import(/* webpackChunkName: "deviceDetail" */ "./views/DeviceDetail.vue"),
+        import(
+          /* webpackChunkName: "deviceDetail" */ "./views/DeviceDetail.vue"
+        ),
       meta: {
         requiresAuth: true
       }
@@ -55,7 +66,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.getters["auth/isAuthenticated"]) {
+    if (store.getters["user/isAuthenticated"]) {
       // We need authentication, and we have it. continue.
       return next();
     }

@@ -6,8 +6,6 @@ import {
   faAngleDown,
   faCog,
   faEllipsisV,
-  faSignOutAlt,
-  faPlug,
   faSyncAlt,
   faPencilAlt,
   faCheckCircle,
@@ -16,7 +14,11 @@ import {
   faSave,
   faTimes,
   faArrowUp,
-  faArrowDown
+  faArrowDown,
+  faPlus,
+  faTrashAlt,
+  faUsers,
+  faMicrochip
 } from "@fortawesome/free-solid-svg-icons";
 import { faQuestionCircle as farQuestionCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -27,8 +29,6 @@ library.add(
   faAngleDown,
   faCog,
   faEllipsisV,
-  faSignOutAlt,
-  faPlug,
   faSyncAlt,
   faPencilAlt,
   faCheckCircle,
@@ -38,7 +38,11 @@ library.add(
   faSave,
   faTimes,
   faArrowUp,
-  faArrowDown
+  faArrowDown,
+  faPlus,
+  faTrashAlt,
+  faUsers,
+  faMicrochip
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);

@@ -17,9 +17,6 @@ export default {
   },
   components: {
     Login
-  },
-  created: function() {
-    this.$store.dispatch("auth/prepareLogin");
   }
 };
 </script>

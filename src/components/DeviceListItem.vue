@@ -1,28 +1,27 @@
 <template>
-  <router-link
-    class="device"
-    :to="{ name: 'device', params: { id: device.progName } }"
-  >
+  <ListItem :to="{ name: 'device', params: { id: device.id } }">
     <div class="left">
       <TriStateIcon :status="device.status" class="tristate" />
-      <span class="d-name">{{ device.name }}</span>
-      <span v-if="device.name != device.progName" class="d-id small">
-        ({{ device.progName }})
-      </span>
+      <span class="d-name">{{ device.name || device.id }}</span>
+      <span v-if="device.name" class="d-id small"> ({{ device.id }}) </span>
     </div>
     <div class="right">
       <TimeAgo
-        v-if="!device.onlineNow"
         class="online small"
-        :time="device.online"
+        :time="timestamp"
         text="Online"
+        :dynamic="true"
       />
-      <span v-else class="online small">Device online</span>
-      <Renamer class="rname-sa" :startText="device.name" @save="rename" />
-      <NavIcon icon="ellipsis-v" />
+      <Renamer
+        class="rname-sa"
+        v-if="detailed"
+        :startText="device.name || device.id"
+        @save="rename"
+      />
+      <NavIcon icon="trash-alt" @click="remove" v-if="detailed" />
       <!-- TODO add renamer to dropdown under sm breakpoint -->
     </div>
-  </router-link>
+  </ListItem>
 </template>
 
 <script>
@@ -30,45 +29,74 @@ import NavIcon from "@/components/NavIcon.vue";
 import TriStateIcon from "@/components/StateIcon.vue";
 import TimeAgo from "@/components/TimeAgo.vue";
 import Renamer from "@/components/Renamer.vue";
+import ListItem from "@/components/ListItem.vue";
+import gql from "graphql-tag";
 
 export default {
   name: "DeviceListItem",
   components: {
+    ListItem,
     NavIcon,
     TriStateIcon,
     TimeAgo,
     Renamer
   },
   props: {
-    device: Object
+    device: Object,
+    detailed: {
+      type: Boolean,
+      required: false,
+      default: true
+    }
+  },
+  data: function() {
+    return {
+      timestamp: new Date(this.device.latest.timestamp)
+    };
+  },
+  watch: {
+    device: {
+      deep: true,
+      handler(device) {
+        this.timestamp = new Date(device.latest.timestamp);
+      }
+    }
   },
   methods: {
     rename: function(name) {
-      console.log(name);
-      let pl = { id: this.device.progName, name: name };
-      this.$store.dispatch("devices/rename", pl);
+      this.$apollo.mutate({
+        mutation: gql`
+          mutation($id: String!, $name: String!) {
+            renameDevice(id: $id, name: $name) {
+              id
+              name
+            }
+          }
+        `,
+        variables: {
+          id: this.device.id,
+          name: name
+        }
+      });
+    },
+    remove: function() {
+      this.$apollo.mutate({
+        mutation: gql`
+          mutation($id: String!) {
+            removeDevice(id: $id)
+          }
+        `,
+
+        variables: {
+          id: this.device.id
+        }
+      });
     }
   }
 };
 </script>
 
 <style scoped lang="scss">
-.device {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  text-decoration: none;
-  border-radius: 0.5em;
-  transition: all 0.15s ease-in-out;
-  padding: 0 0.5em;
-  min-height: 3.5em;
-
-  &:hover {
-    background: var(--light);
-  }
-}
-
 .d-id {
   display: none;
 
@@ -103,6 +131,6 @@ export default {
 }
 
 .tristate {
-  padding-right: 1em;
+  margin-right: 1rem;
 }
 </style>

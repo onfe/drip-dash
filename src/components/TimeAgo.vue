@@ -10,7 +10,6 @@ export default {
   props: {
     time: Date,
     text: String,
-    short: Boolean,
     dynamic: Boolean
   },
   data: function() {
@@ -22,7 +21,8 @@ export default {
   },
   methods: {
     update() {
-      if (Date.now() - this.t < 1000) {
+      this.t = this.time;
+      if (Date.now() - this.t < 5000) {
         this.timeText = "now";
       } else {
         this.timeText = ta.ago(this.t);

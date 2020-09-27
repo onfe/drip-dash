@@ -2,7 +2,7 @@
   <div class="login-wrap">
     <b-card class="login">
       <h2><DripDashLogo />&nbsp;DripDash</h2>
-      <b-form @submit.prevent="login" @reset.prevent="reset">
+      <b-form @submit.prevent="login">
         <b-form-group>
           <b-form-input
             id="input-1"
@@ -23,6 +23,10 @@
         <b-button type="submit" block class="login-btn" variant="primary">
           Login
         </b-button>
+        <hr />
+        <router-link class="register" to="/register"
+          >No account? Sign Up.</router-link
+        >
       </b-form>
     </b-card>
   </div>
@@ -30,6 +34,7 @@
 
 <script>
 import DripDashLogo from "@/components/DripDashLogo.vue";
+
 export default {
   name: "Login",
   components: {
@@ -44,26 +49,22 @@ export default {
     };
   },
   methods: {
-    login() {
+    async login() {
       const { username, password } = this.form;
-      this.$store.dispatch("auth/request", { username, password }).then(() => {
-        this.$router.push({ path: "/" });
-      });
-    },
-    reset() {
-      // Reset our form values
-      this.form.email = "";
-      this.form.password = "";
+      this.$store.dispatch("user/login", { username, password });
     }
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .login {
   width: 20em;
   text-align: center;
+}
+
+.register {
+  color: var(--primary);
 }
 
 h2 {
