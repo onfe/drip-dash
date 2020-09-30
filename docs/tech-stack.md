@@ -4,7 +4,7 @@ DripDash is a combination of two main units:
 * DripDash server - a data logging and viewing API.
 * DripDash client - a web app for monitoring and controlling devices.
 
-The two halves are linked with the DripDash GraphQL API.
+The two halves are linked with the DripDash GraphQL [API](API.md).
 
 ![Diagram of DripDash's technology stack](dripdash-stack.svg)
 

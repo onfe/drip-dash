@@ -21,7 +21,7 @@ DripDash is part of the [unPhone Project](https://unphone.net/).
 ## :bookmark_tabs: Documentation
 
 - [Installation & Usage](docs/installation.md)
-- [Tech Stack](docs/stack/README.md)
+- [Tech Stack](docs/tech-stack.md)
 - [API](docs/API.md)
 
 ## :zap: Quick Start Guide
