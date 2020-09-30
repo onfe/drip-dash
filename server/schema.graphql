@@ -88,8 +88,7 @@ type Mutation {
 
   createGroup(name: String!): Group
   leaveGroup(id: Int!): Group
-  deleteGroup(id: Int!): Group
-  # renameGroup(id: Int): Group
+  
   addUserToGroup(username: String!, groupId: Int!): Group
   addDeviceToGroup(deviceId: String!, groupId: Int!): Group
   removeDeviceFromGroup(deviceId: String!, groupId: Int!): Group

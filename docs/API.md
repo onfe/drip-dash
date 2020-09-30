@@ -1,8 +1,8 @@
 # API
 
 DripDash uses two main endpoints for it's API.
-- `/collect` for the collector endpoint.
-- `/api` for everything else, via GraphQL.
+- [`/collect` for the collector endpoint](#collectid).
+- [`/api` for everything else](#api-1), via GraphQL.
 
 Endpoints that require authentication have a padlock symbol (:closed_lock_with_key:).
 
@@ -84,24 +84,85 @@ Refresh the authorization token. Requires a valid token to be set in the Authori
 If the authorization token in the header is valid, a new token is returned with a later expiry.
 If an invalid or expired token is passed, `null` is returned.
 
+#### `createGroup(name: String!): Group` :closed_lock_with_key:
+Create a group.
 
-Still TODO
-```
-createGroup(name: String!): Group
-leaveGroup(id: Int!): Group
-deleteGroup(id: Int!): Group
-addUserToGroup(username: String!, groupId: Int!): Group
-addDeviceToGroup(deviceId: String!, groupId: Int!): Group
-removeDeviceFromGroup(deviceId: String!, groupId: Int!): Group
+##### Parameters
+* `name` (String, required) - The name of the group to create.
 
-addDevice(id: String!): Device
-removeDevice(id: String!): Boolean
-renameDevice(id: String!, name: String!): Device
-```
+##### Response
+Returns the newly created `Group` if the group is created, else `null`.
+
+#### `leaveGroup(id: Int!): Group` :closed_lock_with_key:
+Leave a group.
+
+##### Parameters
+* `id` (Integer, required) - The ID of the group to leave.
+
+##### Response
+Returns the `Group` you just left. Else `null`. If you were the last member of the group, the group is deleted automatically.
+
+#### `addUserToGroup(username: String!, groupId: Int!): Group` :closed_lock_with_key:
+Add the specified user to a group.
+
+##### Parameters
+* `username` (String, required) - The username of the user you wish to add to the group.
+* `groupId` (Integer, required) - The ID of the group to add the user to.
+
+##### Response
+Returns the `Group` after the new user has been added, else `null`.
+
+#### `addDeviceToGroup(deviceId: Int!, groupId: Int!): Group` :closed_lock_with_key:
+Add the specified device to a group.
+
+##### Parameters
+* `deviceId` (Integer, required) - The ID of the device you wish to add to the group.
+* `groupId` (Integer, required) - The ID of the group to add the device to.
+
+##### Response
+Returns the `Group` after the device has been added, else `null`.
+
+#### `removeDeviceToGroup(deviceId: Int!, groupId: Int!): Group` :closed_lock_with_key:
+Remove the specified device from a group.
+
+##### Parameters
+* `deviceId` (Integer, required) - The ID of the device you wish to remove from the group.
+* `groupId` (Integer, required) - The ID of the group to remove the device from.
+
+##### Response
+Returns the `Group` after the device has been removed, else `null`.
+
+#### `addDevice(id: String!): Device` :closed_lock_with_key:
+Add a device to DripDash. The owner is the person who adds the device.
+
+##### Parameters
+* `id` (String, required) - The ID of the device to be added.
+
+##### Response
+Returns the created `Device`, else `null`.
+
+#### `removeDevice(id: String!): Boolean` :closed_lock_with_key:
+Remove a device from DripDash.
+
+##### Parameters
+* `id` (String, required) - The ID of the device to be removed.
+
+##### Response
+Returns `True` if the device is removed successfully, else `False`.
+
+#### `renameDevice(id: String!, name: String!): Device` :closed_lock_with_key:
+Rename a device. If a device name is empty, the UI should default to using the ID.
+
+##### Parameters
+* `id` (String, required) - The ID of the device to rename.
+* `name` (String, required) - The new name for the device.
+
+##### Response
+Returns the `Device` with it's new name.
 
 ### Queries
 
-Still TODO
+TODO
 
 ```
 type Query {
@@ -115,7 +176,7 @@ type Query {
 
 ### Types
 
-Still TODO
+TODO
 
 ```
 type User {
