@@ -1,4 +1,4 @@
-**⚠️ DripDash is still a work in progress, check back for updates.**
+**⚠️ This repository is archived. Current development for DripDash is [here](https://gitlab.com/hamishcunningham/unphone/-/tree/master/dripdash).**
 
 ![DripDash Header](public/drip-dash-header.svg)
 
